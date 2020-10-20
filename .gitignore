@@ -1,2 +1,5 @@
 /package-lock.json
 /node_modules
+/wallet.txt
+/dist/main.js
+/dist/main.js.LICENSE.txt

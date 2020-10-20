@@ -18,7 +18,7 @@
   "homepage": "https://github.com/DaWe35/SkyID#readme",
   "dependencies": {
     "buffer": "^5.6.0",
-    "sia-js": "github:escada-finance/sia-js"
+    "sia-js": "github:DaWe35/sia-js"
   },
   "devDependencies": {
     "webpack": "^5.1.3",
