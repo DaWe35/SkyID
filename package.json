@@ -1,0 +1,27 @@
+{
+  "name": "skyid",
+  "version": "0.0.1",
+  "description": "Sky ID auth system for Skynet",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaWe35/SkyID.git"
+  },
+  "author": "DaWe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DaWe35/SkyID/issues"
+  },
+  "homepage": "https://github.com/DaWe35/SkyID#readme",
+  "dependencies": {
+    "buffer": "^5.6.0",
+    "sia-js": "github:escada-finance/sia-js"
+  },
+  "devDependencies": {
+    "webpack": "^5.1.3",
+    "webpack-cli": "^4.1.0"
+  }
+}
