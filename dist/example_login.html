@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="example.css">
+<meta charset="utf-8">
+
+<h1>SkyID</h1>
+<p><b>Example Skapp (example_skapp)</b> wants to get access to your data. Are you sure about this is the real <b>Example Skapp (example_skapp)</b> and not a phishing site?</p>
+
+<a href="javascript:CloseMySelf(false)" class="mr-3">No, deny</a>
+
+<button onclick="javascript:CloseMySelf('This is your app-key: euhq348rzhq39rz2378gz')">Yes, grant access</button>
+
+<script>
+	function CloseMySelf(message) {
+		window.opener.postMessage(message, "*")
+		window.close()
+		return false
+	}
+</script>

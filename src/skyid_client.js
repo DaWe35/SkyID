@@ -9,6 +9,7 @@ function toHexString(byteArray) {
 	}).join('')
 }
 
+
 sia.keyPair.generateRandomData(randomCallback)
 
 function randomCallback(random_data) {
@@ -20,10 +21,9 @@ function randomCallback(random_data) {
 	var seed = Buffer.concat(arr)
 	console.log('seed:', seed)
 	// show the words
-	/* var words = mnemonic.toMnemonic(data)
+	// var words = mnemonic.toMnemonic(data)
 	
-	console.log(data) */
+	// console.log(data) 
 	let address = sia.keyPair.generateFromSeed(seed)
-	console.log('private key:', address)
+	console.log(address)
 }
-
