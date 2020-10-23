@@ -1,29 +1,96 @@
-var sia = require('sia-js')
-global.Buffer = global.Buffer || require('buffer').Buffer
+import base64 from "base64-js";
+import base32Encode from "base32-encode";
 
+function decodeBase64(input) {
+	return base64.toByteArray(
+		input.padEnd(input.length + 4 - (input.length % 4), "=")
+	);
+}
 
+function encodeBase32(input) {
+	return base32Encode(input, "RFC4648-HEX", { padding: false }).toLowerCase();
+}
 
-function toHexString(byteArray) {
-	return Array.from(byteArray, function(byte) {
-		return ('0' + (byte & 0xFF).toString(16)).slice(-2)
-	}).join('')
+function isSubdomain() {
+	let url = window.location.pathname
+    let regex = new RegExp(/^([a-z]+\:\/{2})?([\w-]+\.[\w-]+\.\w+)$/);
+    return !!url.match(regex); // make sure it returns boolean
+}
+
+function isIndexPage() {
+	if (window.location.pathname == '/' || window.location.pathname == '') {
+		return true
+	} else {
+		return false
+	}
+}
+
+function trimChar(string, charToRemove) {
+    while(string.charAt(0)==charToRemove) {
+        string = string.substring(1);
+    }
+
+    while(string.charAt(string.length-1)==charToRemove) {
+        string = string.substring(0,string.length-1);
+    }
+
+    return string;
+}
+
+function redirectToSkappContainer(location) {
+	let protocol = location.protocol
+	let hostname = location.hostname
+	let pathname = location.pathname
+	let hash = location.hash
+	let search = location.search
+	let trimmedPathname = trimChar(pathname, '/')
+	if (trimmedPathname.includes('/')) {
+		let index = trimmedPathname.indexOf("/");  // Gets the first index where a space occours
+		var skylink = trimmedPathname.substr(0, index); // Gets the first part
+		var filename = "/" + trimmedPathname.substr(index + 1);  // Gets the text part
+	} else {
+		var skylink = trimmedPathname
+		var filename = ''
+	}
+
+	
+	let decoded = decodeBase64(skylink)
+	let encoded = encodeBase32(decoded)
+	let base32skylink = encoded
+	let container = protocol + "//" + base32skylink + '.' + hostname + filename + hash + search
+	return container
 }
 
 
-sia.keyPair.generateRandomData(randomCallback)
+window.SkyID = class SkyID {
 
-function randomCallback(random_data) {
-	console.log('random data:', random_data)
+	constructor(sessionCallback) {
+		window.addEventListener("message", (event) => {
+			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
+				console.log("event.data", event.data)
+				let message = event.data
+				sessionCallback(message)
+			}
+		}, false);
+	}
 
-	var nonce = Buffer.from([0,0,0,0,0,0,0,0])
-	var arr = [random_data, nonce]
+
 	
-	var seed = Buffer.concat(arr)
-	console.log('seed:', seed)
-	// show the words
-	// var words = mnemonic.toMnemonic(data)
-	
-	// console.log(data) 
-	let address = sia.keyPair.generateFromSeed(seed)
-	console.log(address)
+	sessionStart() {
+		// BROKEN ON https://pg0anies87je55r4ngqssqce4o3cirn9dfu38nmbvef6tudpoohlhlo.siasky.net/example_skapp.html
+		if (!isSubdomain() || !isIndexPage()) {
+			let red = redirectToSkappContainer(window.location)
+			window.location.href = red
+		}
+		// NOT IMPLEMENTED YET
+		window.windowObjectReference = window.open(
+			"example_login.html",
+			"DescriptiveWindowName",
+			"resizable,scrollbars,status,width=400,height=500"
+		)
+	}
+
+	getUserValidationLevel() {
+		// NOT IMPLEMENTED YET
+	}
 }

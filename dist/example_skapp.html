@@ -4,26 +4,17 @@
 
 <h2>This is an example skapp</h2>
 
-<h4 id="alertbox">Why don't you <a href="javascript:signin()">Sign in?</a></h4>
+<h4 id="alertbox">Why don't you <a href="javascript: skyid.sessionStart()">Sign in?</a></h4>
 
-
+<script src="skyid_client.js"></script>
 <script>
-	var windowObjectReference;
-	function signin() {
-		windowObjectReference = window.open(
-			"example_login.html",
-			"DescriptiveWindowName",
-			"resizable,scrollbars,status,width=400,height=500"
-		);
-	}
-
-	window.addEventListener("message", (event) => {
-		message = event.data
-		if (message == false) {
-			document.getElementById('alertbox').innerHTML = 'Access denied, <a href="javascript:signin()">try again?</a>'
+	var skyid = new SkyID(sessionHandler)
+	function sessionHandler(message) {
+		if (message.data == false) {
+			document.getElementById('alertbox').innerHTML = 'Access denied, <a href="javascript: skyid.sessionStart()">try again?</a>'
 		} else {
-			document.getElementById('alertbox').innerHTML = message
+			document.getElementById('alertbox').innerHTML = message.data
 		}
-	}, false);
+	}
 
 </script>

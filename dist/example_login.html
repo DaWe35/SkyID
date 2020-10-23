@@ -10,8 +10,8 @@
 <button onclick="javascript:CloseMySelf('This is your app-key: euhq348rzhq39rz2378gz')">Yes, grant access</button>
 
 <script>
-	function CloseMySelf(message) {
-		window.opener.postMessage(message, "*")
+	function CloseMySelf(data) {
+		window.opener.postMessage({'sender': 'skyid', 'type': 'login', 'data': data}, "*")
 		window.close()
 		return false
 	}
