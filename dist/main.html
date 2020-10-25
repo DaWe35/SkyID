@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="example.css">
+<script src="main.js"></script>
+<meta charset="utf-8">
+
+<button onclick="javascript: skyidMain.generateRandomKeypair()">Generate keypair</button>
+<p>Mnemonic: <span id="mnemonic"></span></p>
+<p>Secret key: <span id="seckey"></span></p>
+<p>Public key: <span id="pubkey"></span></p>
+<p>Sia address: <span id="address"></span></p>
+
+<script>
+const skyidMain = new SkyidMain()
+</script>
