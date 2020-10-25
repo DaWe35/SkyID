@@ -1,24 +1,34 @@
-import base64 from "base64-js";
-import base32Encode from "base32-encode";
+import base64 from "base64-js"
+import base32Encode from "base32-encode"
 
 function decodeBase64(input) {
 	return base64.toByteArray(
 		input.padEnd(input.length + 4 - (input.length % 4), "=")
-	);
+	)
 }
 
 function encodeBase32(input) {
-	return base32Encode(input, "RFC4648-HEX", { padding: false }).toLowerCase();
+	return base32Encode(input, "RFC4648-HEX", { padding: false }).toLowerCase()
 }
 
 function isSubdomain() {
 	let url = window.location.pathname
-    let regex = new RegExp(/^([a-z]+\:\/{2})?([\w-]+\.[\w-]+\.\w+)$/);
-    return !!url.match(regex); // make sure it returns boolean
+    let regex = new RegExp(/^([a-z]+\:\/{2})?([\w-]+\.[\w-]+\.\w+)$/)
+    return !!url.match(regex) // make sure it returns boolean
 }
 
-function isIndexPage() {
-	if (window.location.pathname == '/' || window.location.pathname == '') {
+function isSkylinkPage() {
+	let trimmedPathname = trimChar(window.location.pathname, '/')
+	if (trimmedPathname.includes('/')) {
+		let index = trimmedPathname.indexOf("/")  // Gets the first index where a space occours
+		var skylink = trimmedPathname.substr(0, index) // Gets the first part
+	} else {
+		var skylink = trimmedPathname.substr(0, index)
+	}
+
+	notSkylink = /[^\da-z-_]/i
+	
+	if (skylink.length == 46 && !notSkylink.test(skylink)) {
 		return true
 	} else {
 		return false
@@ -27,14 +37,14 @@ function isIndexPage() {
 
 function trimChar(string, charToRemove) {
     while(string.charAt(0)==charToRemove) {
-        string = string.substring(1);
+        string = string.substring(1)
     }
 
     while(string.charAt(string.length-1)==charToRemove) {
-        string = string.substring(0,string.length-1);
+        string = string.substring(0,string.length-1)
     }
 
-    return string;
+    return string
 }
 
 function redirectToSkappContainer(location) {
@@ -45,9 +55,9 @@ function redirectToSkappContainer(location) {
 	let search = location.search
 	let trimmedPathname = trimChar(pathname, '/')
 	if (trimmedPathname.includes('/')) {
-		let index = trimmedPathname.indexOf("/");  // Gets the first index where a space occours
-		var skylink = trimmedPathname.substr(0, index); // Gets the first part
-		var filename = "/" + trimmedPathname.substr(index + 1);  // Gets the text part
+		let index = trimmedPathname.indexOf("/")  // Gets the first index where a space occours
+		var skylink = trimmedPathname.substr(0, index) // Gets the first part
+		var filename = "/" + trimmedPathname.substr(index + 1)  // Gets the text part
 	} else {
 		var skylink = trimmedPathname
 		var filename = ''
@@ -71,14 +81,12 @@ window.SkyID = class SkyID {
 				let message = event.data
 				sessionCallback(message)
 			}
-		}, false);
+		}, false)
 	}
 
-
-	
 	sessionStart() {
 		// BROKEN ON https://pg0anies87je55r4ngqssqce4o3cirn9dfu38nmbvef6tudpoohlhlo.siasky.net/example_skapp.html
-		if (!isSubdomain() || !isIndexPage()) {
+		if (!isSubdomain() || !isSkylinkPage()) {
 			let red = redirectToSkappContainer(window.location)
 			window.location.href = red
 		}
