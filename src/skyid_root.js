@@ -27,3 +27,18 @@ function randomCallback(random_data) {
 	let address = sia.keyPair.generateFromSeed(seed)
 	console.log(address)
 }
+
+
+
+window.SkyIDRoot = class SkyIDRoot {
+
+	constructor() {
+		console.log('')
+	}
+
+	CloseMySelf(data) {
+		window.opener.postMessage({'sender': 'skyid', 'type': 'login', 'data': data}, "*")
+		window.close()
+		return false
+	}
+}

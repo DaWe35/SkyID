@@ -73,7 +73,7 @@ function redirectToSkappContainer(location) {
 
 
 window.SkyID = class SkyID {
-
+	
 	constructor(sessionCallback) {
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
