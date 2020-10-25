@@ -74,7 +74,8 @@ function redirectToSkappContainer(location) {
 
 window.SkyID = class SkyID {
 	
-	constructor(sessionCallback) {
+	constructor(appid, sessionCallback) {
+		this.appid = appid
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
 				console.log("event.data", event.data)
@@ -92,7 +93,7 @@ window.SkyID = class SkyID {
 		}
 		// NOT IMPLEMENTED YET
 		window.windowObjectReference = window.open(
-			"example_login.html",
+			"example_login.html?appid=" + this.appid,
 			"DescriptiveWindowName",
 			"resizable,scrollbars,status,width=400,height=500"
 		)

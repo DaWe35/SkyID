@@ -10,7 +10,8 @@
 
 <script src="skyid_client.js"></script>
 <script>
-	var skyid = new SkyID(sessionHandler)
+	//			new SkyID('You app name (appid)', login_callback_function)
+	var skyid = new SkyID('Example skapp', sessionHandler)
 	function sessionHandler(message) {
 		if (message.data == false) {
 			document.getElementById('alertbox').innerHTML = 'Access denied, <a href="javascript: skyid.sessionStart()">try again?</a>'
