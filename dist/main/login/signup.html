@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=yes, initial-scale=1.0">
+
+    <link rel="stylesheet" href="signup.css">
+  </head>
+  <body onload="docLoaded()">
+    <div id="signupCon">
+      <div id="signup" action="signupProcess.php" method="post">
+        <label for="generatedPassphrase">Generate New Passphrase:</label>
+        <div id="generatedPassphrase"></div>
+
+        <button id="generatePassphraseButton" type="submit" name="button">Generate Passphrase</button>
+      </div>
+
+      <div id="loginAlt">
+        <h2>Already have an account?</h2>
+        <button id="loginAltButton" type="button" name="button">Login</button>
+      </div>
+    </div>
+
+    <div id="message">
+      <span>Please Revert Back To Portrait Mode</span>
+    </div>
+
+    <script type="text/javascript" src="signup.js"></script>
+  </body>
+</html>

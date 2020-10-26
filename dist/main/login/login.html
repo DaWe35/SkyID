@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=yes, initial-scale=1.0">
+
+    <link rel="stylesheet" href="login.css">
+  </head>
+  <body onload="docLoaded()">
+    <div id="loginCon" class="big">
+      <div id="loginChoose">
+        <button id="loginChooseButton" type="button" name="button">Click Here To Login Instead</button>
+      </div>
+
+      <form id="login" action="loginProcess.php" method="post">
+        <label for="passphrase">Enter Passphrase:</label>
+        <input id="passphrase" type="text" name="passphrase" value="">
+
+        <button id="loginButton" type="submit" name="button">Login</button>
+      </form>
+
+      <div id="signupAlt">
+        <h2>Don't have an account?</h2>
+        <button id="signupAltButton" type="button" name="button">Signup</button>
+      </div>
+    </div>
+
+    <div id="signupCon" class="small">
+      <div id="signupChoose">
+        <button id="signupChooseButton" type="button" name="button">Click Here To Create Wallet Instead</button>
+      </div>
+
+      <div id="signup" action="signupProcess.php" method="post">
+        <label for="generatedPassphrase">Generate New Passphrase:</label>
+        <div id="generatedPassphrase"></div>
+
+        <button id="generatePassphraseButton" type="submit" name="button">Generate Passphrase</button>
+      </div>
+    </div>
+
+    <div id="message">
+      <span>Please Revert Back To Portrait Mode</span>
+    </div>
+
+    <script type="text/javascript" src="login.js"></script>
+  </body>
+</html>

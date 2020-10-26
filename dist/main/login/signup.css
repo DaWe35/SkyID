@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+
+* {
+  outline: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#generatePassphraseButton {
+  cursor: pointer;
+}
+
+#generatePassphraseButton:focus {
+  border: 2px solid #fff;
+}
+
+#signupCon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url("img1.jpg");
+}
+
+#signup {
+  width: 100%;
+  height: 70%;
+  background-color: #2cd385cc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0vh 3vw;
+  box-sizing: border-box;
+}
+
+#signupCon label {
+  width: 100%;
+  margin-bottom: 2vh;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 6vw;
+  font-weight: 900;
+  color: #fff;
+}
+
+#generatedPassphrase {
+  width: 100%;
+  height: 35%;
+  background-color: #ddd;
+  margin-bottom: 3vh;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 2vh 3vw;
+  box-sizing: border-box;
+  font-size: 4vw;
+}
+
+#generatePassphraseButton {
+  width: 100%;
+  height: 10%;
+  background-color: #ff8300;
+  border: 1px solid transparent;
+  border-radius: 500px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 7vw;
+}
+
+#loginAlt {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #555c;
+}
+
+h2 {
+  text-align: center;
+  color: #fff;
+}
+
+#loginAltButton {
+  width: 80%;
+  height: 25%;
+  background-color: transparent;
+  border: 1px solid #ff8300;
+  border-radius: 500px;
+  box-sizing: border-box;
+  color: #ff8300;
+  font-size: 7vw;
+}
+
+* {
+  font-family: 'Bitter', serif;
+}
+
+#message {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  font-size: 5vw;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #000;
+  font-weight: 900;
+  display: none;
+}
