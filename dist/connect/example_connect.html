@@ -1,15 +1,15 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel="stylesheet" href="example.css">
-<script src="skyid_root.js"></script>
+<link rel="stylesheet" href="../example.css">
+<script src="connect.js"></script>
 <meta charset="utf-8">
 
 <h1>SkyID</h1>
 <p><b><span class="appid">...loading...</span></b> wants to get access to your data. Are you sure about this is the real <span class="appid">...loading...</span> and not a phishing site?</p>
 
-<a href="javascript: skyidroot.CloseMySelf(false)" class="mr-3">No, deny</a>
+<a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3">No, deny</a>
 
-<button onclick="javascript: skyidroot.CloseMySelf('This is your app-key: euhq348rzhq39rz2378gz')">Yes, grant access</button>
+<button onclick="javascript: skyidConnect.CloseMySelf('This is your app-key: euhq348rzhq39rz2378gz')">Yes, grant access</button>
 
 <script>
-	skyidroot = new SkyIDRoot()
+	skyidConnect = new SkyidConnect()
 </script>

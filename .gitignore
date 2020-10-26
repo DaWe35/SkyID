@@ -1,7 +1,6 @@
 /package-lock.json
 /node_modules
 /wallet.txt
-/dist/main.js
-/dist/main.js.LICENSE.txt
-/dist/skyid_client.js
-/dist/skyid_root.js
+/dist/main/main.js
+/dist/skyid_client/skyid_client.js
+/dist/connect/connect.js
