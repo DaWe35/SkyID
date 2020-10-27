@@ -1,4 +1,4 @@
-window.SkyidConnect = class SkyidConnect {
+export class SkyidConnect {
 
 	constructor() {
 		const urlParams = new URLSearchParams(window.location.search)
