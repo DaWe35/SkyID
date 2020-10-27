@@ -1,5 +1,6 @@
 import base64 from "base64-js"
 import base32Encode from "base32-encode"
+import Url from "url-parse"
 
 export function setCookie(cname, cvalue, exdays) {
 	var d = new Date()
@@ -55,22 +56,22 @@ export function encodeBase32(input) {
 	return base32Encode(input, "RFC4648-HEX", { padding: false }).toLowerCase()
 }
 
-export function isSubdomain() {
-	let url = window.location.pathname
-    let regex = new RegExp(/^([a-z]+\:\/{2})?([\w-]+\.[\w-]+\.\w+)$/)
-    return !!url.match(regex) // make sure it returns boolean
-}
-
-export function isSkylinkPage() {
-	let trimmedPathname = trimChar(window.location.pathname, '/')
+// checks if the url an insecure skylink page
+export function isSkylinkPage(url = null) {
+	if (url == null) {
+		var location = window.location
+	} else {
+		var location = new Url(url)
+	}
+	let trimmedPathname = trimChar(location.pathname, '/')
 	if (trimmedPathname.includes('/')) {
 		let index = trimmedPathname.indexOf("/")  // Gets the first index where a space occours
 		var skylink = trimmedPathname.substr(0, index) // Gets the first part
 	} else {
-		var skylink = trimmedPathname.substr(0, index)
+		var skylink = trimmedPathname
 	}
 
-	notSkylink = /[^\da-z-_]/i
+	let notSkylink = /[^\da-z-_]/i
 	
 	if (skylink.length == 46 && !notSkylink.test(skylink)) {
 		return true

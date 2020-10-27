@@ -1,4 +1,4 @@
-import {isSubdomain, isSkylinkPage, redirectToSkappContainer} from "./utils"
+import {isSkylinkPage, redirectToSkappContainer} from "./utils"
 
 window.SkyID = class SkyID {
 	constructor(appid, sessionCallback) {
@@ -14,7 +14,7 @@ window.SkyID = class SkyID {
 
 	sessionStart() {
 		// BROKEN ON https://pg0anies87je55r4ngqssqce4o3cirn9dfu38nmbvef6tudpoohlhlo.siasky.net/example_skapp.html
-		if (!isSubdomain() || !isSkylinkPage()) {
+		if (isSkylinkPage()) {
 			let red = redirectToSkappContainer(window.location)
 			window.location.href = red
 		}
