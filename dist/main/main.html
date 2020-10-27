@@ -3,7 +3,15 @@
 <script src="main.js"></script>
 <meta charset="utf-8">
 
-<button onclick="javascript: account.generateRandomKeypair()">Generate keypair</button>
+<style>
+	body {
+		background: #1D1E21;
+		color: #3ae09e;
+	}
+</style>
+
+<button onclick="javascript: register()">Register</button>
+<button onclick="javascript: login()">Sign in</button>
 <p>Mnemonic: <span id="mnemonic"></span></p>
 <p>Secret key: <span id="seckey"></span></p>
 <p>Public key: <span id="pubkey"></span></p>
@@ -11,4 +19,12 @@
 
 <script>
 const account = new Account()
+function register() {
+	account.generateSkyIDAccount()
+	
+	document.getElementById('mnemonic').innerHTML = account.mnemonic
+	document.getElementById('seckey').innerHTML = account.secKey
+	document.getElementById('pubkey').innerHTML = account.pubKey
+	document.getElementById('address').innerHTML = account.address
+}
 </script>

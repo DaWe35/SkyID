@@ -2,59 +2,86 @@ const sia = require('sia-js')
 import { FileID, FileType, SkynetClient, SkynetFile, User } from "skynet-js"
 global.Buffer = global.Buffer || require('buffer').Buffer
 
+// class for the main SkyID account & for dapp accounts
 export class Account {
-	generateRandomKeypair() {
-		let randomData = sia.keyPair.generateRandomData()
-		
-		let nonce = Buffer.from([0,0,0,0,0,0,0,0])
-		let arr = [randomData, nonce]
-		
-		let seed = Buffer.concat(arr)
-		// show the words
-		// var words = mnemonic.toMnemonic(data)
-		
-		// console.log(data) 
-		let keypair = sia.keyPair.generateFromSeed(seed)
-
-		let mnemonic = sia.mnemonics.bytesToMnemonic(randomData)
-
-		document.getElementById('mnemonic').innerHTML = mnemonic
-		document.getElementById('seckey').innerHTML = keypair['privateKey']
-		document.getElementById('pubkey').innerHTML = keypair['publicKey']
-		document.getElementById('address').innerHTML = keypair['address']
+	constructor() {
+		this.client = new SkynetClient()
+		this.secKey = false
+		this.pubKey = false
+		this.address = false
+		this.mnemonic = false
+		this.userData = {}
 	}
 
-	/* const client = new SkynetClient();
+	addUserData() {
+		this.userData
+	}
 
-	const appID = "SkySkapp";
-	const filename = "foo.txt";
-	const user = User.New("john.doe@example.com", "supersecret");
-	const fileID = new FileID(appID, FileType.PublicUnencrypted, filename);
+	modifyUserData() {
+		this.userData
+	}
 
-	getFileExample() {
-		try {
-			client.getFile(user, fileID);
-		} catch (error) {
-			console.log(error)
+	removeUserData() {
+		this.userData
+	}
+
+	/* getRegistry() {
+		const appID = "SkySkapp";
+		const filename = "foo.txt";
+		const user = User.New("john.doe@example.com", "supersecret");
+		const fileID = new FileID(appID, FileType.PublicUnencrypted, filename);
+
+		getFileExample() {
+			try {
+				client.getFile(user, fileID);
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 
+	setRegistry() {
+		const client = new SkynetClient();
 
-
-	const client = new SkynetClient();
-
-	const appID = "SkySkapp";
-	const filename = "foo.txt";
-	const user = User.New("john.doe@example.com", "supersecret");
-	const fileID = new FileID(appID, FileType.PublicUnencrypted, filename);
-
-	// Must have an existing File object.
-
-	async function setFileExample() {
-		try {
-			client.setFile(user, fileID, SkyFile.New(file);
-		} catch (error) {
-			console.log(error)
+		const appID = "SkySkapp";
+		const filename = "foo.txt";
+		const user = User.New("john.doe@example.com", "supersecret");
+		const fileID = new FileID(appID, FileType.PublicUnencrypted, filename);
+	
+		// Must have an existing File object.
+	
+		async function setFileExample() {
+			try {
+				client.setFile(user, fileID, SkyFile.New(file);
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	} */
+
+
+
+	generateAccount(seed, nonce) {
+		let arr = [seed, nonce]
+		let deterministicSeed = Buffer.concat(arr)
+
+		let keypair = sia.keyPair.generateFromSeed(deterministicSeed)
+		let mnemonic = sia.mnemonics.bytesToMnemonic(randomData)
+
+		this.secKey = keypair['privateKey']
+		this.pubKey = keypair['publicKey']
+		this.address = keypair['address']
+		this.mnemonic = mnemonic
+		return true
+	}
+
+	generateSkyIDAccount() {
+		let seed = sia.keyPair.generateRandomData()
+		let nonce = Buffer.from([0,0,0,0,0,0,0,0])
+		return generateAccount(seed, nonce)
+	}
+
+	generateDappAccount() {
+
+	}
 }
