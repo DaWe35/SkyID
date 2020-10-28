@@ -61,12 +61,18 @@ export class Account {
 
 
 
-	generateAccount(seed, nonce) {
+	generateNewMasterKey() {
+		let seed = sia.keyPair.generateRandomData()
+		let nonce = Buffer.from([0,0,0,0,0,0,0,0])
+		return this.generateKey(seed, nonce)
+	}
+
+	generateKey(seed, nonce) {
 		let arr = [seed, nonce]
 		let deterministicSeed = Buffer.concat(arr)
 
 		let keypair = sia.keyPair.generateFromSeed(deterministicSeed)
-		let mnemonic = sia.mnemonics.bytesToMnemonic(randomData)
+		let mnemonic = sia.mnemonics.bytesToMnemonic(seed)
 
 		this.secKey = keypair['privateKey']
 		this.pubKey = keypair['publicKey']
@@ -75,13 +81,16 @@ export class Account {
 		return true
 	}
 
-	generateSkyIDAccount() {
-		let seed = sia.keyPair.generateRandomData()
-		let nonce = Buffer.from([0,0,0,0,0,0,0,0])
-		return generateAccount(seed, nonce)
-	}
-
-	generateDappAccount() {
+	generateDappAccount(masterKey) {
 
 	}
+
+	signData(data, childSecKey) {
+		
+	}
+
+	validateMessage(signedMessage, masterPubKey, childPath) {
+
+	}
+
 }

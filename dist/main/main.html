@@ -20,7 +20,7 @@
 <script>
 const account = new Account()
 function register() {
-	account.generateSkyIDAccount()
+	account.generateNewMasterKey()
 	
 	document.getElementById('mnemonic').innerHTML = account.mnemonic
 	document.getElementById('seckey').innerHTML = account.secKey

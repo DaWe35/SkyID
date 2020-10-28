@@ -12,7 +12,8 @@ module.exports = {
 		filename: '[name]/[name].js'
 	},
 	optimization: {
-		minimize: true,
+		// minimize: true,
+		minimize: false,
 		minimizer: [
 			new TerserPlugin({
 				extractComments: false,
