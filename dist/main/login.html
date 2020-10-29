@@ -120,7 +120,7 @@
     <!-- Page content -->
     <div class="container mt--8 pb-5">
       <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-7">
+        <div class="col-lg-8 col-md-12">
           <div class="row m-0">
             <div class="col-sm-6 bg-secondary rounded-top" id="login_btn" onclick="switchPage('login')">
               Sign in
@@ -165,7 +165,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <textarea class="form-control" placeholder="Passphrase" readonly style="background: #FFF;"></textarea>
+                    <span id="passphrase" class="form-control bg-white h-auto" placeholder="Passphrase"></span>
+                    
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -243,11 +244,16 @@
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
-
+  <script src="main.js"></script>
   
   <script>
     function switchPage(page) {
       if (page == 'register') {
+        if ($('#passphrase').html() == '') {
+          const account = new Account()
+          account.generateNewMasterKey()
+          $('#passphrase').html(account.mnemonic)
+        }
         $('#login_btn').removeClass('bg-secondary rounded-top')
         $('#login_btn').addClass('text-white mb-1')
         $('#register_btn').addClass('bg-secondary rounded-top')
