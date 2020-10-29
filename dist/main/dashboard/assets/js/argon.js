@@ -55,7 +55,7 @@ var Layout = (function() {
 
     var $sidenavState = Cookies.get('sidenav-state') ? Cookies.get('sidenav-state') : 'pinned';
 
-    if($(window).width() > 1200) {
+    if($(window).width() > 960) {
         if($sidenavState == 'pinned') {
             pinSidenav()
         }
@@ -71,7 +71,7 @@ var Layout = (function() {
         })
     }
 
-    if($(window).width() < 1200){
+    if($(window).width() < 960){
       $('body').removeClass('g-sidenav-hide').addClass('g-sidenav-hidden');
       $('body').removeClass('g-sidenav-show');
       $(window).resize(function() {
