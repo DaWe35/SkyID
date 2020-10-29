@@ -1,5 +1,5 @@
 const sia = require('sia-js')
-import { FileID, FileType, SkynetClient, SkynetFile, User } from "skynet-js"
+import { SkynetClient, keyPairFromSeed } from "skynet-js";
 global.Buffer = global.Buffer || require('buffer').Buffer
 
 // class for the main SkyID account & for dapp accounts
@@ -62,6 +62,8 @@ export class Account {
 
 
 	generateNewMasterKey() {
+		const client = new SkynetClient();
+
 		let seed = sia.keyPair.generateRandomData()
 		let nonce = Buffer.from([0,0,0,0,0,0,0,0])
 		return this.generateKey(seed, nonce)
@@ -70,6 +72,9 @@ export class Account {
 	generateKey(seed, nonce) {
 		let arr = [seed, nonce]
 		let deterministicSeed = Buffer.concat(arr)
+
+		let keyPDB = keyPairFromSeed(Buffer.from(seed).toString('hex'))
+		console.log('SkyDB key:', Buffer.from(keyPDB.privateKey).toString('hex'))
 
 		let keypair = sia.keyPair.generateFromSeed(deterministicSeed)
 		let mnemonic = sia.mnemonics.bytesToMnemonic(seed)
