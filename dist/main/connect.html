@@ -1,15 +1,125 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel="stylesheet" href="../../example.css">
-<script src="../main.js"></script>
-<meta charset="utf-8">
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
 
-<h1>SkyID</h1>
-<p><b><span class="appid">...loading...</span></b> wants to get access to your data. Are you sure about this is the real <span class="appid">...loading...</span> and not a phishing site?</p>
 
-<a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3">No, deny</a>
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
 
-<button onclick="javascript: skyidConnect.CloseMySelf('This is your app-key: euhq348rzhq39rz2378gz')">Yes, grant access</button>
 
-<script>
-	skyidConnect = new SkyidConnect()
-</script>
+
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>SkyID</title>
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/brand/SkyID_Logo_128.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+</head>
+
+<body>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar links -->
+          <a class="navbar-brand" href="dashboard.html">
+            <img src="assets/img/brand/SkyID_Logo_128_white.png" style="width: 30px; vertical-align: text-bottom;">
+            <span class="ml-1 text-white">SkyID</span>
+          </a>
+          <ul class="navbar-nav align-items-center ml-md-auto ml-auto">
+            <li class="nav-item d-lg-none">
+            </li>
+          </ul>
+          <ul class="navbar-nav align-items-center ml-0">
+            <li class="nav-item dropdown">
+              <div class="media align-items-center">
+                <i class="ni ni-circle-08 text-white"></i>
+                <!-- <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
+                </span> -->
+                <div class="media-body  ml-2 d-lg-block">
+                  <span class="mb-0 text-sm font-weight-bold text-white">Profile</span>
+                </div>
+              </div>
+              
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-9">
+      <div class="container-fluid">
+        <div class="header-body">
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--6" id="content">
+      <div class="row">
+        <div class="col-sm-0 col-md-2 col-lg-3"></div>
+        <div class="col-sm-12 col-md-8 col-lg-6 order-xl-1">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center mt--7">
+                <img class="mb-4" style="background: #3a4169; border-radius: 10px; max-width: 150px; max-height: 150px;" src="assets/img/brand/SkyID_Logo_128_white.png" alt="">
+              </div>
+
+              <p>
+                <b><span class="appid">...loading...</span></b>
+                wants to get access to your data. Are you sure about this is the real
+                <span class="appid">...loading...</span> and not a phishing site?
+              </p>
+              <div class="text-right">
+                <a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3">No, deny</a>
+                <button class="btn btn-primary" onclick="javascript: skyidConnect.CloseMySelf('This is your app-key: euhq348rzhq39rz2378gz')">Yes, grant access</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="assets/js/argon.js?v=1.2.0"></script>
+  
+  <script src="main.js"></script>
+
+  <script>
+    skyidConnect = new SkyidConnect()
+  </script>
+
+</body>
+
+</html>

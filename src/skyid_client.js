@@ -22,7 +22,7 @@ window.SkyID = class SkyID {
 		}
 		// NOT IMPLEMENTED YET
 		window.windowObjectReference = window.open(
-			"../main/connect/example_connect.html?appid=" + this.appid,
+			"../main/connect.html?appid=" + this.appid,
 			"DescriptiveWindowName",
 			"resizable,scrollbars,status,width=400,height=500"
 		)
