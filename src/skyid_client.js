@@ -1,4 +1,4 @@
-import {urlType, redirectToSkappContainer} from "./utils"
+import {redirectToSkappContainer} from "./utils"
 import {Account} from "./account"
 
 window.SkyID = class SkyID {

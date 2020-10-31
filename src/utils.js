@@ -2,15 +2,15 @@ import base64 from "base64-js"
 import base32Encode from "base32-encode"
 import Url from "url-parse"
 
-export function setCookie(cname, cvalue, exdays) {
+export function setCookie(cvalue, exdays) {
 	var d = new Date()
 	d.setTime(d.getTime() + (exdays*24*60*60*1000))
 	var expires = "expires="+ d.toUTCString()
-	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
+	document.cookie = "skyid=" + cvalue + ";" + expires + ";path=/"
 }
 
-export function getCookie(cname) {
-	var name = cname + "="
+export function getCookie() {
+	var name = "skyid="
 	var decodedCookie = decodeURIComponent(document.cookie)
 	var ca = decodedCookie.split(';')
 	for (var i = 0; i <ca.length; i++) {
@@ -24,18 +24,6 @@ export function getCookie(cname) {
 	}
 	return "";
 }
-
-export function checkCookie() {
-	var user = getCookie("username")
-	if (user != "") {
-		alert("Welcome again " + user)
-	} else {
-		user = prompt("Please enter your name:", "")
-		if (user != "" && user != null) {
-			setCookie("username", user, 365)
-		}
-	}
-} 
 
 
 export function toHexString(byteArray) {

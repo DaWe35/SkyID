@@ -236,7 +236,7 @@
                   <span>Settings</span>
                 </a> -->
                 <div class="dropdown-divider"></div>
-                <a href="javascript: skyid.logout();" class="dropdown-item">
+                <a href="javascript: account.sessionDestroy('login.html');" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
@@ -287,12 +287,13 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script>
-    window.addEventListener("hashchange", function(){
-      loadPage(window.location.hash)
-    });
-  </script>
+
+  <script src="skyid_dashboard.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script>
+    const account = new Account()
+  </script>
+
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
@@ -304,6 +305,14 @@
   <script src="assets/js/argon.js?v=1.2.0"></script>
 
   <script>
+
+    window.addEventListener("hashchange", function(){
+      loadPage(window.location.hash)
+    })
+    
+    loadPage(window.location.hash || '#blog')
+
+
     function loadPage(page) {
       if (page == '#dapps') {
         var content = `<div class="card">
@@ -767,11 +776,6 @@
       }
       document.getElementById('content').innerHTML = content
     }
-
-
-
-
-    loadPage(window.location.hash || '#blog')
   </script>
 </body>
 

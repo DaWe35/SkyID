@@ -1,16 +1,20 @@
 const sia = require('sia-js')
 import { SkynetClient, keyPairFromSeed } from "skynet-js";
+import { getCookie, setCookie } from "./utils"
 global.Buffer = global.Buffer || require('buffer').Buffer
 
 // class for the main SkyID account & for dapp accounts
 export class Account {
 	constructor() {
 		this.client = new SkynetClient()
-		this.secKey = false
-		this.pubKey = false
-		this.address = false
-		this.mnemonic = false
+		this.seed = getCookie()
 		this.userData = {}
+	}
+
+	setSeed(seed, days = 1) {
+		this.seed = seed
+		setCookie(seed, days)
+		return true
 	}
 
 	addUserData() {
@@ -61,29 +65,24 @@ export class Account {
 
 
 
-	generateNewMasterKey() {
-		const client = new SkynetClient();
-
-		let seed = sia.keyPair.generateRandomData()
-		let nonce = Buffer.from([0,0,0,0,0,0,0,0])
-		return this.generateKey(seed, nonce)
+	generateNewMasterSeed() {
+		if (this.seed != '') {
+			throw "redeclaration of master seed. skyid.generateNewMasterSeed() called after skyid cookie was set already. If you want, you can skyid.sessionDestroy()"
+		} else {
+			const client = new SkynetClient();
+			let rendomData = sia.keyPair.generateRandomData()		
+			let mnemonic = sia.mnemonics.bytesToMnemonic(rendomData)
+			return mnemonic
+		}
 	}
 
-	generateKey(seed, nonce) {
-		let arr = [seed, nonce]
-		let deterministicSeed = Buffer.concat(arr)
-
-		let keyPDB = keyPairFromSeed(Buffer.from(seed).toString('hex'))
-		console.log('SkyDB key:', Buffer.from(keyPDB.privateKey).toString('hex'))
-
-		let keypair = sia.keyPair.generateFromSeed(deterministicSeed)
-		let mnemonic = sia.mnemonics.bytesToMnemonic(seed)
-
-		this.secKey = keypair['privateKey']
-		this.pubKey = keypair['publicKey']
-		this.address = keypair['address']
-		this.mnemonic = mnemonic
-		return true
+	sessionDestroy(redirectUrl = null) {
+		setCookie('', -1)
+		if (redirectUrl === null) {
+			location.reload()
+		} else {
+			window.location.href = redirectUrl
+		}
 	}
 
 	generateDappAccount(masterKey) {

@@ -122,10 +122,10 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="row m-0">
-            <div class="col-sm-6 bg-secondary rounded-top" id="login_btn" onclick="switchPage('login')">
+            <div class="col-sm-6 bg-secondary rounded-top" id="login_btn" onclick="switchPage('#login')">
               Sign in
             </div>
-            <div class="col-sm-6 mb-1 text-white" id="register_btn" onclick="switchPage('register')">
+            <div class="col-sm-6 mb-1 text-white" id="register_btn" onclick="switchPage('#register')">
               Create new account
             </div>
           </div>
@@ -137,17 +137,17 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Passphrase" type="password">
+                    <input id="loginInput" class="form-control" placeholder="Passphrase" type="password">
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                  <label class="custom-control-label" for=" customCheckLogin">
+                  <input class="custom-control-input" id="rememberMe" type="checkbox">
+                  <label class="custom-control-label" for="rememberMe">
                     <span class="text-muted">Remember me</span>
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Sign in</button>
+                  <button type="button" class="btn btn-primary mt-4" onclick="javascript: singIn()">Sign in</button>
                 </div>
               </form>
             </div>
@@ -176,7 +176,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Create account</button>
+                  <button type="button" class="btn btn-primary mt-4" onclick="javascript: createAccount()">Create account</button>
                 </div>
 
                 
@@ -235,24 +235,18 @@
     </div>
   </footer> -->
 
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Argon JS -->
-  <script src="assets/js/argon.js?v=1.2.0"></script>
-  <script src="skyid_dashboard.js"></script>
   
+  <script src="skyid_dashboard.js"></script>
+  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+
   <script>
+    const account = new Account()
+    var mnemonic = ''
     function switchPage(page) {
-      if (page == 'register') {
-        if ($('#passphrase').html() == '') {
-          const account = new Account()
-          account.generateNewMasterKey()
-          $('#passphrase').html(account.mnemonic)
+      if (page == '#register') {
+        if (account.seed == '' && $('#passphrase').html() == '') {
+          mnemonic = account.generateNewMasterSeed()
+          $('#passphrase').html(mnemonic)
         }
         $('#login_btn').removeClass('bg-secondary rounded-top')
         $('#login_btn').addClass('text-white mb-1')
@@ -261,7 +255,7 @@
         $('#pagecard').removeClass('no-top-left-radius')
         $('#register_card').removeClass('display-none')
         $('#login_card').addClass('display-none')
-      } else {
+      } else if (page == '#login' || page == '') {
         $('#login_btn').addClass('bg-secondary rounded-top')
         $('#login_btn').removeClass('text-white mb-1')
         $('#register_btn').removeClass('bg-secondary rounded-top')
@@ -270,10 +264,52 @@
         $('#pagecard').removeClass('no-top-right-radius')
         $('#register_card').addClass('display-none')
         $('#login_card').removeClass('display-none')
+      } else {
+        throw 'Page ' + page + ' not found, try #login or #register?'
       }
     }
+
+    window.addEventListener("hashchange", function(){
+      switchPage(window.location.hash)
+    });
+    switchPage(window.location.hash)
     
+    function createAccount() {
+      if (mnemonic == '') {
+        alert('Please report this bug: unable to create account, seed is empty')
+      } else {
+        if (account.setSeed(mnemonic) === true) {
+          window.location.href = 'dashboard.html'
+        } else {
+          alert('Please report this bug: setSeed failed')
+        }
+      }
+    }
+
+    function singIn() {
+      let mnemonic = $('#loginInput').val()
+      if ($('#rememberMe').is(':checked')) {
+        var days = 30
+      } else {
+        var days = 1
+      }
+      if (account.setSeed(mnemonic, days) === true) {
+        window.location.href = 'dashboard.html'
+      } else {
+        alert('Please report this bug: setSeed failed')
+      }
+    }
   </script>
+
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Argon JS -->
+  <script src="assets/js/argon.js?v=1.2.0"></script>
+
 </body>
 
 </html>
