@@ -15,18 +15,20 @@ window.SkyID = class SkyID {
 	}
 
 	sessionStart() {
-		let red = redirectToSkappContainer(window.location)
-		if (red == null) {
+		let redirect = redirectToSkappContainer(window.location)
+		if (redirect == null) {
 			alert('Error: unable to detect dapp container URL')
-		} else if (red != false) {
-			window.location.href = red
+		} else {
+			if (red != false) {
+				window.location.href = redirect
+			}
+			// NOT IMPLEMENTED YET
+			window.windowObjectReference = window.open(
+				"../main/connect.html?appid=" + this.appid,
+				"DescriptiveWindowName",
+				"resizable,scrollbars,status,width=400,height=500"
+			)
 		}
-		// NOT IMPLEMENTED YET
-		window.windowObjectReference = window.open(
-			"../main/connect.html?appid=" + this.appid,
-			"DescriptiveWindowName",
-			"resizable,scrollbars,status,width=400,height=500"
-		)
 	}
 
 
