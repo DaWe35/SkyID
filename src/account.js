@@ -17,6 +17,27 @@ export class Account {
 		return true
 	}
 
+	generateNewMasterSeed() {
+		if (this.seed != '') {
+			throw "redeclaration of master seed. skyid.generateNewMasterSeed() called after skyid cookie was set already. If you want, you can skyid.sessionDestroy()"
+		} else {
+			const client = new SkynetClient();
+			let rendomData = sia.keyPair.generateRandomData()		
+			let mnemonic = sia.mnemonics.bytesToMnemonic(rendomData)
+			return mnemonic
+		}
+	}
+
+	sessionDestroy(redirectUrl = null) {
+		setCookie('', -1)
+		if (redirectUrl === null) {
+			location.reload()
+		} else {
+			window.location.href = redirectUrl
+		}
+	}
+
+	
 	addUserData() {
 		this.userData
 	}
@@ -62,28 +83,6 @@ export class Account {
 			}
 		}
 	} */
-
-
-
-	generateNewMasterSeed() {
-		if (this.seed != '') {
-			throw "redeclaration of master seed. skyid.generateNewMasterSeed() called after skyid cookie was set already. If you want, you can skyid.sessionDestroy()"
-		} else {
-			const client = new SkynetClient();
-			let rendomData = sia.keyPair.generateRandomData()		
-			let mnemonic = sia.mnemonics.bytesToMnemonic(rendomData)
-			return mnemonic
-		}
-	}
-
-	sessionDestroy(redirectUrl = null) {
-		setCookie('', -1)
-		if (redirectUrl === null) {
-			location.reload()
-		} else {
-			window.location.href = redirectUrl
-		}
-	}
 
 	generateDappAccount(masterKey) {
 

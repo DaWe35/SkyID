@@ -241,6 +241,11 @@
 
   <script>
     const account = new Account()
+    
+    if (account.seed != '') {
+      window.location.href = 'dashboard.html'
+    }
+
     var mnemonic = ''
     function switchPage(page) {
       if (page == '#register') {

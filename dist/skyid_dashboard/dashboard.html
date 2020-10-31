@@ -292,6 +292,10 @@
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
   <script>
     const account = new Account()
+
+    if (account.seed == '') {
+      window.location.href = 'login.html'
+    }
   </script>
 
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
