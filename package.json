@@ -19,13 +19,13 @@
   "dependencies": {
     "base32-encode": "^1.1.1",
     "base64-js": "^1.3.1",
-    "buffer": "^5.6.0",
+    "buffer": "^5.7.0",
     "sia-js": "github:dawe35/sia-js",
-    "skynet-js": "^2.3.0",
+    "skynet-js": "^2.3.1",
     "url-parse": "^1.4.7"
   },
   "devDependencies": {
-    "webpack": "^5.1.3",
+    "webpack": "^5.3.2",
     "webpack-cli": "^4.1.0"
   }
 }

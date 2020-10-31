@@ -1,4 +1,4 @@
-import {isSkylinkPage, redirectToSkappContainer} from "./utils"
+import {urlType, redirectToSkappContainer} from "./utils"
 import {Account} from "./account"
 
 window.SkyID = class SkyID {
@@ -15,9 +15,10 @@ window.SkyID = class SkyID {
 	}
 
 	sessionStart() {
-		// BROKEN ON https://pg0anies87je55r4ngqssqce4o3cirn9dfu38nmbvef6tudpoohlhlo.siasky.net/example_skapp.html
-		if (isSkylinkPage()) {
-			let red = redirectToSkappContainer(window.location)
+		let red = redirectToSkappContainer(window.location)
+		if (red == null) {
+			alert('Error: unable to detect dapp container URL')
+		} else if (red != false) {
 			window.location.href = red
 		}
 		// NOT IMPLEMENTED YET
