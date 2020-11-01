@@ -7,7 +7,11 @@ global.Buffer = global.Buffer || require('buffer').Buffer
 window.SkyID = class SkyID {
 	constructor(appid, callback = null) {
 		this.appid = appid
-		this.skynetClient = new SkynetClient()
+		if (window.location.protocol == 'file:') {
+			this.skynetClient = new SkynetClient('https://siasky.net')
+		} else {
+			this.skynetClient = new SkynetClient()
+		}
 		this.seed = getCookie()
 		this.callback = callback
 		toggleElementsDisplay(this.seed)
@@ -57,27 +61,34 @@ window.SkyID = class SkyID {
 	}
 
 	
-	getRegistry(dataKey) {
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed);
+	async getRegistry(dataKey, callback) {
+		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
 		
-		async function getJSONExample() {
-		  try {
-			const { data, revision } = await client.db.getJSON(publicKey, dataKey);
-		  } catch (error) {
-			console.log(error);
-		  }
+		try {
+			const { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
+			callback(data, revision)
+		} catch (error) {
+			console.log(error)
+			return false
 		}
 	}
 
-	setRegistry(filename, json) {
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed);
+	async setRegistry(dataKey, json, callback) {
+		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		try {
+			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
 
-		async function setJSONExample() {
-			try {
-				await client.db.setJSON(privateKey, dataKey, json);
-			} catch (error) {
-				console.log(error);
-			}
+			// control
+			this.getRegistry(dataKey, function(registryData, revision) {
+				console.log(registryData)
+				if (registryData == json) {
+					callback(true)
+				} else {
+					callback(false)
+				}
+			})
+		} catch (error) {
+			console.log(error)
 		}
 	}
 
