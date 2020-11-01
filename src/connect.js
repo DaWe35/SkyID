@@ -1,4 +1,4 @@
-export class SkyidConnect {
+window.SkyidConnect = class SkyidConnect {
 
 	constructor() {
 		const urlParams = new URLSearchParams(window.location.search)
@@ -15,8 +15,13 @@ export class SkyidConnect {
 
 	}
 
-	CloseMySelf(data) {
-		window.opener.postMessage({'sender': 'skyid', 'type': 'login', 'data': data}, "*")
+	CloseMySelf(seed) {
+		if (seed == false || seed == '') {
+			var eventCode = 'login_fail'
+		} else {
+			var eventCode = 'login_success'
+		}
+		window.opener.postMessage({'sender': 'skyid', 'eventCode': eventCode, 'seed': seed}, "*")
 		window.close()
 	}
 

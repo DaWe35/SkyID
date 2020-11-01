@@ -91,10 +91,58 @@ export function redirectToSkappContainer(url = null) {
 		return false
 	} else if (base32Regex.test(location.hostname)) { // safe base32 subdomain
 		return false
+	} else if (protocol == 'file:') { // for development purposes
+		return false
 	} else {
 		return null
 	}
 }
+
+export function popupCenter(url, title, w, h) {
+    // Fixes dual-screen position                             Most browsers      Firefox
+    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
+    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+
+    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    const systemZoom = width / window.screen.availWidth;
+    const left = (width - w) / 2 / systemZoom + dualScreenLeft
+    const top = (height - h) / 2 / systemZoom + dualScreenTop
+	const newWindow = window.open(url, title, 
+		`
+		scrollbars=yes,
+		width=${w / systemZoom}, 
+		height=${h / systemZoom}, 
+		top=${top}, 
+		left=${left}
+		`
+	  )
+
+	if (window.focus) newWindow.focus();
+	return newWindow
+}
+
+
+// apply display settings for hide-if-logged-in and show-if-logged-in
+export function toggleElementsDisplay(seed) {
+	if (seed == '') { // logged out
+		document.querySelectorAll('.hide-if-logged-in').forEach(function(element) {
+			element.style.display = 'initial'
+		})
+		document.querySelectorAll('.show-if-logged-in').forEach(function(element) {
+			element.style.display = 'none'
+		})
+	} else { // logged in
+		document.querySelectorAll('.hide-if-logged-in').forEach(function(element) {
+			element.style.display = 'none'
+		})
+		document.querySelectorAll('.show-if-logged-in').forEach(function(element) {
+			element.style.display = 'initial'
+		})
+	}
+}
+
 
 function getFirstAndRemainingPath(pathname) {
 	var trimmedPathname = trimChar(pathname, '/')

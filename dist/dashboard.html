@@ -230,7 +230,7 @@
                   <span>Settings</span>
                 </a> -->
                 <div class="dropdown-divider"></div>
-                <a href="javascript: account.sessionDestroy('index.html');" class="dropdown-item">
+                <a href="javascript: skyid.sessionDestroy('index.html');" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
@@ -282,12 +282,12 @@
   <!-- Argon Scripts -->
   <!-- Core -->
 
-  <script src="skyid_dashboard.js"></script>
+  <script src="skyid.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
   <script>
-    const account = new Account()
+    const skyid = new SkyID('SkyID')
 
-    if (account.seed == '') {
+    if (skyid.seed == '') {
       window.location.href = 'index.html'
     }
   </script>
