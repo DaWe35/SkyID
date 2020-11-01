@@ -14,7 +14,9 @@ window.SkyID = class SkyID {
 
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
-				console.log("event.data", event.data)
+				if (event.data.eventCode == 'login_success') {
+					this.setSeed(event.data.seed)
+				}
 				typeof callback === 'function' && this.callback(event.data.eventCode)
 			}
 		}, false)
@@ -39,13 +41,13 @@ window.SkyID = class SkyID {
 
 
 	sessionDestroy(redirectUrl = null) {
-		setCookie('', -1)
+		this.setSeed('', -1)
 		if (redirectUrl !== null) {
 			window.location.href = redirectUrl
 		} else {
-			toggleElementsDisplay()
+			toggleElementsDisplay(this.seed)
 		}
-		typeof callback === 'function' && this.callback('logout')
+		typeof callback === 'function' && this.callback('destroy')
 	}
 
 
@@ -89,7 +91,7 @@ window.SkyID = class SkyID {
 
 	getUserData() {
 		// NOT IMPLEMENTED YET
-		user = {
+		var user = {
 			'username': 'Test username',
 			'username': 'Test username',
 			/*	verificationLevel is a number between 0 and 10
@@ -105,7 +107,7 @@ window.SkyID = class SkyID {
 	setSeed(seed, days = 1) {
 		this.seed = seed
 		setCookie(seed, days)
-		toggleElementsDisplay()
+		toggleElementsDisplay(seed)
 		return true
 	}
 	
