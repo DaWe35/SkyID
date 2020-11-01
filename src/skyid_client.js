@@ -1,10 +1,12 @@
 import {redirectToSkappContainer} from "./utils"
 import {Account} from "./account"
+import { SkynetClient, keyPairFromSeed } from "skynet-js";
 
 window.SkyID = class SkyID {
 	constructor(appid, sessionCallback) {
 		this.appid = appid
 		this.account = new Account()
+		this.skynetClient = new SkynetClient()
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
 				console.log("event.data", event.data)
@@ -31,6 +33,38 @@ window.SkyID = class SkyID {
 		}
 	}
 
+	
+	getRegistry(dataKey) {
+		const { publicKey, privateKey } = keyPairFromSeed(this.account.seed);
+		
+		async function getJSONExample() {
+		  try {
+			const { data, revision } = await client.db.getJSON(publicKey, dataKey);
+		  } catch (error) {
+			console.log(error);
+		  }
+		}
+	}
+
+	setRegistry(filename, json) {
+		const { publicKey, privateKey } = keyPairFromSeed(this.account.seed);
+
+		async function setJSONExample() {
+			try {
+				await client.db.setJSON(privateKey, dataKey, json);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
+
+	signData(data, childSecKey) {
+		
+	}
+
+	validateMessage(signedMessage, masterPubKey, childPath) {
+
+	}
 
 	getUserData() {
 		// NOT IMPLEMENTED YET
