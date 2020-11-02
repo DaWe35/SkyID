@@ -80,7 +80,6 @@ window.SkyID = class SkyID {
 
 			// control
 			this.getRegistry(dataKey, function(registryData, revision) {
-				console.log(registryData)
 				if (registryData == json) {
 					callback(true)
 				} else {
