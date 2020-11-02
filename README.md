@@ -41,6 +41,24 @@ function skyidEventCallback(message) {
 }
 ```
 
+#### Display classes
+
+If you wnat, you can use special HTML classes, so you don't need to listen for SkyID callbacks.
+
+- `show-if-logged-in` - Set `display` to `''` if user logged in
+
+- `hide-if-logged-in` - Set `display` to `nonde` if user logged in
+
+- `show-if-initialized` - Set `display` to `''` if SkyID initialized
+
+- `hide-if-initialized` - Set `display` to `nonde` if SkyID initialized
+
+Example:
+
+```
+<div class="show-if-logged-in"> You are logged in! </div>
+```
+
 #### Save file
 
 SkyID uses SkyDB under the hood to save, modify, and fetch files. The only difference is that you don't need to remember for your secret key - SkyID generates deterministic keypairs instead.

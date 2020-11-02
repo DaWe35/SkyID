@@ -141,6 +141,14 @@ export function toggleElementsDisplay(seed) {
 			element.style.display = ''
 		})
 	}
+
+	 // initialize
+	document.querySelectorAll('.show-if-initialized').forEach(function(element) {
+		element.style.display = ''
+	})
+	document.querySelectorAll('.hide-if-initialized').forEach(function(element) {
+		element.style.display = 'none'
+	})
 }
 
 
