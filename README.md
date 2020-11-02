@@ -8,17 +8,17 @@ Global frontend-only verification system for web3 dapps
 
 ## Documentation
 
-#### Install
+### Install
 ``` html
 <script src="https://skyaccounts.hns.siasky.net/skyid.js"></script>
 ```
 
-#### Initialize
+### Initialize
 ``` javascript
 var skyid = new SkyID('App name')
 ```
 
-#### Initialize with callback (optional)
+### Initialize with callback (optional)
 ``` javascript
 var skyid = new SkyID('App name', skyidEventCallback)
 
@@ -41,7 +41,7 @@ function skyidEventCallback(message) {
 }
 ```
 
-#### Display classes
+### Display classes
 
 If you wnat, you can use special HTML classes, so you don't need to listen for SkyID callbacks.
 
@@ -59,7 +59,7 @@ Example:
 <div class="show-if-logged-in"> You are logged in! </div>
 ```
 
-#### Save file
+### Save file
 
 SkyID uses SkyDB under the hood to save, modify, and fetch files. The only difference is that you don't need to remember for your secret key - SkyID generates deterministic keypairs instead.
 
@@ -76,7 +76,7 @@ skyid.setFile('filename', jsonData, function(response) {
 You can store any JSON data, for example notes, settings, or a list of your uploaded files.
 
 
-#### Fetch file
+### Fetch file
 ``` javascript
 skyid.getFile('filename', function(response) {
 	if (response == false) {
