@@ -12,6 +12,7 @@ Global frontend-only verification system for web3 dapps
 ``` html
 <script src="https://skyaccounts.hns.siasky.net/skyid.js"></script>
 ```
+🔼 *This URL will change in a week!* 🔼
 
 ### Initialize
 ``` javascript

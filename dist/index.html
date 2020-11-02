@@ -35,6 +35,10 @@
     .display-none {
       display: none;
     }
+
+    .disabled {
+      background-color: gray !important;
+    }
   </style>
 </head>
 
@@ -151,9 +155,18 @@
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
                     <span id="passphrase" class="form-control bg-white h-auto" placeholder="Passphrase"></span>
-                    
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input id="username" class="form-control" placeholder="Username" required>
+                  </div>
+                </div>
+
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckReg" type="checkbox" required>
                   <label class="custom-control-label" for=" customCheckReg">
@@ -161,7 +174,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4" onclick="javascript: createAccount()">Create account</button>
+                  <button id="createAccountBtn" type="button" class="btn btn-primary mt-4" onclick="javascript: createAccount()">Create account</button>
                 </div>
 
                 
@@ -265,11 +278,28 @@
     switchPage(window.location.hash)
     
     function createAccount() {
-      if (mnemonic == '') {
+      var username = document.getElementById('username').value
+      if (username == '') {
+        alert('Username is empty')
+      } else if (typeof mnemonic == 'undefined' || mnemonic == '') {
         alert('Please report this bug: unable to create account, seed is empty')
       } else {
+        // disable button
+        let createAccountBtn = document.getElementById('createAccountBtn')
+        createAccountBtn.disabled = 'disabled'
+        createAccountBtn.className += ' disabled'
+        createAccountBtn.innerHTML = 'Initializing profile...'
+
         if (skyid.setMnemonic(mnemonic) === true) {
-          window.location.href = 'dashboard.html'
+          let profile = {'username': username}
+          let jsonProfile = JSON.stringify(profile)
+          skyid.setFile('profile', jsonProfile, function(success){
+            if (success) {
+              window.location.href = 'dashboard.html'
+            } else {
+              alert('Error: unable to save profile.json')
+            }
+          })
         } else {
           alert('Please report this bug: setMnemonic failed')
         }
@@ -288,6 +318,17 @@
       } else {
         alert('Please report this bug: setMnemonic failed')
       }
+    }
+
+
+
+
+	  function removeClass(el, classNameToRemove){
+      var elClass = ' ' + el.className + ' ';
+      while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1){
+        elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
+      }
+      el.className = elClass;
     }
   </script>
 
