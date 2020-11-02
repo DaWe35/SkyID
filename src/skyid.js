@@ -114,7 +114,7 @@ window.SkyID = class SkyID {
 		return user
 	}
 
-	setSeed(seed, days = 1) {
+	setSeed(seed, days = 0) {
 		this.seed = seed
 		setCookie(seed, days)
 		toggleElementsDisplay(seed)
