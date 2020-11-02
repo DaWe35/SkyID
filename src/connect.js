@@ -1,3 +1,4 @@
+import { keyPairFromSeed } from "skynet-js";
 window.SkyidConnect = class SkyidConnect {
 
 	constructor() {
@@ -28,7 +29,9 @@ window.SkyidConnect = class SkyidConnect {
 			window.close()
 		} else if (grantAccess === true) {
 			var seed = this.skyid.generateChildSeed(this.appId)
-			this.addDapp(this.appId, document.referrer, null, function() {
+			const { publicKey, privateKey } = keyPairFromSeed(seed)
+			let appData = { 'url': document.referrer, 'publicKey': publicKey, 'img': null }
+			this.addDapp(this.appId, appData, function() {
 				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'seed': seed}, "*")
 				window.close()
 			})
@@ -43,8 +46,8 @@ window.SkyidConnect = class SkyidConnect {
 		}
 	}
 
-	addDapp(appId, dappUrl, dappImg = null, callback) {
-		console.log(appId, dappUrl, dappImg, callback)
+	addDapp(appId, appData, callback) {
+		console.log(appId, appData, callback)
 		// fetch file
 		var self = this;
 		this.skyid.getFile('profile', function(response, revision) {
@@ -57,7 +60,7 @@ window.SkyidConnect = class SkyidConnect {
 				if (typeof profileObj.dapps == 'undefined') {
 					profileObj.dapps = {}
 				}
-				profileObj.dapps[appId] = { 'url': dappUrl, 'img': dappImg }
+				profileObj.dapps[appId] = appData
 
 				// set file
 				let jsonProfile = JSON.stringify(profileObj)
