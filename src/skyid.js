@@ -34,9 +34,15 @@ window.SkyID = class SkyID {
 			if (redirect != false) {
 				window.location.href = redirect
 			}
-			// NOT IMPLEMENTED YET
-			window.windowObjectReference = popupCenter(
+/* 			window.windowObjectReference = popupCenter(
 				'https://skyaccounts.hns.siasky.net/connect.html?appid=' + this.appid,
+				'SkyID',
+				400, 500
+			) */
+
+			//for testing
+			window.windowObjectReference = popupCenter(
+				'http://idtest.local/connect.html?appid=' + this.appid,
 				'SkyID',
 				400, 500
 			)
@@ -56,8 +62,9 @@ window.SkyID = class SkyID {
 
 
 
-	generateChildSeed(seed, derivatePath) {
-		deriveChildSeed(seed, derivatePath)
+	generateChildSeed(derivatePath) {
+		var childSeed = deriveChildSeed(this.seed, derivatePath)
+		return encodeBase64(childSeed)
 	}
 
 	
@@ -69,7 +76,10 @@ window.SkyID = class SkyID {
 			callback(data, revision)
 		} catch (error) {
 			console.log(error)
-			return false
+			callback('', 0)
+			
+			// error: 
+			// callback(false, -1)
 		}
 	}
 
