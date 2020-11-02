@@ -74,6 +74,8 @@ ___
 
 ### Todo
 
+- Connect page: check if user logged in to SkyID
+
 - Verify app-domain and warn users if app1 wants to access app2 data
 
 - Finish app-key generation
