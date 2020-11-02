@@ -40,6 +40,10 @@ export function decodeBase64(input) {
 	)
 }
 
+export function encodeBase64(input) {
+	return base64.fromByteArray(input)
+}
+
 export function encodeBase32(input) {
 	return base32Encode(input, "RFC4648-HEX", { padding: false }).toLowerCase()
 }

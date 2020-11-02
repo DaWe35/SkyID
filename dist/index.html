@@ -271,10 +271,10 @@
       if (mnemonic == '') {
         alert('Please report this bug: unable to create account, seed is empty')
       } else {
-        if (skyid.setSeed(mnemonic) === true) {
+        if (skyid.setMnemonic(mnemonic) === true) {
           window.location.href = 'dashboard.html'
         } else {
-          alert('Please report this bug: setSeed failed')
+          alert('Please report this bug: setMnemonic failed')
         }
       }
     }
@@ -286,10 +286,10 @@
       } else {
         var days = 1
       }
-      if (skyid.setSeed(mnemonic, days) === true) {
+      if (skyid.setMnemonic(mnemonic, days) === true) {
         window.location.href = 'dashboard.html'
       } else {
-        alert('Please report this bug: setSeed failed')
+        alert('Please report this bug: setMnemonic failed')
       }
     }
   </script>
