@@ -59,16 +59,22 @@ Example:
 <div class="show-if-logged-in"> You are logged in! </div>
 ```
 
-You can also **combine** these classes:
+<details>
+	<summary>You can also **combine** these classes:</summary>
+	<br>
+	``` html
+	<div class="hide-if-initialized">Loading...</div>
 
-``` html
-<div class="hide-if-initialized">Loading...</div>
+	<div class="show-if-initialized hide-if-logged-in" style="display:none"> Loaded and you are not logged in :( </div>
 
-<div class="show-if-initialized hide-if-logged-in" style="display:none"> Loaded and you are not logged in :( </div>
+	<div class="show-if-initialized show-if-logged-in" style="display:none"> Loaded and you are logged in! </div>
+	```
+	*It is important to use `style="display:none"` and not a CSS class the display property (bad example `class="display-none"`) because SkyID will only reset the display attribute and not the CSS class*
+</details>
 
-<div class="show-if-initialized show-if-logged-in" style="display:none"> Loaded and you are logged in! </div>
-```
-*It is important to use `style="display:none"` and not a CSS class the display property (bad example `class="display-none"`) because SkyID will only reset the display attribute and not the CSS class*
+
+
+
 
 ### Save file
 
