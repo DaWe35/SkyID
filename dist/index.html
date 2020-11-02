@@ -284,7 +284,7 @@
       if ($('#rememberMe').is(':checked')) {
         var days = 30
       } else {
-        var days = 1
+        var days = 0
       }
       if (skyid.setMnemonic(mnemonic, days) === true) {
         window.location.href = 'dashboard.html'

@@ -1,5 +1,5 @@
 import { getCookie, setCookie, redirectToSkappContainer, popupCenter, toggleElementsDisplay, encodeBase64 } from "./utils"
-import { SkynetClient, keyPairFromSeed } from "skynet-js";
+import { SkynetClient, keyPairFromSeed, deriveChildSeed } from "skynet-js";
 const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
@@ -56,8 +56,8 @@ window.SkyID = class SkyID {
 
 
 
-	generateChildAccount(masterKey) {
-
+	generateChildSeed(seed, derivatePath) {
+		deriveChildSeed(seed, derivatePath)
 	}
 
 	
@@ -121,14 +121,14 @@ window.SkyID = class SkyID {
 	
 	*/
 
-	setSeed(seed, days = 1) {
+	setSeed(seed, days = 0) {
 		this.seed = seed
 		setCookie(seed, days)
 		toggleElementsDisplay(seed)
 		return true
 	}
 
-	setMnemonic(mnemonic, days = 1) {
+	setMnemonic(mnemonic, days = 0) {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
 		let seed = encodeBase64(mnemonicBytes)
 		return this.setSeed(seed, days)

@@ -21,7 +21,7 @@
     "base64-js": "^1.3.1",
     "buffer": "^5.7.0",
     "sia-js": "github:dawe35/sia-js",
-    "skynet-js": "^2.3.1",
+    "skynet-js": "github:NebulousLabs/skynet-js#add-crypto-seed-api-test",
     "url-parse": "^1.4.7"
   },
   "devDependencies": {
