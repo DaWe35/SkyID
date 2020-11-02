@@ -2,7 +2,9 @@
 
 Global frontend-only verification system for web3 dapps
 
-#### Demo: https://skydev.hns.siasky.net/
+### SkyID: https://skyaccounts.hns.siasky.net/
+
+### Demo dapp using SkyID login: https://skydev.hns.siasky.net/
 
 ## Documentation
 
@@ -71,6 +73,14 @@ ___
 
 
 ### Todo
+
+- Verify app-domain and warn users if app1 wants to access app2 data
+
+- Finish app-key generation
+
+- Child key derivation
+
+- File encryption & decryption
 
 ___
 
