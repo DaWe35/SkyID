@@ -49,7 +49,7 @@ SkyID uses SkyDB under the hood to save, modify, and fetch files. The only diffe
 ``` javascript
 let yourObject = { key1: 'value1' }
 let jsonData = JSON.stringify(yourObject)
-skyid.setRegistry('filename', jsonData, function(response) {
+skyid.setFile('filename', jsonData, function(response) {
 	if (response != true) {
 		alert('Sorry, but upload failed :(')
 	}
@@ -60,7 +60,7 @@ You can store any JSON data, for example notes, settings, or a list of your uplo
 
 #### Fetch file
 ``` javascript
-skyid.getRegistry('filename', function(response) {
+skyid.getFile('filename', function(response) {
 	if (response == false) {
 		alert('Sorry, but note fetching failed :(')
 	}

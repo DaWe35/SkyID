@@ -61,7 +61,7 @@ window.SkyID = class SkyID {
 	}
 
 	
-	async getRegistry(dataKey, callback) {
+	async getFile(dataKey, callback) {
 		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
 		
 		try {
@@ -73,13 +73,13 @@ window.SkyID = class SkyID {
 		}
 	}
 
-	async setRegistry(dataKey, json, callback) {
+	async setFile(dataKey, json, callback) {
 		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
 
 			// control
-			this.getRegistry(dataKey, function(registryData, revision) {
+			this.getFile(dataKey, function(registryData, revision) {
 				if (registryData == json) {
 					callback(true)
 				} else {
