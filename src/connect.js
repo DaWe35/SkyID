@@ -24,14 +24,16 @@ window.SkyidConnect = class SkyidConnect {
 
 	CloseMySelf(grantAccess) {
 		if (grantAccess === false) {
-			var eventCode = 'login_fail'
-			var seed = false
+			window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_fail', 'seed': false}, "*")
+			window.close()
 		} else if (grantAccess === true) {
-			var eventCode = 'login_success'
 			var seed = this.skyid.generateChildSeed(this.appId)
+			this.addDapp(this.appId, document.referrer, null, function() {
+				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'seed': seed}, "*")
+				window.close()
+			})
 		}
-		window.opener.postMessage({'sender': 'skyid', 'eventCode': eventCode, 'seed': seed}, "*")
-		window.close()
+
 	}
 
 	showAlert(text, type) {
@@ -39,5 +41,35 @@ window.SkyidConnect = class SkyidConnect {
 		if (type == 'error') {
 			window.close()
 		}
+	}
+
+	addDapp(appId, dappUrl, dappImg = null, callback) {
+		console.log(appId, dappUrl, dappImg, callback)
+		// fetch file
+		var self = this;
+		this.skyid.getFile('profile', function(response, revision) {
+			console.log('call appadd, response:', response)
+			if (response == '') { // file not found
+				alert('Error: unable to fetch dapp list')
+				console.log('Error: unable to fetch dapp list')
+			} else { // success
+				var profileObj = JSON.parse(response)
+				if (typeof profileObj.dapps == 'undefined') {
+					profileObj.dapps = {}
+				}
+				profileObj.dapps[appId] = { 'url': dappUrl, 'img': dappImg }
+
+				// set file
+				let jsonProfile = JSON.stringify(profileObj)
+				self.skyid.setFile('profile', jsonProfile, function(success) {
+					console.log('File Set')
+					if (!success) {
+						alert('Error: unable to save profile.json')
+					} else {
+						callback()
+					}
+				})
+			}
+		})
 	}
 }

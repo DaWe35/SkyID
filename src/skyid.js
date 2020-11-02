@@ -34,18 +34,23 @@ window.SkyID = class SkyID {
 			if (redirect != false) {
 				window.location.href = redirect
 			}
-/* 			window.windowObjectReference = popupCenter(
-				'https://skyaccounts.hns.siasky.net/connect.html?appid=' + this.appid,
-				'SkyID',
-				400, 500
-			) */
 
-			//for testing
-			window.windowObjectReference = popupCenter(
-				'http://idtest.local/connect.html?appid=' + this.appid,
-				'SkyID',
-				400, 500
-			)
+			if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local') {
+				//for testing
+				window.windowObjectReference = popupCenter(
+					'http://idtest.local/connect.html?appid=' + this.appid,
+					'SkyID',
+					400, 500
+				)
+			} else {
+				window.windowObjectReference = popupCenter(
+					'https://skyaccounts.hns.siasky.net/connect.html?appid=' + this.appid,
+					'SkyID',
+					400, 500
+				)
+			}
+
+
 		}
 	}
 
