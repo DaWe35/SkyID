@@ -126,6 +126,15 @@ export function popupCenter(url, title, w, h) {
 
 // apply display settings for hide-if-logged-in and show-if-logged-in
 export function toggleElementsDisplay(seed) {
+	// initialize
+	document.querySelectorAll('.show-if-initialized').forEach(function(element) {
+		element.style.display = ''
+	})
+	document.querySelectorAll('.hide-if-initialized').forEach(function(element) {
+		element.style.display = 'none'
+	})
+
+	
 	if (seed == '') { // logged out
 		document.querySelectorAll('.hide-if-logged-in').forEach(function(element) {
 			element.style.display = ''
@@ -141,14 +150,6 @@ export function toggleElementsDisplay(seed) {
 			element.style.display = ''
 		})
 	}
-
-	 // initialize
-	document.querySelectorAll('.show-if-initialized').forEach(function(element) {
-		element.style.display = ''
-	})
-	document.querySelectorAll('.hide-if-initialized').forEach(function(element) {
-		element.style.display = 'none'
-	})
 }
 
 
