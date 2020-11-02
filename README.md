@@ -4,7 +4,7 @@ Global frontend-only verification system for web3 dapps
 
 ### SkyID: https://skyaccounts.hns.siasky.net/
 
-### Demo dapp using SkyID login: https://skydev.hns.siasky.net/
+### Demo dapp using SkyID login: https://skyacc.hns.siasky.net/
 
 ## Documentation
 
