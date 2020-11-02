@@ -7,7 +7,7 @@ global.Buffer = global.Buffer || require('buffer').Buffer
 window.SkyID = class SkyID {
 	constructor(appid, callback = null) {
 		this.appid = appid
-		if (window.location.protocol == 'file:') {
+		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local') {
 			this.skynetClient = new SkynetClient('https://siasky.net')
 		} else {
 			this.skynetClient = new SkynetClient()

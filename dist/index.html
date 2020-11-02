@@ -291,7 +291,7 @@
         createAccountBtn.innerHTML = 'Initializing profile...'
 
         if (skyid.setMnemonic(mnemonic) === true) {
-          let profile = {'username': username}
+          let profile = {'username': username, 'aboutMe': ''}
           let jsonProfile = JSON.stringify(profile)
           skyid.setFile('profile', jsonProfile, function(success){
             if (success) {

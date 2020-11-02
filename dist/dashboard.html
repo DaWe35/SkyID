@@ -32,6 +32,11 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <style>
+    .disabled {
+      background-color: gray !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -703,7 +708,7 @@
                   <h3 class="mb-0">Edit profile </h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="javascript:alert('failed')" class="btn btn-primary">Save</a>
+                  <a href="javascript: saveProfile()" class="btn btn-primary">Save</a>
                 </div>
               </div>
             </div>
@@ -714,8 +719,8 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="">
+                        <label class="form-control-label" for="profileUsername">Username</label>
+                        <input type="text" id="profileUsername" class="form-control" placeholder="Username" value="">
                       </div>
                     </div>
                   </div>
@@ -726,7 +731,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control" placeholder="A few words about you ..."></textarea>
+                    <textarea id="profileAboutMe" rows="4" class="form-control" placeholder="A few words about you ..."></textarea>
                   </div>
                 </div>
               </form>
@@ -734,13 +739,12 @@
             <div class="card-footer">
               <div class="row align-items-center">
                 <div class="col-12 text-right">
-                  <a href="javascript:alert('failed')" class="btn btn-primary">Save</a>
+                  <a href="javascript: saveProfile()" class="btn btn-primary">Save</a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>`
+        </div>`
       } else if (page == "#blog") {
         var content = `
         <div class="row">
@@ -773,7 +777,77 @@
         `
       }
       document.getElementById('content').innerHTML = content
+      if (page == '#profile') {
+        fetchProfile()
+      }
     }
+
+
+
+    function fetchProfile() {
+      // disable textarea
+      var profileUsername = document.getElementById('profileUsername')
+      var profileAboutMe = document.getElementById('profileAboutMe')
+      profileUsername.disabled = 'disabled'
+      profileUsername.className += ' disabled'
+      profileAboutMe.disabled = 'disabled'
+      profileAboutMe.className += ' disabled'
+
+      // fetch file
+      skyid.getFile('profile', function(response, revision) {
+        console.log('response', response)
+        if (response == '') { // file not found
+          profileUsername.value = ''
+          profileAboutMe.value = ''
+        } else { // success
+          var respObs = JSON.parse(response)
+          profileUsername.value = respObs.username
+          profileAboutMe.value = respObs.aboutMe
+        }
+
+        // enable textarea
+        profileUsername.disabled = ''
+        removeClass(profileUsername, 'disabled')
+        profileAboutMe.disabled = ''
+        removeClass(profileAboutMe, 'disabled')
+      })
+    }
+
+
+    function saveProfile() {
+      // disable inputs
+      var profileUsername = document.getElementById('profileUsername')
+      var profileAboutMe = document.getElementById('profileAboutMe')
+      profileUsername.disabled = 'disabled'
+      profileUsername.className += ' disabled'
+      profileAboutMe.disabled = 'disabled'
+      profileAboutMe.className += ' disabled'
+
+      let username = profileUsername.value
+      let aboutMe = profileAboutMe.value
+      // set file
+      let profile = {'username': username, 'aboutMe': aboutMe}
+      let jsonProfile = JSON.stringify(profile)
+      skyid.setFile('profile', jsonProfile, function(success){
+        if (!success) {
+          alert('Error: unable to save profile.json')
+        }
+        // enable inputs
+        profileUsername.disabled = ''
+        removeClass(profileUsername, 'disabled')
+        profileAboutMe.disabled = ''
+        removeClass(profileAboutMe, 'disabled')
+      })
+    }
+
+    
+    function removeClass(el, classNameToRemove){
+        var elClass = ' ' + el.className + ' ';
+        while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1){
+          elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
+        }
+        el.className = elClass;
+      }
   </script>
 </body>
 
