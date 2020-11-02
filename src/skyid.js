@@ -36,7 +36,7 @@ window.SkyID = class SkyID {
 			}
 			// NOT IMPLEMENTED YET
 			window.windowObjectReference = popupCenter(
-				'https://skynetid.hns.siasky.net/connect.html?appid=' + this.appid,
+				'https://skyaccounts.hns.siasky.net/connect.html?appid=' + this.appid,
 				'SkyID',
 				400, 500
 			)
