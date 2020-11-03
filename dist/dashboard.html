@@ -804,6 +804,14 @@
                 </td>
               </tr>`
           }
+          if (rows == '') {
+            rows += `<tr>
+                <th scope="row">There are no connected dapps. <a href="https://skyacc.hns.siasky.net/" target="_blank">Try out this example!</a></th>
+                <td class="budget"></td>
+                <td class="budget"></td>
+                <td class="text-right"></td>
+              </tr>`
+          }
           table.innerHTML = rows
         }
       })
