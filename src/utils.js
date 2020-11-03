@@ -2,7 +2,9 @@ import base64 from "base64-js"
 import base32Encode from "base32-encode"
 import Url from "url-parse"
 
-export function setCookie(cvalue, exdays) {
+export function setCookie(values, exdays) {
+	let cvalue = JSON.stringify(values)
+	console.log(cvalue)
 	if (exdays == 0) {
 		var expires = 0
 	} else {
@@ -11,6 +13,10 @@ export function setCookie(cvalue, exdays) {
 		var expires = "expires="+ d.toUTCString()
 	}
 	document.cookie = "skyid=" + cvalue + ";" + expires + ";path=/"
+}
+
+export function delCookie() {
+	document.cookie = "skyid=;0;path=/"
 }
 
 export function getCookie() {
@@ -23,10 +29,16 @@ export function getCookie() {
 			c = c.substring(1)
 		}
 		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length)
+			let cstring = c.substring(name.length, c.length)
+			try {
+				console.log(cstring)
+				return JSON.parse(cstring)
+			} catch {
+				delCookie()
+			}
 		}
 	}
-	return "";
+	return false;
 }
 
 

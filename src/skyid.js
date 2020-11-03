@@ -1,4 +1,4 @@
-import { getCookie, setCookie, redirectToSkappContainer, popupCenter,
+import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, encodeBase64, showOverlay, hideOverlay } from "./utils"
 import { SkynetClient, keyPairFromSeed, deriveChildSeed } from "skynet-js";
 const sia = require('sia-js')
@@ -7,22 +7,23 @@ global.Buffer = global.Buffer || require('buffer').Buffer
 
 window.SkyID = class SkyID {
 	constructor(appid, callback = null) {
+		this.callback = callback
 		this.appid = appid
 		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
 			this.skynetClient = new SkynetClient('https://siasky.net')
 		} else {
 			this.skynetClient = new SkynetClient()
 		}
-		this.seed = getCookie()
-		this.callback = callback
-		toggleElementsDisplay(this.seed)
-
+		let cookie = getCookie()
+		this.setAccount(cookie)
+		
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
 				if (event.data.eventCode == 'login_success') {
-					this.setSeed(event.data.seed)
+					setCookie(event.data.appData, 1)
+					this.setAccount(event.data.appData)
 				}
-				typeof callback === 'function' && this.callback(event.data.eventCode)
+				typeof this.callback === 'function' && this.callback(event.data.eventCode)
 			}
 		}, false)
 	}
@@ -55,13 +56,12 @@ window.SkyID = class SkyID {
 
 
 	sessionDestroy(redirectUrl = null) {
-		this.setSeed('', -1)
+		delCookie()
+		this.setAccount(false)
 		if (redirectUrl !== null) {
 			window.location.href = redirectUrl
-		} else {
-			toggleElementsDisplay(this.seed)
 		}
-		typeof callback === 'function' && this.callback('destroy')
+		typeof this.callback === 'function' && this.callback('destroy')
 	}
 
 
@@ -125,10 +125,17 @@ window.SkyID = class SkyID {
 	
 	*/
 
-	setSeed(seed, days = 0) {
-		this.seed = seed
-		setCookie(seed, days)
-		toggleElementsDisplay(seed)
+	setAccount(appData) {
+		if (appData == false){
+			this.seed = ''
+		} else {
+			for (var key in appData) {
+				// skip loop if the property is from prototype
+				if (!appData.hasOwnProperty(key)) continue
+				this[key] = appData[key]
+			}
+		}
+		toggleElementsDisplay(this.seed)
 		return true
 	}
 
@@ -139,7 +146,9 @@ window.SkyID = class SkyID {
 		}
 
 		let seed = encodeBase64(mnemonicBytes)
-		return this.setSeed(seed, days)
+		
+		setCookie({"seed": seed}, days)
+		return this.setAccount({"seed": seed}, days)
 	}
 	
 	generateNewMasterSeed() {

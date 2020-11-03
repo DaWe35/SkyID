@@ -7,7 +7,7 @@ window.SkyidConnect = class SkyidConnect {
 		const urlParams = new URLSearchParams(window.location.search)
 		this.appId = urlParams.get('appid')
 		this.skyid = new SkyID()
-		if (this.skyid.seed == '') {
+		if (typeof this.skyid.seed == 'undefined') {
 			alert('Please login to SkyID first!')
 		}
 		if (this.appId == null || this.appId == '') {
@@ -31,12 +31,19 @@ window.SkyidConnect = class SkyidConnect {
 			window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_fail', 'seed': false}, "*")
 			window.close()
 		} else if (grantAccess === true) {
-			var seed = this.skyid.generateChildSeed(this.appId)
-			const { publicKey, privateKey } = keyPairFromSeed(seed)
+			var appSeed = this.skyid.generateChildSeed(this.appId)
+			
+			// generate private app data
+			const masterKeys = keyPairFromSeed(this.skyid.seed)
+			let userIdHex = toHexString(masterKeys.publicKey)
+			let appData =  { 'seed': appSeed,'userId': userIdHex, 'url': document.referrer, 'appImg': null }
+
+			// generate public app data
+			const { publicKey, privateKey } = keyPairFromSeed(appSeed)
 			let publicKeyHex = toHexString(publicKey)
-			let appData = { 'url': document.referrer, 'publicKey': publicKeyHex, 'img': null }
-			this.addDapp(this.appId, appData, function() {
-				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'seed': seed}, "*")
+			let publicAppData = { 'url': document.referrer, 'publicKey': publicKeyHex, 'img': null }
+			this.addDapp(this.appId, publicAppData, function() {
+				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData}, "*")
 				window.close()
 			})
 		}
@@ -51,11 +58,9 @@ window.SkyidConnect = class SkyidConnect {
 	}
 
 	addDapp(appId, appData, callback) {
-		console.log(appId, appData, callback)
 		// fetch file
 		var self = this;
 		this.skyid.getFile('profile', function(response, revision) {
-			console.log('call appadd, response:', response)
 			if (response == '') { // file not found
 				alert('Error: unable to fetch dapp list')
 				console.log('Error: unable to fetch dapp list')
