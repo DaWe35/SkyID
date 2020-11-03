@@ -20,6 +20,7 @@ window.SkyidConnect = class SkyidConnect {
 
 		// TODO
 		// Check is document.referrer the same as the register page was
+		// window.opener.parent.location.href
 
 	}
 

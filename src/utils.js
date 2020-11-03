@@ -99,7 +99,7 @@ export function redirectToSkappContainer(url = null) {
 		return false
 	} else if (base32Regex.test(location.hostname)) { // safe base32 subdomain
 		return false
-	} else if (protocol == 'file:') { // for development purposes
+	} else if (protocol == 'file:' || hostname == 'skynote.local') { // for development purposes
 		return false
 	} else {
 		return null
@@ -172,4 +172,32 @@ function getFirstAndRemainingPath(pathname) {
 		var remainingPath = ''
 	}
 	return [firstPath, remainingPath]
+}
+
+export function showOverlay() {
+	if (!document.getElementById('loadingOverlay')) {
+		var loadScreen = document.createElement("div")
+		loadScreen.id = 'loadingOverlay'
+		loadScreen.innerHTML = "Loading..."
+		loadScreen.style.width = '100%'
+		loadScreen.style.height = '100%'
+		loadScreen.style.background = 'rgba(20, 20, 20, 0.6)'
+		loadScreen.style.position = 'fixed'
+		loadScreen.style.top = 0
+		loadScreen.style.left = 0
+		loadScreen.style.textAlign = 'center'
+		loadScreen.style.zIndex = 1000000 // hopefully its enough
+		loadScreen.style.margin = 0
+		loadScreen.style.padding = '45vh'
+		loadScreen.style.overflow = 'hidden'
+		loadScreen.style.fontSize = '200%'
+		loadScreen.style.color = '#FFF'
+		document.body.appendChild(loadScreen)
+	}
+}
+
+export function hideOverlay() {
+	if (document.getElementById('loadingOverlay')) {
+		document.getElementById("loadingOverlay").remove()
+	}
 }
