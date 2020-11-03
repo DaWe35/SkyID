@@ -32,11 +32,6 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
-  <style>
-    .disabled {
-      background-color: gray !important;
-    }
-  </style>
 </head>
 
 <body>
@@ -334,35 +329,8 @@
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                <tbody class="list">
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="assets/img/brand/SkyID_Logo_128.png">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Dapp name</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="budget">
-                      Url
-                    </td>
-                    <td class="budget">
-                      Public key
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="javascript:alert('soon')">soon</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                <tbody class="list" id="dappsTable">
+                  
                 </tbody>
               </table>
             </div>
@@ -764,9 +732,15 @@
                 </div>
               </div>
               <div class="card-body">
+
+                <a href="https://skyacc.hns.siasky.net/" target="_blank">
+                  <h2>Example dapp using SkyID</h2>
+                </a>
+                <a href="https://github.com/DaWe35" class="skygreen" target="_blank">by DaWe</a>
+                <br><br>
               
                 <a href="https://medium.com/@davidvorick/2b282682f5b3" target="_blank">
-                  <h2>SkyID: How to Make Decentralized Identity using Skynet</h2>
+                  <h2>How to Make Decentralized Identity using Skynet</h2>
                 </a>
                 <a href="https://medium.com/@davidvorick" class="skygreen" target="_blank">by David Vorick</a>
 
@@ -779,19 +753,66 @@
       document.getElementById('content').innerHTML = content
       if (page == '#profile') {
         fetchProfile()
+      } else if (page == '#dapps') {
+        fetchDapps()
       }
     }
 
+    function fetchDapps() {
+      var table = document.getElementById('dappsTable')
+
+      // fetch file
+      skyid.getFile('profile', function(response, revision) {
+        console.log('response', response)
+        if (response == '') { // file not found
+          table.innerHTML = ''
+        } else { // success
+          var respObs = JSON.parse(response)
+          var rows = ''
+          for (var key in respObs.dapps) {
+            // skip loop if the property is from prototype
+            if (!respObs.dapps.hasOwnProperty(key)) continue
+            var dataRow = respObs.dapps[key]
+
+            rows += `
+              <tr>
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a href="#" class="avatar rounded-circle mr-3">
+                      <img alt="Image placeholder" src="assets/img/brand/SkyID_Logo_128.png">
+                    </a>
+                    <div class="media-body">
+                      <span class="name mb-0 text-sm">` + key + `</span>
+                    </div>
+                  </div>
+                </th>
+                <td class="budget"> ` +
+                  dataRow.url + `
+                </td>
+                <td class="budget"> ` +
+                  dataRow.publicKey + `
+                </td>
+                <td class="text-right">
+                  <div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" href="javascript:alert('soon')">soon</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>`
+          }
+          table.innerHTML = rows
+        }
+      })
+    }
 
 
     function fetchProfile() {
-      // disable textarea
       var profileUsername = document.getElementById('profileUsername')
       var profileAboutMe = document.getElementById('profileAboutMe')
-      profileUsername.disabled = 'disabled'
-      profileUsername.className += ' disabled'
-      profileAboutMe.disabled = 'disabled'
-      profileAboutMe.className += ' disabled'
 
       // fetch file
       skyid.getFile('profile', function(response, revision) {
@@ -804,24 +825,13 @@
           profileUsername.value = respObs.username
           profileAboutMe.value = respObs.aboutMe
         }
-
-        // enable textarea
-        profileUsername.disabled = ''
-        removeClass(profileUsername, 'disabled')
-        profileAboutMe.disabled = ''
-        removeClass(profileAboutMe, 'disabled')
       })
     }
 
 
     function saveProfile() {
-      // disable inputs
       var profileUsername = document.getElementById('profileUsername')
       var profileAboutMe = document.getElementById('profileAboutMe')
-      profileUsername.disabled = 'disabled'
-      profileUsername.className += ' disabled'
-      profileAboutMe.disabled = 'disabled'
-      profileAboutMe.className += ' disabled'
 
       let username = profileUsername.value
       let aboutMe = profileAboutMe.value
@@ -832,22 +842,8 @@
         if (!success) {
           alert('Error: unable to save profile.json')
         }
-        // enable inputs
-        profileUsername.disabled = ''
-        removeClass(profileUsername, 'disabled')
-        profileAboutMe.disabled = ''
-        removeClass(profileAboutMe, 'disabled')
       })
     }
-
-    
-    function removeClass(el, classNameToRemove){
-        var elClass = ' ' + el.className + ' ';
-        while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1){
-          elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
-        }
-        el.className = elClass;
-      }
   </script>
 </body>
 

@@ -1,4 +1,6 @@
 import { keyPairFromSeed } from "skynet-js";
+import { toHexString } from "./utils"
+
 window.SkyidConnect = class SkyidConnect {
 
 	constructor() {
@@ -31,7 +33,8 @@ window.SkyidConnect = class SkyidConnect {
 		} else if (grantAccess === true) {
 			var seed = this.skyid.generateChildSeed(this.appId)
 			const { publicKey, privateKey } = keyPairFromSeed(seed)
-			let appData = { 'url': document.referrer, 'publicKey': publicKey, 'img': null }
+			let publicKeyHex = toHexString(publicKey)
+			let appData = { 'url': document.referrer, 'publicKey': publicKeyHex, 'img': null }
 			this.addDapp(this.appId, appData, function() {
 				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'seed': seed}, "*")
 				window.close()

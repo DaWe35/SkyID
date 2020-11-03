@@ -123,11 +123,9 @@ ___
 
 - Verify app-domain and warn users if app1 wants to access app2 data
 
-- Finish app-key generation
-
-- Child key derivation
-
 - File encryption & decryption
+
+- Allow multi-account login for dapps, for example `var domain = new SkyIDDomain('app-name')` with `sessionStartAll()`
 
 ___
 
