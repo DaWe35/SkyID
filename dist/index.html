@@ -39,6 +39,15 @@
     .disabled {
       background-color: gray !important;
     }
+
+    .field-icon {
+      float: right;
+      margin-right: 15px;
+      margin-top: 15px;
+      position: relative;
+      z-index: 2;
+      color: #adb5bd;
+    }
   </style>
 </head>
 
@@ -111,24 +120,28 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="row m-0">
-            <div class="col-sm-6 bg-secondary rounded-top" id="login_btn" onclick="switchPage('#login')">
+            <div class="col-6 bg-secondary rounded-top" id="login_btn" onclick="switchPage('#login')">
               Sign in
             </div>
-            <div class="col-sm-6 mb-1 text-white" id="register_btn" onclick="switchPage('#register')">
+            <div class="col-6 mb-1 text-white" id="register_btn" onclick="switchPage('#register')">
               Create new account
             </div>
           </div>
           <div id="login_card" class="card bg-secondary border-0 mb-0 rounded-bottom no-top-left-radius">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form">
+
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
                     <input id="loginInput" class="form-control" placeholder="Passphrase" type="password">
+                    <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   </div>
                 </div>
+
+
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id="rememberMe" type="checkbox">
                   <label class="custom-control-label" for="rememberMe">
@@ -161,7 +174,7 @@
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
                     <input id="username" class="form-control" placeholder="Username" required>
                   </div>
@@ -330,6 +343,16 @@
       }
       el.className = elClass;
     }
+
+    $(".toggle-password").click(function() {
+      $(this).toggleClass("fa-eye fa-eye-slash");
+      var input = $($(this).attr("toggle"));
+      if (input.attr("type") == "password") {
+        input.attr("type", "text");
+      } else {
+        input.attr("type", "password");
+      }
+    });
   </script>
 
   <!-- Argon Scripts -->
