@@ -116,24 +116,8 @@ window.SkyID = class SkyID {
 	}
 
 	validateMessage(signedMessage, masterPubKey, childPath) {
-
-	}
-
-	getUserData() {
 		// NOT IMPLEMENTED YET
-		var user = {
-			'username': 'Test username',
-			'username': 'Test username',
-			/*	verificationLevel is a number between 0 and 10
-				0 --> user not found, fake/hacked account
-				1 --> unverified
-				2-10 --> 
-			*/
-			'verificationLevel': 10
-		}
-		return user
 	}
-
 
 	/*
 

@@ -42,6 +42,18 @@ function skyidEventCallback(message) {
 }
 ```
 
+### Start session (login)
+
+``` javascript
+skyid.sessionStart()
+```
+
+### Destroy session (logout)
+
+``` javascript
+skyid.sessionDestroy()
+```
+
 ### Display classes
 
 If you wnat, you can use special HTML classes, so you don't need to listen for SkyID callbacks.
