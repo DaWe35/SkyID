@@ -134,6 +134,10 @@ window.SkyID = class SkyID {
 
 	setMnemonic(mnemonic, days = 0) {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
+		if (mnemonicBytes.length != 32) {
+			return false
+		}
+
 		let seed = encodeBase64(mnemonicBytes)
 		return this.setSeed(seed, days)
 	}
