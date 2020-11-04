@@ -129,13 +129,13 @@
           </div>
           <div id="login_card" class="card bg-secondary border-0 mb-0 rounded-bottom no-top-left-radius">
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form">
+              <form role="form" id="signInForm">
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input id="loginInput" class="form-control" placeholder="Passphrase" type="password">
+                    <input id="loginInput" class="form-control" placeholder="Passphrase" type="password" required>
                     <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   </div>
                 </div>
@@ -148,7 +148,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4" onclick="javascript: singIn()">Sign in</button>
+                  <button type="submit" class="btn btn-primary mt-4">Sign in</button>
                 </div>
               </form>
             </div>
@@ -326,6 +326,11 @@
         }
       }
     }
+
+    $("#signInForm").submit((event) => {
+      event.preventDefault();
+      singIn();
+    });
 
     function singIn() {
       let mnemonic = $('#loginInput').val()
