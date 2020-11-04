@@ -168,9 +168,9 @@ If you're using the `file://` protocol (or `idtest.local` as localhost domain), 
 
 ##### Testing with example dapp
 
-We have a [SkyID-example-note-dapp](https://github.com/DaWe35/SkyID-example-note-dapp), so you can clone it. Don't forget to change the source of `skyid.js` if you want to test with self-hosted SkyID ([open image](https://raw.githubusercontent.com/DaWe35/SkyID/assets/skyid-example.png))
+We have a [SkyID-example-note-dapp](https://github.com/DaWe35/SkyID-example-note-dapp), so you can clone it. Don't forget to change the source of `skyid.js` if you want to test with self-hosted SkyID ([open image](https://raw.githubusercontent.com/DaWe35/SkyID/main/assets/skyid-example.png))
 
-To be able to test cross-domain things, you need to setup two local virtual-host domains. If you have [Wamp.NET](https://wamp.net/) installed (what I really recommend), this will be easy. You just need to create two sites pointing to your local SkyID projects: `idtest.local` for SkyID and `skynote.local` for the example dapp. [Open image](https://raw.githubusercontent.com/DaWe35/SkyID/assets/skyid_wamp.jpg)
+To be able to test cross-domain things, you need to setup two local virtual-host domains. If you have [Wamp.NET](https://wamp.net/) installed (what I really recommend), this will be easy. You just need to create two sites pointing to your local SkyID projects: `idtest.local` for SkyID and `skynote.local` for the example dapp ([open image](https://raw.githubusercontent.com/DaWe35/SkyID/main/assets/skyid_wamp.jpg)).
 
 
 
