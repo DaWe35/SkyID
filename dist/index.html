@@ -289,17 +289,17 @@
     });
     switchPage(window.location.hash)
 
-    $("#createAccountForm").submit((event) => {
-      event.preventDefault(); // Prevents the form submit reloading the page
-      createAccount();
+    $('#createAccountForm').submit((event) => {
+      event.preventDefault() // Prevents the form submit reloading the page
+      createAccount()
     });
     
     function createAccount() {
-      const passphraseCheckbox = $("#customCheckReg").val();
-      const username = $("#username").val();
+      const passphraseCheckbox = $('#customCheckReg').val()
+      const username = $('#username').val()
 
       if (!passphraseCheckbox) {
-        return alert("Make sure to save your secure passphrase");
+        alert('Make sure to save your secure passphrase')
       } else if (username == '') {
         alert('Username is empty')
       } else if (typeof mnemonic == 'undefined' || mnemonic == '') {
@@ -327,9 +327,9 @@
       }
     }
 
-    $("#signInForm").submit((event) => {
-      event.preventDefault();
-      singIn();
+    $('#signInForm').submit((event) => {
+      event.preventDefault()
+      singIn()
     });
 
     function singIn() {
