@@ -135,5 +135,43 @@ RFC: https://forum.sia.tech/t/discussion-about-sky-id/64
 [Skynet-js](https://github.com/NebulousLabs/skynet-js)
 [Sia-js](https://github.com/escada-finance/sia-js)
 
+##### Contributors:
+
+@Delivator
+
+❤ Thank you! ❤
+
 ##### Brainstorm participants & helpers:
 Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
+
+### Development
+
+##### install development dependencies
+
+`cd SkyID`
+
+`npm install`
+
+##### Compiling Javascript
+You need to compile your node-js files (from the `src` folder) to a web-browser friendly javascript.
+
+`nxp webpack`
+
+You'll see 3 new .js file in `dist`. If you want to edit javascript, you can make changes inside the `src` folder and run webpack again. `npx webpack --watch` will do it automatically if you change a file.
+
+##### Open in browser
+You can just open the `/dist/index.html` in your browser.
+
+If you're using the `file://` protocol or `idtest.local` as localhost domain, SkyID will recognise you're in development mode and siasky.net will be used as default Skynet portal.
+
+*Don't forget to wait for webpack to finish*
+
+##### Testing with example dapp
+
+We have a [SkyID-example-note-dapp](https://github.com/DaWe35/SkyID-example-note-dapp), so you can clone it. Don't forget to change the source of `skyid.js` if you want to test with self-hosted SkyID [open image](https://raw.githubusercontent.com/DaWe35/SkyID/assets/skyid-example.png)
+
+To be able to test cross-domain things, you need to setup two local virtual-host domains. If you have [Wamp.NET](https://wamp.net/) installed (what I really recommend), this will be easy. Just just need to create two sites pointing to your local SkyID projects: `idtest.local` for SkyID and `skynote.local` for the example dapp. [Open image](https://raw.githubusercontent.com/DaWe35/SkyID/assets/skyid_wamp.jpg)
+
+
+
+
