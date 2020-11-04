@@ -284,15 +284,15 @@
       }
     }
 
-    window.addEventListener("hashchange", function(){
+    window.addEventListener('hashchange', function(){
       switchPage(window.location.hash)
-    });
+    })
     switchPage(window.location.hash)
 
     $('#createAccountForm').submit((event) => {
       event.preventDefault() // Prevents the form submit reloading the page
       createAccount()
-    });
+    })
     
     function createAccount() {
       const passphraseCheckbox = $('#customCheckReg').val()
@@ -330,7 +330,7 @@
     $('#signInForm').submit((event) => {
       event.preventDefault()
       singIn()
-    });
+    })
 
     function singIn() {
       let mnemonic = $('#loginInput').val()
@@ -350,22 +350,22 @@
 
 
 	  function removeClass(el, classNameToRemove){
-      var elClass = ' ' + el.className + ' ';
+      var elClass = ' ' + el.className + ' '
       while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1){
-        elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
+        elClass = elClass.replace(' ' + classNameToRemove + ' ', '')
       }
-      el.className = elClass;
+      el.className = elClass
     }
 
-    $(".toggle-password").click(function() {
-      $(this).toggleClass("fa-eye fa-eye-slash");
-      var input = $($(this).attr("toggle"));
-      if (input.attr("type") == "password") {
-        input.attr("type", "text");
+    $('.toggle-password').click(function() {
+      $(this).toggleClass('fa-eye fa-eye-slash')
+      var input = $($(this).attr('toggle'))
+      if (input.attr('type') == 'password') {
+        input.attr('type', 'text')
       } else {
-        input.attr("type", "password");
+        input.attr('type', 'password')
       }
-    });
+    })
   </script>
 
   <!-- Argon Scripts -->
