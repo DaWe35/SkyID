@@ -130,7 +130,6 @@
           <div id="login_card" class="card bg-secondary border-0 mb-0 rounded-bottom no-top-left-radius">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form">
-
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
@@ -158,7 +157,7 @@
           
           <div id="register_card" class="card bg-secondary border-0 mb-0 rounded-bottom no-top-right-radius display-none">
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form">
+              <form role="form" id="createAccountForm">
                 <div class="text-center text-muted mb-4">
                   <small>This is your secure passphrase, please keep it in secret. If you lose your passphrase, you lose all your accounts. </small>
                 </div>
@@ -181,13 +180,13 @@
                 </div>
 
                 <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckReg" type="checkbox" required>
-                  <label class="custom-control-label" for=" customCheckReg">
+                  <input class="custom-control-input" id="customCheckReg" type="checkbox" required>
+                  <label class="custom-control-label" for="customCheckReg">
                     <span class="text-muted">I wrote down my passphrase in several places</span>
                   </label>
                 </div>
                 <div class="text-center">
-                  <button id="createAccountBtn" type="button" class="btn btn-primary mt-4" onclick="javascript: createAccount()">Create account</button>
+                  <button id="createAccountBtn" type="submit" class="btn btn-primary mt-4">Create account</button>
                 </div>
 
                 
@@ -289,10 +288,19 @@
       switchPage(window.location.hash)
     });
     switchPage(window.location.hash)
+
+    $("#createAccountForm").submit((event) => {
+      event.preventDefault(); // Prevents the form submit reloading the page
+      createAccount();
+    });
     
     function createAccount() {
-      var username = document.getElementById('username').value
-      if (username == '') {
+      const passphraseCheckbox = $("#customCheckReg").val();
+      const username = $("#username").val();
+
+      if (!passphraseCheckbox) {
+        return alert("Make sure to save your secure passphrase");
+      } else if (username == '') {
         alert('Username is empty')
       } else if (typeof mnemonic == 'undefined' || mnemonic == '') {
         alert('Please report this bug: unable to create account, seed is empty')
