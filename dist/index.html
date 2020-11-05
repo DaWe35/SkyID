@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>SkyID 0.78</title>
+  <title>SkyID 0.88</title>
   <!-- Favicon -->
   <link rel="icon" href="assets/img/brand/SkyID_Logo_128.png" type="image/png">
   <!-- Fonts -->
@@ -279,8 +279,6 @@
         $('#pagecard').removeClass('no-top-right-radius')
         $('#register_card').addClass('display-none')
         $('#login_card').removeClass('display-none')
-      } else {
-        throw 'Page ' + page + ' not found, try #login or #register?'
       }
     }
 
@@ -311,19 +309,29 @@
         createAccountBtn.className += ' disabled'
         createAccountBtn.innerHTML = 'Initializing profile...'
 
-        if (skyid.setMnemonic(mnemonic) === true) {
-          let profile = {'username': username, 'aboutMe': ''}
-          let jsonProfile = JSON.stringify(profile)
-          skyid.setFile('profile', jsonProfile, function(success){
-            if (success) {
-              window.location.href = 'dashboard.html'
-            } else {
-              alert('Error: unable to save profile.json')
-            }
-          })
-        } else {
-          alert('Please report this bug: setMnemonic failed')
-        }
+        skyid.setMnemonic(mnemonic, function(success) {
+          if (success) {
+            console.log('nmset')
+            let profile = {'username': username, 'aboutMe': ''}
+            let jsonProfile = JSON.stringify(profile)
+            skyid.setFile('profile', jsonProfile, function(success){
+              if (success) {
+                var urlParams = new URLSearchParams(window.location.search)
+		            var redirect = urlParams.get('redirect')
+                var appId = urlParams.get('appId')
+                if (redirect == 'backConnect') {
+                  window.location.href = 'connect.html?appId=' + appId
+                } else {
+                  window.location.href = 'dashboard.html'
+                }
+              } else {
+                alert('Error: unable to save profile.json')
+              }
+            })
+          } else {
+            alert('Please report this bug: setMnemonic failed')
+          }
+        })
       }
     }
 
@@ -339,11 +347,22 @@
       } else {
         var days = 0
       }
-      if (skyid.setMnemonic(mnemonic, days) === true) {
-        window.location.href = 'dashboard.html'
-      } else {
-        alert('You passphrase is invalid')
-      }
+
+      skyid.setMnemonic(mnemonic, function(success) {
+        console.log('success',success)
+        if (success) {
+          var urlParams = new URLSearchParams(window.location.search)
+          var redirect = urlParams.get('redirect')
+          var appId = urlParams.get('appId')
+          if (redirect == 'backConnect') {
+            window.location.href = 'connect.html?appId=' + appId
+          } else {
+            window.location.href = 'dashboard.html'
+          }
+        } else {
+          alert('You passphrase is invalid')
+        }
+      }, days, true)
     }
 
 

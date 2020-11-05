@@ -6,9 +6,9 @@ global.Buffer = global.Buffer || require('buffer').Buffer
 
 
 window.SkyID = class SkyID {
-	constructor(appid, callback = null) {
+	constructor(appId, callback = null) {
 		this.callback = callback
-		this.appid = appid
+		this.appId = appId
 		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
 			this.skynetClient = new SkynetClient('https://siasky.net')
 		} else {
@@ -40,13 +40,13 @@ window.SkyID = class SkyID {
 			if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
 				//for testing
 				window.windowObjectReference = popupCenter(
-					'http://idtest.local/connect.html?appid=' + this.appid,
+					'http://idtest.local/connect.html?appId=' + this.appId,
 					'SkyID',
 					400, 500
 				)
 			} else {
 				window.windowObjectReference = popupCenter(
-					'https://skyaccounts.hns.siasky.net/connect.html?appid=' + this.appid,
+					'https://skyaccounts.hns.siasky.net/connect.html?appId=' + this.appId,
 					'SkyID',
 					400, 500
 				)
@@ -75,13 +75,12 @@ window.SkyID = class SkyID {
 	async getFile(dataKey, callback) {
 		showOverlay()
 		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
-		
+		console.log(this.seed)
 		try {
 			const { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
 			hideOverlay()
 			callback(data, revision)
 		} catch (error) {
-			console.log(error)
 			hideOverlay()
 			callback('', 0)
 			
@@ -139,16 +138,30 @@ window.SkyID = class SkyID {
 		return true
 	}
 
-	setMnemonic(mnemonic, days = 0) {
+	setMnemonic(mnemonic, callback, days = 0, checkMnemonic = false) {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
 		if (mnemonicBytes.length != 32) {
-			return false
+			callback(false)
 		}
 
 		let seed = encodeBase64(mnemonicBytes)
-		
 		setCookie({"seed": seed}, days)
-		return this.setAccount({"seed": seed}, days)
+
+		if (checkMnemonic && this.setAccount({"seed": seed}, days)) {
+			var self = this
+			skyid.getFile('profile', function(response, revision) {
+				console.log('response', response)
+				if (response == '') { // file not found
+					console.log('response is ""')
+					self.sessionDestroy()
+					callback(false)
+				} else {
+					callback(true)
+				}
+			})
+		} else {
+			callback(this.setAccount({"seed": seed}, days))
+		}		
 	}
 	
 	generateNewMasterSeed() {

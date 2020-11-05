@@ -200,7 +200,7 @@ export function showOverlay() {
 		loadScreen.style.textAlign = 'center'
 		loadScreen.style.zIndex = 1000000 // hopefully its enough
 		loadScreen.style.margin = 0
-		loadScreen.style.padding = '45vh'
+		loadScreen.style.paddingTop = '45vh'
 		loadScreen.style.overflow = 'hidden'
 		loadScreen.style.fontSize = '200%'
 		loadScreen.style.color = '#FFF'

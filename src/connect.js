@@ -5,19 +5,32 @@ window.SkyidConnect = class SkyidConnect {
 
 	constructor() {
 		const urlParams = new URLSearchParams(window.location.search)
-		this.appId = urlParams.get('appid')
+		this.appId = urlParams.get('appId')
 		this.skyid = new SkyID()
-		if (typeof this.skyid.seed == 'undefined') {
-			alert('Please login to SkyID first!')
+
+		// if login needed to SkyID master account
+		if (typeof this.skyid.seed == 'undefined' || this.skyid.seed == '') {
+			document.getElementById('accessCard').style.display = 'none'
+			document.getElementById('needLoginCard').style.display = 'block'
+
+			window.addEventListener("message", (event) => {
+				if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
+					if (event.data.eventCode == 'master_login_success') {
+						document.getElementById('accessCard').style.display = 'block'
+						document.getElementById('needLoginCard').style.display = 'none'
+					}
+				}
+			}, false)
+
 		}
 		if (this.appId == null || this.appId == '') {
 			this.showAlert('Misconfigured dapp - appId is empty', 'error')
 		}
 
-		// print appid to page
-		let appid_print_elems = document.getElementsByClassName('appid')
-		for (let index = 0; index < appid_print_elems.length; index++) {
-			appid_print_elems[index].innerHTML = this.appId
+		// print appId to page
+		let appId_print_elems = document.getElementsByClassName('appId')
+		for (let index = 0; index < appId_print_elems.length; index++) {
+			appId_print_elems[index].innerHTML = this.appId
 		}
 
 		// TODO
@@ -54,6 +67,14 @@ window.SkyidConnect = class SkyidConnect {
 		alert(text)
 		if (type == 'error') {
 			window.close()
+		}
+	}
+
+	skyidLogin() {
+		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
+			window.location.href = "http://idtest.local?appId=" + this.appId + "&redirect=backConnect"
+		} else {
+			window.location.href = "https://skyaccounts.hns.siasky.net?appId=" + this.appId + "&redirect=backConnect"
 		}
 	}
 

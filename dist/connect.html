@@ -80,16 +80,17 @@
       <div class="row">
         <div class="col-sm-0 col-md-2 col-lg-3"></div>
         <div class="col-sm-12 col-md-8 col-lg-6 order-xl-1">
-          <div class="card">
+
+         <div class="card" id="accessCard">
             <div class="card-body">
               <div class="text-center mt--7">
                 <img class="mb-4" style="background: #3a4169; border-radius: 10px; max-width: 150px; max-height: 150px;" src="assets/img/brand/SkyID_Logo_128_white.png" alt="">
               </div>
 
               <p>
-                <b><span class="appid">...loading...</span></b>
+                <b><span class="appId">...loading...</span></b>
                 wants to get access to your data. Are you sure about this is the real
-                <span class="appid">...loading...</span> and not a phishing site?
+                <span class="appId">...loading...</span> and not a phishing site?
               </p>
               <div class="text-right">
                 <a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3">No, deny</a>
@@ -97,6 +98,18 @@
               </div>
             </div>
           </div>
+
+          <div class="card" id="needLoginCard" style="display: none;">
+            <div class="card-body">
+              <p>
+                Hey, seems like you're logged out from SkyID. Please login to SkyID to be able to allow access to other apps.
+              </p>
+              <div class="text-right">
+                <button class="btn btn-primary" onclick="javascript: skyidConnect.skyidLogin()">Login to SkyID</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
