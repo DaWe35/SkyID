@@ -142,6 +142,7 @@ window.SkyID = class SkyID {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
 		if (mnemonicBytes.length != 32) {
 			callback(false)
+			return
 		}
 
 		let seed = encodeBase64(mnemonicBytes)
