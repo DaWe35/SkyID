@@ -95,7 +95,6 @@ window.SkyidConnect = class SkyidConnect {
 				// set file
 				let jsonProfile = JSON.stringify(profileObj)
 				self.skyid.setFile('profile', jsonProfile, function(success) {
-					console.log('File Set')
 					if (!success) {
 						alert('Error: unable to save profile.json')
 					} else {

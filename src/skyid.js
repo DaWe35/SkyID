@@ -75,18 +75,14 @@ window.SkyID = class SkyID {
 	async getFile(dataKey, callback) {
 		showOverlay()
 		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
-		console.log(this.seed)
 		try {
-			const { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
-			hideOverlay()
-			callback(data, revision)
+			var { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
 		} catch (error) {
-			hideOverlay()
-			callback('', 0)
-			
-			// error: 
-			// callback(false, -1)
+			var data = ''
+			var revision = 0
 		}
+		hideOverlay()
+		callback(data, revision)
 	}
 
 	async setFile(dataKey, json, callback) {
