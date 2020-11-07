@@ -307,7 +307,7 @@
     window.addEventListener("hashchange", function(){
       loadPage(window.location.hash)
     })
-    
+
     loadPage(window.location.hash || '#blog')
 
 
@@ -330,7 +330,7 @@
                   </tr>
                 </thead>
                 <tbody class="list" id="dappsTable">
-                  
+
                 </tbody>
               </table>
             </div>
@@ -675,9 +675,6 @@
                 <div class="col-8">
                   <h3 class="mb-0">Edit profile </h3>
                 </div>
-                <div class="col-4 text-right">
-                  <a href="javascript: saveProfile()" class="btn btn-primary">Save</a>
-                </div>
               </div>
             </div>
             <div class="card-body">
@@ -738,7 +735,7 @@
                 </a>
                 <a href="https://github.com/DaWe35" class="skygreen" target="_blank">by DaWe</a>
                 <br><br>
-              
+
                 <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
                   <h2>How to Make Decentralized Identity using Skynet</h2>
                 </a>
@@ -843,7 +840,7 @@
 
       let username = profileUsername.value
       let aboutMe = profileAboutMe.value
-        
+
       skyid.getFile('profile', function(response, revision) {
         if (response == '') { // file not found
           alert('Error: unable to fetch your profile')
@@ -862,11 +859,11 @@
           })
         }
       })
-    
 
 
 
-    
+
+
     }
   </script>
 </body>
