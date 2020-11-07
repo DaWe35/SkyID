@@ -36,7 +36,7 @@
 
 <body>
   <!-- Sidenav -->
-  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-dark bg-darker" id="sidenav-main">
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
@@ -84,7 +84,9 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
+              <a class="nav-link"
+                href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3"
+                target="_blank">
                 <i class="ni ni-collection"></i>
                 <span class="nav-link-text">Learn</span>
               </a>
@@ -109,14 +111,15 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-darker">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center ml-md-auto ml-auto">
             <li class="nav-item d-lg-none">
               <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
@@ -206,7 +209,8 @@
           </ul>
           <ul class="navbar-nav align-items-center ml-0">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <div class="media align-items-center">
                   <i class="ni ni-circle-08 text-white"></i>
                   <!-- <span class="avatar avatar-sm rounded-circle">
@@ -242,7 +246,7 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-6">
+    <div class="header bg-darker pb-6">
       <div class="container-fluid">
         <div class="header-body">
         </div>
@@ -304,7 +308,7 @@
 
   <script>
 
-    window.addEventListener("hashchange", function(){
+    window.addEventListener("hashchange", function () {
       loadPage(window.location.hash)
     })
 
@@ -704,7 +708,7 @@
             <div class="card-footer">
               <div class="row align-items-center">
                 <div class="col-12 text-right">
-                  <a href="javascript: saveProfile()" class="btn btn-primary">Save</a>
+                  <a href="javascript: saveProfile()" class="btn btn-darker">Save</a>
                 </div>
               </div>
             </div>
@@ -759,7 +763,7 @@
       var table = document.getElementById('dappsTable')
 
       // fetch file
-      skyid.getFile('profile', function(response, revision) {
+      skyid.getFile('profile', function (response, revision) {
         console.log('response', response)
         if (response == '') { // file not found
           table.innerHTML = ''
@@ -784,10 +788,10 @@
                   </div>
                 </th>
                 <td class="budget"> ` +
-                  dataRow.url + `
+              dataRow.url + `
                 </td>
                 <td class="budget"> ` +
-                  dataRow.publicKey + `
+              dataRow.publicKey + `
                 </td>
                 <td class="text-right">
                   <div class="dropdown">
@@ -820,7 +824,7 @@
       var profileAboutMe = document.getElementById('profileAboutMe')
 
       // fetch file
-      skyid.getFile('profile', function(response, revision) {
+      skyid.getFile('profile', function (response, revision) {
         console.log('response', response)
         if (response == '') { // file not found
           profileUsername.value = ''
@@ -841,7 +845,7 @@
       let username = profileUsername.value
       let aboutMe = profileAboutMe.value
 
-      skyid.getFile('profile', function(response, revision) {
+      skyid.getFile('profile', function (response, revision) {
         if (response == '') { // file not found
           alert('Error: unable to fetch your profile')
           console.log('Error: unable to fetch your profile')
@@ -851,7 +855,7 @@
           profileObj.aboutMe = aboutMe
           // set file
           let jsonProfile = JSON.stringify(profileObj)
-          skyid.setFile('profile', jsonProfile, function(success) {
+          skyid.setFile('profile', jsonProfile, function (success) {
             console.log('File Set')
             if (!success) {
               alert('Error: unable to save profile')
