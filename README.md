@@ -164,7 +164,7 @@ You can just open the `/dist/index.html` in your browser.
 
 If you're using the `file://` protocol (or `idtest.local` as localhost domain), SkyID will recognise you're in development mode and siasky.net will be used as default Skynet portal.
 
-*Don't forget to wait for webpack to finish*
+*Chrome won't savecookies with file:// protocol. YOu can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
 
 ##### Testing with example dapp
 
