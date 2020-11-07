@@ -155,7 +155,7 @@ Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
 ##### Compiling Javascript
 You need to compile your node-js files (from the `src` folder) to a web-browser friendly javascript. Type
 
-`nxp webpack`
+`npx webpack`
 
 You'll see 3 new .js file in the `dist` folder. If you want to edit javascript, you can make changes inside the `src` folder and run `npx webpack` again. (Of course you can use `npx webpack --watch` so it will watch and compile automatically if you change something.
 
