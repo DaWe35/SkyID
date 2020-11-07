@@ -38,7 +38,7 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-darker">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
@@ -61,7 +61,7 @@
                   <span class="mb-0 text-sm font-weight-bold text-white">Profile</span>
                 </div>
               </div>
-              
+
             </li>
           </ul>
         </div>
@@ -69,12 +69,18 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-9">
+    <div class="header bg-darker pb-9">
       <div class="container-fluid">
         <div class="header-body">
         </div>
       </div>
     </div>
+    <div class="header bg-darker pb-9">
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-secondary" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
     <!-- Page content -->
     <div class="container mt--6" id="content">
       <div class="row">
@@ -94,7 +100,7 @@
               </p>
               <div class="text-right">
                 <a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3">No, deny</a>
-                <button class="btn btn-primary" onclick="javascript: skyidConnect.CloseMySelf(true)">Yes, grant access</button>
+                <button class="btn btn-success" onclick="javascript: skyidConnect.CloseMySelf(true)">Yes, grant access</button>
               </div>
             </div>
           </div>
@@ -126,7 +132,7 @@
   <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
-  
+
   <script src="skyid.js"></script>
   <script src="connect.js"></script>
 
