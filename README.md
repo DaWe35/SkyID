@@ -1,4 +1,10 @@
-# SkyID
+old styling: https://siasky.net/IADUoX_G49GKKr9CsC-kyMBV5xUefCqUVjD0KLvoiwwkkQ/
+
+# SkyID (improved styling)
+
+![index](https://raw.githubusercontent.com/10000multiplier/SkyID-1/new-colors/screenshots/index.jpg)
+![dashboard](https://raw.githubusercontent.com/10000multiplier/SkyID-1/new-colors/screenshots/dashboard.jpg)
+![connect](https://raw.githubusercontent.com/10000multiplier/SkyID-1/new-colors/screenshots/connect.jpg)
 
 Global frontend-only verification system for web3 dapps
 
