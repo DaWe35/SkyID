@@ -43,6 +43,7 @@
     .field-icon {
       float: right;
       margin-right: 15px;
+      margin-left: 15px;
       margin-top: 15px;
       position: relative;
       z-index: 2;
@@ -153,8 +154,8 @@
               </form>
             </div>
           </div>
-          
-          
+
+
           <div id="register_card" class="card bg-secondary border-0 mb-0 rounded-bottom no-top-right-radius display-none">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" id="createAccountForm">
@@ -189,8 +190,8 @@
                   <button id="createAccountBtn" type="submit" class="btn btn-primary mt-4">Create account</button>
                 </div>
 
-                
-                <!-- 
+
+                <!--
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
@@ -245,13 +246,13 @@
     </div>
   </footer> -->
 
-  
+
   <script src="skyid.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 
   <script>
     const skyid = new SkyID()
-    
+
     if (skyid.seed != '') {
       window.location.href = 'dashboard.html'
     }
@@ -291,7 +292,7 @@
       event.preventDefault() // Prevents the form submit reloading the page
       createAccount()
     })
-    
+
     function createAccount() {
       const passphraseCheckbox = $('#customCheckReg').val()
       const username = $('#username').val()
