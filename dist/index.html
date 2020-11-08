@@ -117,7 +117,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container mt--8 pb-5">
+    <div class="container mt--8 py-5 pt-6 py-lg-5 pt-lg-4">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="row m-0">
@@ -136,13 +136,13 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input id="loginInput" class="form-control" placeholder="Passphrase" type="password" required>
+                    <input id="loginInput" class="form-control" placeholder="Your passphrase" type="password" required>
                     <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   </div>
                 </div>
 
 
-                <div class="custom-control custom-control-alternative custom-checkbox">
+                <div class="custom-control custom-control-alternative custom-checkbox mb-3">
                   <input class="custom-control-input" id="rememberMe" type="checkbox">
                   <label class="custom-control-label" for="rememberMe">
                     <span class="text-muted">Remember me</span>
@@ -159,10 +159,10 @@
           <div id="register_card" class="card bg-secondary border-0 mb-0 rounded-bottom no-top-right-radius display-none">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" id="createAccountForm">
-                <div class="text-center text-muted mb-4">
-                  <small>This is your secure passphrase, please keep it in secret. If you lose your passphrase, you lose all your accounts. </small>
-                </div>
                 <div class="form-group">
+                  <div class="text-muted mb-4">
+                    <small>This is your secure passphrase:</small>
+                  </div>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
@@ -176,11 +176,16 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input id="username" class="form-control" placeholder="Username" required>
+                    <input id="username" class="form-control" placeholder="Your username" required>
+                  </div>
+
+                  <div class="text-muted mt-4">
+                    <small>Please keep your passphrase secret. If you lose your passphrase, you lose your accounts.</small>
                   </div>
                 </div>
 
-                <div class="custom-control custom-control-alternative custom-checkbox">
+
+                <div class="custom-control custom-control-alternative custom-checkbox mb-3">
                   <input class="custom-control-input" id="customCheckReg" type="checkbox" required>
                   <label class="custom-control-label" for="customCheckReg">
                     <span class="text-muted">I wrote down my passphrase in several places</span>
