@@ -2732,7 +2732,7 @@ pre code
 .form-control::-ms-input-placeholder
 {
     opacity: 1;
-    color: #adb5bd;
+    color: black;
 }
 .form-control::placeholder
 {
@@ -24690,6 +24690,11 @@ button.section-darker:focus
     fill: #70B269;
 }
 
+.fill-skygreenish
+{
+    fill: #19cf86;
+}
+
 .blur--hover
 {
     position: relative;
@@ -29866,6 +29871,10 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
     color: #70B269;
 }
 
+.skygreenish, .skygreenish:hover {
+    color: #19cf86;
+}
+
 input[type="color"],
 input[type="date"],
 input[type="datetime"],
@@ -29923,4 +29932,92 @@ textarea {
 .show > .btn-skygreen.dropdown-toggle:focus
 {
     box-shadow: none, 0 0 0 0 rgba(45, 206, 137, .5);
+}
+
+.btn-skygreenish
+{
+    color: #fff;
+    border-color: #19cf86;
+    background-color: #19cf86;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+.btn-skygreenish:hover
+{
+    color: #fff;
+    border-color: #227051;
+    background-color: #227051;
+}
+.btn-skygreenish:focus,
+.btn-skygreenish.focus
+{
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08), 0 0 0 0 rgba(45, 206, 137, .5);
+}
+.btn-skygreenish.disabled,
+.btn-skygreenish:disabled
+{
+    color: #fff;
+    border-color: #19cf86;
+    background-color: #19cf86;
+}
+.btn-skygreenish:not(:disabled):not(.disabled):active,
+.btn-skygreenish:not(:disabled):not(.disabled).active,
+.show > .btn-skygreenish.dropdown-toggle
+{
+    color: #fff;
+    border-color: #19cf86;
+    background-color: #24a46d;
+}
+.btn-skygreenish:not(:disabled):not(.disabled):active:focus,
+.btn-skygreenish:not(:disabled):not(.disabled).active:focus,
+.show > .btn-skygreenish.dropdown-toggle:focus
+{
+    box-shadow: none, 0 0 0 0 rgba(45, 206, 137, .5);
+}
+
+.bg-grayer
+{
+    background-color: #3d3d3d !important;
+}
+
+a.bg-grayer:hover,
+a.bg-grayer:focus,
+button.bg-grayer:hover,
+button.bg-grayer:focus
+{
+    background-color: #383838 !important;
+}
+
+.bg-darkish
+{
+    background-color: #1d1e21 !important;
+}
+
+a.bg-darkish:hover,
+a.bg-darkish:focus,
+button.bg-darkish:hover,
+button.bg-darkish:focus
+{
+    background-color: black !important;
+}
+
+.text-skygreenish
+{
+    color: #19cf86 !important;
+}
+
+a.text-skygreenish:hover,
+a.text-skygreenish:focus
+{
+    color: #19bdcf !important;
+}
+
+.text-darkish
+{
+    color: #1d1e21 !important;
+}
+
+a.text-darkish:hover,
+a.text-darkish:focus
+{
+    color: black !important;
 }
