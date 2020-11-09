@@ -24695,6 +24695,11 @@ button.section-darker:focus
     fill: #19cf86;
 }
 
+.fill-grayish
+{
+    fill: #3d3d3d;
+}
+
 .blur--hover
 {
     position: relative;
@@ -29998,6 +30003,19 @@ button.bg-darkish:hover,
 button.bg-darkish:focus
 {
     background-color: black !important;
+}
+
+.bg-skygreenish
+{
+    background-color: #19cf86 !important;
+}
+
+a.bg-skygreenish:hover,
+a.bg-skygreenish:focus,
+button.bg-skygreenish:hover,
+button.bg-skygreenish:focus
+{
+    background-color: #227051 !important;
 }
 
 .text-skygreenish
