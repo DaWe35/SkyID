@@ -29855,7 +29855,7 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
 }
 
 .navbar-brand span {
-    color: #70B269;
+    color: #fff;
     font-weight: 600;
     font-size: 125%;
 }
@@ -30036,6 +30036,17 @@ a.text-skygreenish:focus
 
 a.text-darkish:hover,
 a.text-darkish:focus
+{
+    color: black !important;
+}
+
+.text-dropdown
+{
+    color: #f7fafc !important;
+}
+
+a.text-dropdown:hover,
+a.text-dropdown:focus
 {
     color: black !important;
 }
