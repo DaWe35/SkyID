@@ -28,7 +28,8 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
   <style>
-    #login_btn, #register_btn {
+    #login_btn,
+    #register_btn {
       cursor: pointer;
     }
 
@@ -50,11 +51,16 @@
       color: #adb5bd;
     }
 
-    .custom-control-input:checked ~ .custom-control-label::before, .custom-control-input:not(:disabled):active ~ .custom-control-label::before  {
-      background-color:#19cf86 !important;
+    .custom-control-input:checked~.custom-control-label::before,
+    .custom-control-input:not(:disabled):active~.custom-control-label::before {
+      background-color: #19cf86 !important;
       border-color: #19cf86 !important;
     }
 
+    #polygon {
+      border: 10px solid black;
+
+    }
   </style>
 </head>
 
@@ -64,7 +70,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="dashboard.html">
         <img style="width: 30px; vertical-align: text-bottom;" src="assets/img/brand/SkyID_Logo_128_white.png">
-        <span class="ml-1 text-skygreenish">SkyID</span>
+        <span class="ml-1 text-white">SkyID</span>
       </a>
       <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
         <!-- <ul class="navbar-nav mr-auto">
@@ -77,7 +83,8 @@
         <hr class="d-lg-none" />
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://github.com/dawe35/skyid" target="_blank" data-toggle="tooltip" data-original-title="Star us on Github">
+            <a class="nav-link nav-link-icon" href="https://github.com/dawe35/skyid" target="_blank"
+              data-toggle="tooltip" data-original-title="Star us on Github">
               <i class="fab fa-github"></i>
               <span class="nav-link-inner--text d-lg-none">Github</span>
             </a>
@@ -89,7 +96,8 @@
             </a>
           </li> -->
           <li class="nav-item d-none d-lg-block ml-lg-4">
-            <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank" class="btn btn-secondary btn-icon">
+            <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3"
+              target="_blank" class="btn btn-secondary btn-icon">
               <span class="btn-inner--icon">
                 <i class="fas fa-book mr-2"></i>
               </span>
@@ -117,7 +125,8 @@
         </div>
       </div>
       <div class="separator separator-header separator-skew zindex-100 py-5 pt-6 py-lg-6 pt-lg-4">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
           <polygon class="fill-skygreenish" points="2560 0 2560 100 0 100"></polygon>
         </svg>
       </div>
@@ -127,14 +136,15 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="row m-0">
-            <div class="col-6 bg-grayer rounded-top text-center text-white p-2" id="login_btn" onclick="switchPage('#login')">
+            <div class="col-6 bg-grayish rounded-top text-center text-white p-2" id="login_btn"
+              onclick="switchPage('#login')">
               Sign in
             </div>
             <div class="col-6 mb-1 text-white text-center p-2" id="register_btn" onclick="switchPage('#register')">
               Create new account
             </div>
           </div>
-          <div id="login_card" class="card bg-grayer border-0 mb-0 rounded-bottom no-top-left-radius">
+          <div id="login_card" class="card bg-grayish border-0 mb-0 rounded-bottom no-top-left-radius">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" id="signInForm">
                 <div class="form-group">
@@ -142,7 +152,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input id="loginInput" class="form-control text-darkish" placeholder="Your passphrase" type="password" required>
+                    <input id="loginInput" class="form-control text-grayish" placeholder="Your passphrase"
+                      type="password" required>
                     <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   </div>
                 </div>
@@ -162,8 +173,8 @@
           </div>
 
 
-          <div id="register_card" class="card bg-grayer border-0 mb-0 rounded-bottom no-top-right-radius display-none">
-            <div class="card-body px-lg-5 py-lg-5">
+          <div id="register_card" class="card bg-grayish border-0 mb-0 rounded-bottom no-top-right-radius display-none">
+            <div class="card-body px-lg-5 pt-lg-5 pb-lg-5">
               <form role="form" id="createAccountForm">
                 <div class="form-group">
                   <div class="text-white mb-4">
@@ -173,18 +184,21 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <span id="passphrase" class="form-control bg-white text-darkish    h-auto" placeholder="Passphrase"></span>
+                    <span id="passphrase" class="form-control bg-white text-grayish font-weight-600   h-auto"
+                      placeholder="Passphrase"></span>
                   </div>
                 </div>
                 <div class="text-white mb-4">
-                  <small>Please keep your passphrase secret. If you lose your passphrase, you lose your accounts.</small>
+                  <small>Please keep your passphrase secret. If you lose your passphrase, you lose your
+                    accounts.</small>
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input id="username" class="form-control text-darkish" placeholder="Your username" required>
+                    <input id="username" class="form-control text-grayish font-weight-bold" placeholder="Your username"
+                      required>
                   </div>
 
 
@@ -217,10 +231,10 @@
             </div>
           </div>
           <!-- <div class="row mt-3"> -->
-            <!-- <div class="col-6">
+          <!-- <div class="col-6">
               <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div> -->
-            <!-- <div class="col-6 text-right">
+          <!-- <div class="col-6 text-right">
               <a href="#" class="text-light"><small>Create new account</small></a>
             </div> -->
           <!-- </div> -->
@@ -228,6 +242,7 @@
       </div>
     </div>
   </div>
+
   <!-- Footer -->
   <!-- <footer class="py-5" id="footer-main">
     <div class="container">
@@ -275,19 +290,19 @@
           mnemonic = skyid.generateNewMasterSeed()
           $('#passphrase').html(mnemonic)
         }
-        $('#login_btn').removeClass('bg-grayer rounded-top')
+        $('#login_btn').removeClass('bg-grayish rounded-top')
         $('#login_btn').addClass('text-white mb-1')
-        $('#register_btn').addClass('bg-grayer rounded-top')
+        $('#register_btn').addClass('bg-grayish rounded-top')
         // $('#register_btn').removeClass('text-white mb-1')
         $('#register_btn').removeClass('mb-1')
         $('#pagecard').removeClass('no-top-left-radius')
         $('#register_card').removeClass('display-none')
         $('#login_card').addClass('display-none')
       } else if (page == '#login' || page == '') {
-        $('#login_btn').addClass('bg-grayer   rounded-top')
+        $('#login_btn').addClass('bg-grayish   rounded-top')
         // $('#login_btn').removeClass('text-white mb-1')
         $('#login_btn').removeClass('mb-1')
-        $('#register_btn').removeClass('bg-grayer rounded-top')
+        $('#register_btn').removeClass('bg-grayish rounded-top')
         $('#register_btn').addClass('text-white mb-1')
         $('#pagecard').addClass('no-top-left-radius')
         $('#pagecard').removeClass('no-top-right-radius')
@@ -296,7 +311,7 @@
       }
     }
 
-    window.addEventListener('hashchange', function(){
+    window.addEventListener('hashchange', function () {
       switchPage(window.location.hash)
     })
     switchPage(window.location.hash)
@@ -323,15 +338,15 @@
         createAccountBtn.className += ' disabled'
         createAccountBtn.innerHTML = 'Initializing profile...'
 
-        skyid.setMnemonic(mnemonic, function(success) {
+        skyid.setMnemonic(mnemonic, function (success) {
           if (success) {
             console.log('nmset')
-            let profile = {'username': username, 'aboutMe': ''}
+            let profile = { 'username': username, 'aboutMe': '' }
             let jsonProfile = JSON.stringify(profile)
-            skyid.setFile('profile', jsonProfile, function(success){
+            skyid.setFile('profile', jsonProfile, function (success) {
               if (success) {
                 var urlParams = new URLSearchParams(window.location.search)
-		            var redirect = urlParams.get('redirect')
+                var redirect = urlParams.get('redirect')
                 var appId = urlParams.get('appId')
                 if (redirect == 'backConnect') {
                   window.location.href = 'connect.html?appId=' + appId
@@ -362,8 +377,8 @@
         var days = 0
       }
 
-      skyid.setMnemonic(mnemonic, function(success) {
-        console.log('success',success)
+      skyid.setMnemonic(mnemonic, function (success) {
+        console.log('success', success)
         if (success) {
           var urlParams = new URLSearchParams(window.location.search)
           var redirect = urlParams.get('redirect')
@@ -382,15 +397,15 @@
 
 
 
-	  function removeClass(el, classNameToRemove){
+    function removeClass(el, classNameToRemove) {
       var elClass = ' ' + el.className + ' '
-      while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1){
+      while (elClass.indexOf(' ' + classNameToRemove + ' ') !== -1) {
         elClass = elClass.replace(' ' + classNameToRemove + ' ', '')
       }
       el.className = elClass
     }
 
-    $('.toggle-password').click(function() {
+    $('.toggle-password').click(function () {
       $(this).toggleClass('fa-eye fa-eye-slash')
       var input = $($(this).attr('toggle'))
       if (input.attr('type') == 'password') {
