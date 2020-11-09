@@ -106,6 +106,39 @@ window.SkyID = class SkyID {
 		}
 	}
 
+	async getRegistry(dataKey, callback) { // needs DaWe's fork of skynet-js-2.4.0
+		showOverlay()
+		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		try {
+			var skylink = await this.skynetClient.dbDirect.getRegistry(publicKey, dataKey)
+		} catch (error) {
+			var skylink = false
+		}
+		hideOverlay()
+		callback(skylink)
+	}
+
+	async setRegistry(dataKey, skylink, callback) {
+		showOverlay()
+		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		try {
+			await this.skynetClient.dbDirect.setRegistry(privateKey, dataKey, skylink)
+
+			// control
+			this.getRegistry(dataKey, function(registryData, revision) {
+				hideOverlay()
+				if (registryData == skylink) {
+					callback(true)
+				} else {
+					callback(false)
+				}
+			})
+		} catch (error) {
+			hideOverlay()
+			console.log(error)
+		}
+	}
+
 	signData(data, childSecKey) {
 		
 	}
