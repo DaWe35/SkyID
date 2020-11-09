@@ -24118,11 +24118,6 @@ button.bg-gray-dark:focus
     background-color: #20203c !important;
 }
 
-.bg-light
-{
-    background-color: #ced4da !important;
-}
-
 a.bg-light:hover,
 a.bg-light:focus,
 button.bg-light:hover,
