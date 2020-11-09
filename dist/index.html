@@ -57,10 +57,10 @@
       border-color: #19cf86 !important;
     }
 
-    #polygon {
-      border: 10px solid black;
-
+    .custom-control-label::before {
+      background-color: #25272a;
     }
+
   </style>
 </head>
 
@@ -148,11 +148,14 @@
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" id="signInForm">
                 <div class="form-group">
+                  <div class="text-secondary mb-4">
+                    <small>Enter your passphrase:</small>
+                  </div>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-secondary"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text bg-dark"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input id="loginInput" class="form-control text-grayish bg-secondary" placeholder="Your passphrase"
+                    <input id="loginInput" class="form-control text-secondary bg-dark" placeholder="Your passphrase"
                       type="password" required>
                     <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   </div>
@@ -182,9 +185,9 @@
                   </div>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-secondary"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text bg-dark"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <span id="passphrase" class="form-control bg-secondary text-darkish h-auto"
+                    <span id="passphrase" class="form-control bg-dark text-secondary h-auto"
                       placeholder="Passphrase"></span>
                   </div>
                 </div>
@@ -195,9 +198,9 @@
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-secondary"><i class="ni ni-single-02"></i></span>
+                      <span class="input-group-text bg-dark"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input id="username" class="form-control text-darkish bg-secondary" placeholder="Your username"
+                    <input id="username" class="form-control text-secondary bg-dark" placeholder="Your username"
                       required>
                   </div>
 
@@ -291,19 +294,19 @@
           $('#passphrase').html(mnemonic)
         }
         $('#login_btn').removeClass('bg-grayish rounded-top')
-        $('#login_btn').addClass('text-white mb-1')
+        $('#login_btn').addClass('text-secondary mb-1')
         $('#register_btn').addClass('bg-grayish rounded-top')
-        // $('#register_btn').removeClass('text-white mb-1')
+        // $('#register_btn').removeClass('text-secondary mb-1')
         $('#register_btn').removeClass('mb-1')
         $('#pagecard').removeClass('no-top-left-radius')
         $('#register_card').removeClass('display-none')
         $('#login_card').addClass('display-none')
       } else if (page == '#login' || page == '') {
         $('#login_btn').addClass('bg-grayish   rounded-top')
-        // $('#login_btn').removeClass('text-white mb-1')
+        // $('#login_btn').removeClass('text-secondary mb-1')
         $('#login_btn').removeClass('mb-1')
         $('#register_btn').removeClass('bg-grayish rounded-top')
-        $('#register_btn').addClass('text-white mb-1')
+        $('#register_btn').addClass('text-secondary mb-1')
         $('#pagecard').addClass('no-top-left-radius')
         $('#pagecard').removeClass('no-top-right-radius')
         $('#register_card').addClass('display-none')
