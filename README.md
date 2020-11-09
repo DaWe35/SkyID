@@ -152,6 +152,8 @@ Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
 
 `npm install`
 
+Download https://siasky.net/BABkHGic4pnWzzJWvh5ifB2BfPdcdBQ71jHhFdEm6GncqQ and extract to node_modules
+
 ##### Compiling Javascript
 You need to compile your node-js files (from the `src` folder) to a web-browser friendly javascript. Type
 
