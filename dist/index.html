@@ -69,8 +69,8 @@
   <nav id="navbar-main" class="navbar navbar-top navbar-transparent navbar-main navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="dashboard.html">
-        <img style="width: 30px; vertical-align: text-bottom;" src="assets/img/brand/SkyID_Logo_128_white.png">
-        <span class="ml-1 text-white">SkyID</span>
+        <img style="width: 30px; vertical-align: text-bottom; filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);" src="assets/img/brand/SkyID_Logo_128_white.png">
+        <span class="ml-1 text-skygreenish">SkyID</span>
       </a>
       <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
         <!-- <ul class="navbar-nav mr-auto">
@@ -116,8 +116,8 @@
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-              <h1 class="text-white">SkyID</h1>
-              <p class="text-lead text-white">
+              <h1 class="text-secondary">SkyID</h1>
+              <p class="text-lead text-light">
                 one account to rule them all.
               </p>
             </div>
@@ -136,11 +136,11 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="row m-0">
-            <div class="col-6 bg-grayish rounded-top text-center text-white p-2" id="login_btn"
+            <div class="col-6 bg-grayish rounded-top text-center text-secondary p-2" id="login_btn"
               onclick="switchPage('#login')">
               Sign in
             </div>
-            <div class="col-6 mb-1 text-white text-center p-2" id="register_btn" onclick="switchPage('#register')">
+            <div class="col-6 mb-1 text-secondary text-center p-2" id="register_btn" onclick="switchPage('#register')">
               Create new account
             </div>
           </div>
@@ -150,9 +150,9 @@
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text bg-secondary"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input id="loginInput" class="form-control text-grayish" placeholder="Your passphrase"
+                    <input id="loginInput" class="form-control text-grayish bg-secondary" placeholder="Your passphrase"
                       type="password" required>
                     <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                   </div>
@@ -162,7 +162,7 @@
                 <div class="custom-control custom-control-alternative custom-checkbox mb-3">
                   <input class="custom-control-input" id="rememberMe" type="checkbox">
                   <label class="custom-control-label" for="rememberMe">
-                    <span class="text-muted text-white">Remember me</span>
+                    <span class="text-light">Remember me</span>
                   </label>
                 </div>
                 <div class="text-center">
@@ -177,27 +177,27 @@
             <div class="card-body px-lg-5 pt-lg-5 pb-lg-5">
               <form role="form" id="createAccountForm">
                 <div class="form-group">
-                  <div class="text-white mb-4">
+                  <div class="text-secondary mb-4">
                     <small>This is your secure passphrase:</small>
                   </div>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text bg-secondary"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <span id="passphrase" class="form-control bg-white text-darkish h-auto"
+                    <span id="passphrase" class="form-control bg-secondary text-darkish h-auto"
                       placeholder="Passphrase"></span>
                   </div>
                 </div>
-                <div class="text-white mb-4">
+                <div class="text-secondary mb-4">
                   <small>Please keep your passphrase secret. If you lose your passphrase, you lose your
                     accounts.</small>
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                      <span class="input-group-text bg-secondary"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input id="username" class="form-control text-darkish" placeholder="Your username"
+                    <input id="username" class="form-control text-darkish bg-secondary" placeholder="Your username"
                       required>
                   </div>
 
@@ -205,7 +205,7 @@
                 </div>
 
 
-                <div class="custom-control custom-control-alternative custom-checkbox text-white mb-3">
+                <div class="custom-control custom-control-alternative custom-checkbox text-secondary mb-3">
                   <input class="custom-control-input" id="customCheckReg" type="checkbox" required>
                   <label class="custom-control-label" for="customCheckReg">
                     <span>I wrote down my passphrase in several places</span>
