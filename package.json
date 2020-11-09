@@ -22,6 +22,7 @@
     "buffer": "^5.7.0",
     "sia-js": "github:dawe35/sia-js",
     "skynet-js": "^2.4.0",
+    "sweetalert2": "^10.9.1",
     "url-parse": "^1.4.7"
   },
   "devDependencies": {

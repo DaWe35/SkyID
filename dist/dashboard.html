@@ -41,8 +41,8 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="assets/img/brand/SkyID_Logo_128_white.png" class="navbar-brand-img" alt="...">
-          <span class="ml-1">SkyID</span>
+          <img src="assets/img/brand/SkyID_Logo_128_white.png" style="filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);" class="navbar-brand-img" alt="...">
+          <span class="ml-1 text-skygreenish">SkyID</span>
         </a>
       </div>
       <div class="navbar-inner">
@@ -85,14 +85,14 @@
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
               <a class="nav-link" href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
-                <i class="ni ni-collection text-secondary"></i>
-                <span class="nav-link-text text-secondary">Learn</span>
+                <i class="ni ni-collection text-light"></i>
+                <span class="nav-link-text text-light">Learn</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://github.com/DaWe35/SkyID#readme" target="_blank">
-                <i class="fab fa-github text-secondary"></i>
-                <span class="nav-link-text text-secondary">Implement</span>
+                <i class="fab fa-github text-light"></i>
+                <span class="nav-link-text text-light">Implement</span>
               </a>
             </li>
             <!-- <li class="nav-item">
@@ -692,8 +692,8 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label text-secondary" for="profileUsername">Username</label>
-                        <input type="text" id="profileUsername" class="form-control text-darkish" placeholder="Username" value="">
+                        <label class="form-control-label text-light" for="profileUsername">Username</label>
+                        <input type="text" id="profileUsername" class="form-control text-darkish bg-secondary" placeholder="Username" value="">
                       </div>
                     </div>
                   </div>
@@ -703,8 +703,8 @@
                 <h6 class="heading-small text-secondary mb-4">About me</h6>
                 <div class="pl-lg-4">
                   <div class="form-group">
-                    <label class="form-control-label text-secondary">About Me</label>
-                    <textarea id="profileAboutMe" rows="4" class="form-control text-darkish" placeholder="A few words about you ..."></textarea>
+                    <label class="form-control-label text-light">About Me</label>
+                    <textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-darkish bg-secondary" placeholder="A few words about you ..."></textarea>
                   </div>
                 </div>
               </form>
@@ -732,20 +732,20 @@
                   </div>
                   <div class="col-4 text-right">
                     <!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
-                    <small class="float-right text-secondary">Some other content will be here soon</small>
+                    <small class="float-right text-light">Some other content will be here soon</small>
                   </div>
                 </div>
               </div>
               <div class="card-body bg-grayish">
 
                 <a href="https://skyacc.hns.siasky.net/" target="_blank">
-                  <h2 class="text-secondary">Example dapp using SkyID</h2>
+                  <h2 class="text-light">Example dapp using SkyID</h2>
                 </a>
                 <a href="https://github.com/DaWe35" class="skygreenish" target="_blank">by DaWe</a>
                 <br><br>
 
                 <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
-                  <h2 class="text-secondary">How to Make Decentralized Identity using Skynet</h2>
+                  <h2 class="text-light">How to Make Decentralized Identity using Skynet</h2>
                 </a>
                 <a href="https://medium.com/@davidvorick" class="skygreenish" target="_blank">by David Vorick</a>
 
@@ -780,7 +780,7 @@
             var dataRow = respObs.dapps[key]
 
             rows += `
-              <tr>
+              <tr class="text-light">
                 <th scope="row">
                   <div class="media align-items-center">
                     <a href="#" class="avatar rounded-circle mr-3">
@@ -810,7 +810,7 @@
               </tr>`
           }
           if (rows == '') {
-            rows += `<tr class="text-secondary">
+            rows += `<tr class="text-light">
                 <th scope="row">There are no connected dapps. <a class="text-skygreenish" href="https://skyacc.hns.siasky.net/" target="_blank">Try out this example!</a></th>
                 <td class="budget"></td>
                 <td class="budget"></td>
