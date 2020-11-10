@@ -1,6 +1,6 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, encodeBase64, showOverlay, hideOverlay } from "./utils"
-import { SkynetClient, keyPairFromSeed, deriveChildSeed } from "skynet-js";
+import { SkynetClient, keyPairFromSeed, deriveChildSeed, getRegistryUrl } from "skynet-js";
 const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
@@ -137,6 +137,11 @@ window.SkyID = class SkyID {
 			hideOverlay()
 			console.log(error)
 		}
+	}
+
+	getRegistryUrl(dataKey) {
+		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		return this.skynetClient.dbDirect.getRegistryUrl(publicKey, dataKey)
 	}
 
 	signData(data, childSecKey) {
