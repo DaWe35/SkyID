@@ -98,7 +98,7 @@
           </li> -->
           <li class="nav-item d-none d-lg-block ml-lg-4">
             <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3"
-              target="_blank" class="btn btn-secondary btn-icon">
+              target="_blank" class="btn btn-grayish btn-icon">
               <span class="btn-inner--icon">
                 <i class="fas fa-book mr-2"></i>
               </span>
@@ -125,12 +125,6 @@
           </div>
         </div>
       </div>
-      <div class="separator separator-header separator-skew zindex-100 py-5 pt-6 py-lg-6 pt-lg-4">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
-          xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-skygreenish" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
     </div>
     <!-- Page content -->
     <div class="container mt--8 py-5 pt-6 py-lg-5 pt-lg-4">
@@ -142,7 +136,8 @@
               Sign in
             </div>
             <div class="col-6 mb-1 text-secondary text-center p-2" id="register_btn" onclick="switchPage('#register')">
-              Create new account
+<span id="register_border" class="col-2 p-2 border border-success rounded">
+              Sign up </span>
             </div>
           </div>
           <div id="login_card" class="card bg-grayish border-0 mb-0 rounded-bottom no-top-left-radius">
@@ -216,7 +211,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button id="createAccountBtn" type="submit" class="btn btn-skygreenish mt-4">Create account</button>
+                  <button id="createAccountBtn" type="submit" class="btn btn-skygreenish mt-4">Sign up</button>
                 </div>
 
 
@@ -302,6 +297,7 @@
         $('#pagecard').removeClass('no-top-left-radius')
         $('#register_card').removeClass('display-none')
         $('#login_card').addClass('display-none')
+        $('#register_border').removeClass('rounded border border-success')
       } else if (page == '#login' || page == '') {
         $('#login_btn').addClass('bg-grayish   rounded-top')
         // $('#login_btn').removeClass('text-secondary mb-1')
@@ -312,6 +308,7 @@
         $('#pagecard').removeClass('no-top-right-radius')
         $('#register_card').addClass('display-none')
         $('#login_card').removeClass('display-none')
+        $('#register_border').addClass('rounded border border-success')
       }
     }
 

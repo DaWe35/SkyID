@@ -2,7 +2,7 @@ old styling: https://siasky.net/IADUoX_G49GKKr9CsC-kyMBV5xUefCqUVjD0KLvoiwwkkQ/
 
 new styling (black theme): https://siasky.net/IADLI6XrYIook758BKYCKjUMzBywuRrsSWSTrwDhamEFgA
 
-even newer (and better) styling: https://siasky.net/IACNjsRRCDIl-xk0FOHg-J8GRw6AIWAOPdTncwo5Qc5usQ
+even newer (and better) styling: https://siasky.net/IABfghG9iSjoouoteZFvXSsFzmJjTgjeT6mUxEGJJVFueg/
 
 # SkyID (newest styling)
 

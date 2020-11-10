@@ -30057,3 +30057,42 @@ a.text-grayish:focus
     color: black !important;
 }
 
+.btn-grayish
+{
+    color: #fff;
+    border-color: #3d3d3d;
+    background-color: #3d3d3d;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+.btn-grayish:hover
+{
+    color: #fff;
+    border-color: #3d3d3d;
+    background-color: #25272a;
+}
+.btn-grayish:focus,
+.btn-grayish.focus
+{
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08), 0 0 0 0 rgba(45, 206, 137, .5);
+}
+.btn-grayish.disabled,
+.btn-grayish:disabled
+{
+    color: #fff;
+    border-color: #3d3d3d;
+    background-color: #3d3d3d;
+}
+.btn-grayish:not(:disabled):not(.disabled):active,
+.btn-grayish:not(:disabled):not(.disabled).active,
+.show > .btn-grayish.dropdown-toggle
+{
+    color: #fff;
+    border-color: #3d3d3d;
+    background-color: #25272a;
+}
+.btn-grayish:not(:disabled):not(.disabled):active:focus,
+.btn-grayish:not(:disabled):not(.disabled).active:focus,
+.show > .btn-grayish.dropdown-toggle:focus
+{
+    box-shadow: none, 0 0 0 0 rgba(45, 206, 137, .5);
+}
