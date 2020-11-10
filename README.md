@@ -1,21 +1,4 @@
-old styling: https://siasky.net/IADUoX_G49GKKr9CsC-kyMBV5xUefCqUVjD0KLvoiwwkkQ/
-
-new styling (black theme): https://siasky.net/IADLI6XrYIook758BKYCKjUMzBywuRrsSWSTrwDhamEFgA
-
-even newer (and better) styling: https://siasky.net/IABfghG9iSjoouoteZFvXSsFzmJjTgjeT6mUxEGJJVFueg/
-
-# SkyID (newest styling)
-
-![index](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/index-v2.jpg)
-![dashboard](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/dashboard-v2.jpg)
-![connect](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/connect-v2.jpg)
-
-
-# SkyID (new styling: black theme)
-
-![index](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/index.jpg)
-![dashboard](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/dashboard.jpg)
-![connect](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/connect.jpg)
+# SkyID
 
 Global frontend-only verification system for web3 dapps
 
@@ -169,10 +152,12 @@ Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
 
 `npm install`
 
+Download https://siasky.net/BABkHGic4pnWzzJWvh5ifB2BfPdcdBQ71jHhFdEm6GncqQ and extract to node_modules
+
 ##### Compiling Javascript
 You need to compile your node-js files (from the `src` folder) to a web-browser friendly javascript. Type
 
-`npx webpack`
+`nxp webpack`
 
 You'll see 3 new .js file in the `dist` folder. If you want to edit javascript, you can make changes inside the `src` folder and run `npx webpack` again. (Of course you can use `npx webpack --watch` so it will watch and compile automatically if you change something.
 
@@ -188,7 +173,6 @@ If you're using the `file://` protocol (or `idtest.local` as localhost domain), 
 We have a [SkyID-example-note-dapp](https://github.com/DaWe35/SkyID-example-note-dapp), so you can clone it. Don't forget to change the source of `skyid.js` if you want to test with self-hosted SkyID ([open image](https://raw.githubusercontent.com/DaWe35/SkyID/main/assets/skyid-example.png))
 
 To be able to test cross-domain things, you need to setup two local virtual-host domains. If you have [Wamp.NET](https://wamp.net/) installed (what I really recommend), this will be easy. You just need to create two sites pointing to your local SkyID projects: `idtest.local` for SkyID and `skynote.local` for the example dapp ([open image](https://raw.githubusercontent.com/DaWe35/SkyID/main/assets/skyid_wamp.jpg)).
-
 
 
 
