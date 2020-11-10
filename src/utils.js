@@ -1,4 +1,3 @@
-import base64 from "base64-js"
 import base32Encode from "base32-encode"
 import Url from "url-parse"
 
@@ -41,23 +40,12 @@ export function getCookie() {
 	return false;
 }
 
-
 export function toHexString(byteArray) {
-	return Array.from(byteArray, function(byte) {
-		return ('0' + (byte & 0xFF).toString(16)).slice(-2)
-	}).join('')
-}
-
-
-
-export function decodeBase64(input) {
-	return base64.toByteArray(
-		input.padEnd(input.length + 4 - (input.length % 4), "=")
-	)
-}
-
-export function encodeBase64(input) {
-	return base64.fromByteArray(input)
+	let s = "";
+	byteArray.forEach(function (byte) {
+		s += ("0" + (byte & 0xff).toString(16)).slice(-2);
+	});
+	return s;
 }
 
 export function encodeBase32(input) {

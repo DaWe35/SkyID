@@ -1,5 +1,4 @@
 import { genKeyPairFromSeed } from "skynet-js";
-import { toHexString } from "./utils"
 
 window.SkyidConnect = class SkyidConnect {
 
@@ -44,17 +43,14 @@ window.SkyidConnect = class SkyidConnect {
 			window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_fail', 'seed': false}, "*")
 			window.close()
 		} else if (grantAccess === true) {
-			var appSeed = this.skyid.generateChildSeed(this.appId)
-			
+			var appSeed = this.skyid.deriveChildSeed(this.appId)
 			// generate private app data
 			const masterKeys = genKeyPairFromSeed(this.skyid.seed)
-			let userIdHex = toHexString(masterKeys.publicKey)
-			let appData =  { 'seed': appSeed,'userId': userIdHex, 'url': document.referrer, 'appImg': null }
+			let appData =  { 'seed': appSeed,'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
 
 			// generate public app data
 			const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
-			let publicKeyHex = toHexString(publicKey)
-			let publicAppData = { 'url': document.referrer, 'publicKey': publicKeyHex, 'img': null }
+			let publicAppData = { 'url': document.referrer, 'publicKey': publicKey, 'img': null }
 			this.addDapp(this.appId, publicAppData, function() {
 				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData}, "*")
 				window.close()
@@ -74,7 +70,7 @@ window.SkyidConnect = class SkyidConnect {
 		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
 			window.location.href = "http://idtest.local?appId=" + this.appId + "&redirect=backConnect"
 		} else {
-			window.location.href = "https://skyaccounts.hns.siasky.net?appId=" + this.appId + "&redirect=backConnect"
+			window.location.href = "https://sky-id.hns.siasky.net?appId=" + this.appId + "&redirect=backConnect"
 		}
 	}
 

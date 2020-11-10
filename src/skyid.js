@@ -1,6 +1,7 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
-	toggleElementsDisplay, encodeBase64, showOverlay, hideOverlay } from "./utils"
-import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRegistryUrl } from "skynet-js";
+	toggleElementsDisplay, showOverlay, hideOverlay, toHexString } from "./utils"
+import { SkynetClient, genKeyPairFromSeed, deriveChildSeed } from "skynet-js";
+import { pki } from "node-forge";
 const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
@@ -46,7 +47,7 @@ window.SkyID = class SkyID {
 				)
 			} else {
 				window.windowObjectReference = popupCenter(
-					'https://skyaccounts.hns.siasky.net/connect.html?appId=' + this.appId,
+					'https://sky-id.hns.siasky.net/connect.html?appId=' + this.appId,
 					'SkyID',
 					400, 500
 				)
@@ -66,9 +67,8 @@ window.SkyID = class SkyID {
 
 
 
-	generateChildSeed(derivatePath) {
-		var childSeed = deriveChildSeed(this.seed, derivatePath)
-		return encodeBase64(childSeed)
+	deriveChildSeed(derivatePath) {
+		return deriveChildSeed(this.seed, derivatePath)
 	}
 
 	
@@ -90,58 +90,68 @@ window.SkyID = class SkyID {
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
-
-			// control
-			this.getFile(dataKey, function(registryData, revision) {
-				hideOverlay()
-				if (registryData == json) {
-					callback(true)
-				} else {
-					callback(false)
-				}
-			})
+			var success = true
 		} catch (error) {
-			hideOverlay()
 			console.log(error)
+			alert('Failed to save file, please retry.')
+			var success = false
 		}
+		hideOverlay()
+		callback(success)
 	}
 
 	async getRegistry(dataKey, callback) { // needs DaWe's fork of skynet-js-2.4.0
 		showOverlay()
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
-			var skylink = await this.skynetClient.dbDirect.getRegistry(publicKey, dataKey)
+			var entry = await this.skynetClient.registry.getEntry(publicKey, dataKey)
 		} catch (error) {
-			var skylink = false
+			var entry = false
 		}
 		hideOverlay()
-		callback(skylink)
+		callback(entry)
 	}
 
-	async setRegistry(dataKey, skylink, callback) {
+	async setRegistry(dataKey, skylink, callback, revision = null) {
 		showOverlay()
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
-		try {
-			await this.skynetClient.dbDirect.setRegistry(privateKey, dataKey, skylink)
-
-			// control
-			this.getRegistry(dataKey, function(registryData, revision) {
-				hideOverlay()
-				if (registryData == skylink) {
-					callback(true)
-				} else {
-					callback(false)
-				}
-			})
-		} catch (error) {
-			hideOverlay()
-			console.log(error)
+		if (revision === null) {
+			// fetch the current value to find out the revision.
+			const privateKeyBuffer = Buffer.from(privateKey, "hex");
+			let entry
+			const publicKey = pki.ed25519.publicKeyFromPrivateKey({ privateKey: privateKeyBuffer })
+			try {
+				entry = await this.skynetClient.registry.getEntry(toHexString(publicKey), dataKey)
+				revision = entry.entry.revision + 1
+			} catch (err) {
+				console.log(err)
+			  	revision = 0
+			}
 		}
+	
+		// build the registry value
+		const newEntry = {
+			datakey: dataKey,
+			data: skylink,
+			revision,
+		};
+	
+		// update the registry
+		try {
+			await this.skynetClient.registry.setEntry(privateKey, newEntry)
+			var success = true
+		} catch (error) {
+			console.log(error)
+			alert('Failed to save entry, please retry.')
+			var success = false
+		}
+		
+		callback(success)
 	}
 
 	getRegistryUrl(dataKey) {
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
-		return this.skynetClient.dbDirect.getRegistryUrl(publicKey, dataKey)
+		return this.skynetClient.registry.getEntryUrl(publicKey, dataKey)
 	}
 
 	signData(data, childSecKey) {
@@ -179,15 +189,13 @@ window.SkyID = class SkyID {
 			return
 		}
 
-		let seed = encodeBase64(mnemonicBytes)
+		let seed = toHexString(mnemonicBytes)
 		setCookie({"seed": seed}, days)
 
 		if (checkMnemonic && this.setAccount({"seed": seed}, days)) {
 			var self = this
 			skyid.getFile('profile', function(response, revision) {
-				console.log('response', response)
 				if (response == '') { // file not found
-					console.log('response is ""')
 					self.sessionDestroy()
 					callback(false)
 				} else {

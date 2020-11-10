@@ -1,4 +1,16 @@
-import { SkynetClient, keyPairFromSeed } from "skynet-js";
+import { deriveChildSeed } from "skynet-js";
+
+
+console.log(deriveChildSeed('asd', 'asd'))
+console.log(deriveChildSeed('asd', 'aa'))
+console.log(deriveChildSeed('asd', 'ds'))
+console.log(deriveChildSeed('asd', 'fd'))
+console.log(deriveChildSeed('asg', 'xy'))
+console.log(deriveChildSeed('a', 'aa'))
+console.log(deriveChildSeed('aa', 'a'))
+
+
+/* import { SkynetClient, keyPairFromSeed } from "skynet-js";
 
 const client = new SkynetClient();
 const { publicKey, privateKey } = keyPairFromSeed("this seed should be fairly long for security");
@@ -14,7 +26,7 @@ async function setJSONExample() {
   }
 }
 
-setJSONExample()
+setJSONExample() */
 
 /* 
 
