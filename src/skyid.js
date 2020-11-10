@@ -1,6 +1,6 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, encodeBase64, showOverlay, hideOverlay } from "./utils"
-import { SkynetClient, keyPairFromSeed, deriveChildSeed, getRegistryUrl } from "skynet-js";
+import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRegistryUrl } from "skynet-js";
 const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
@@ -74,7 +74,7 @@ window.SkyID = class SkyID {
 	
 	async getFile(dataKey, callback) {
 		showOverlay()
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			var { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
 		} catch (error) {
@@ -87,7 +87,7 @@ window.SkyID = class SkyID {
 
 	async setFile(dataKey, json, callback) {
 		showOverlay()
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
 
@@ -108,7 +108,7 @@ window.SkyID = class SkyID {
 
 	async getRegistry(dataKey, callback) { // needs DaWe's fork of skynet-js-2.4.0
 		showOverlay()
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			var skylink = await this.skynetClient.dbDirect.getRegistry(publicKey, dataKey)
 		} catch (error) {
@@ -120,7 +120,7 @@ window.SkyID = class SkyID {
 
 	async setRegistry(dataKey, skylink, callback) {
 		showOverlay()
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.dbDirect.setRegistry(privateKey, dataKey, skylink)
 
@@ -140,7 +140,7 @@ window.SkyID = class SkyID {
 	}
 
 	getRegistryUrl(dataKey) {
-		const { publicKey, privateKey } = keyPairFromSeed(this.seed)
+		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		return this.skynetClient.dbDirect.getRegistryUrl(publicKey, dataKey)
 	}
 
