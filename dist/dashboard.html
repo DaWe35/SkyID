@@ -34,15 +34,15 @@
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
 </head>
 
-<body>
+<body class="bg-dark">
   <!-- Sidenav -->
-  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-darkish" id="sidenav-main">
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="assets/img/brand/SkyID_Logo_128.png" class="navbar-brand-img" alt="...">
-          <span class="ml-1">SkyID</span>
+          <img src="assets/img/brand/SkyID_Logo_128_white.png" style="filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);" class="navbar-brand-img" alt="...">
+          <span class="ml-1 text-skygreenish">SkyID</span>
         </a>
       </div>
       <div class="navbar-inner">
@@ -51,20 +51,20 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#blog">
-                <i class="fa fa-book text-primary"></i>
+              <a class="nav-link text-secondary" href="#blog">
+                <i class="fa fa-book text-skygreenish"></i>
                 <span class="nav-link-text">Blog</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#profile">
-                <i class="ni ni-single-02 text-primary"></i>
+              <a class="nav-link text-secondary" href="#profile">
+                <i class="ni ni-single-02 text-skygreenish"></i>
                 <span class="nav-link-text">Profile</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#dapps">
-                <i class="ni ni-app text-primary"></i>
+              <a class="nav-link text-secondary" href="#dapps">
+                <i class="ni ni-app text-skygreenish"></i>
                 <span class="nav-link-text">Connected dapps</span>
               </a>
             </li>
@@ -85,14 +85,14 @@
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
               <a class="nav-link" href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
-                <i class="ni ni-collection"></i>
-                <span class="nav-link-text">Learn</span>
+                <i class="ni ni-collection text-light"></i>
+                <span class="nav-link-text text-light">Learn</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://github.com/DaWe35/SkyID#readme" target="_blank">
-                <i class="fab fa-github"></i>
-                <span class="nav-link-text">Implement</span>
+                <i class="fab fa-github text-light"></i>
+                <span class="nav-link-text text-light">Implement</span>
               </a>
             </li>
             <!-- <li class="nav-item">
@@ -109,7 +109,7 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-darkish">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
@@ -208,20 +208,20 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <i class="ni ni-circle-08 text-white"></i>
+                  <i class="ni ni-circle-08 text-secondary"></i>
                   <!-- <span class="avatar avatar-sm rounded-circle">
                     <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                   </span> -->
                   <div class="media-body  ml-2 d-none d-lg-block">
-                    <span class="mb-0 text-sm font-weight-bold">Profile</span>
+                    <span class="mb-0 text-sm font-weight-bold text-secondary">Profile</span>
                   </div>
                 </div>
               </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
+              <div class="dropdown-menu  dropdown-menu-right bg-darkish">
                 <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow m-0">Welcome!</h6>
+                  <h6 class="text-overflow m-0 text-secondary">Welcome!</h6>
                 </div>
-                <a href="#profile" class="dropdown-item">
+                <a href="#profile" class="dropdown-item text-dropdown">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
@@ -230,7 +230,7 @@
                   <span>Settings</span>
                 </a> -->
                 <div class="dropdown-divider"></div>
-                <a href="javascript: skyid.sessionDestroy('index.html');" class="dropdown-item">
+                <a href="javascript: skyid.sessionDestroy('index.html');" class="dropdown-item text-dropdown">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
@@ -242,10 +242,10 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-6">
+    <div class="header bg-darkish pb-6">
       <div class="separator separator-bottom separator-skew zindex-100">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-secondary" points="2560 0 2560 100 0 100"></polygon>
+          <polygon class="fill-dark" points="2560 0 2560 100 0 100"></polygon>
         </svg>
       </div>
       <div class="container-fluid">
@@ -318,15 +318,15 @@
 
     function loadPage(page) {
       if (page == '#dapps') {
-        var content = `<div class="card">
+        var content = `<div class="card bg-grayish">
             <!-- Card header -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Connected dapps</h3>
+            <div class="card-header border-0 bg-grayish">
+              <h3 class="mb-0 text-white">Connected dapps</h3>
             </div>
             <!-- Light table -->
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+                <thead class="bg-grayish text-secondary">
                   <tr>
                     <th scope="col" class="sort" data-sort="name">Dapp</th>
                     <th scope="col" class="sort" data-sort="budget">Url</th>
@@ -674,45 +674,45 @@
         <div class="col-lg-2 order-xl-1">
         </div>
         <div class="col-sm-12 col-xl-8 order-xl-1">
-          <div class="card">
-            <div class="card-header">
+          <div class="card bg-grayish">
+            <div class="card-header bg-grayish">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Edit profile </h3>
+                  <h3 class="mb-0 text-secondary">Edit profile </h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="javascript: saveProfile()" class="btn btn-primary">Save</a>
+                  <a href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <form>
-                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <h6 class="heading-small text-secondary mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="profileUsername">Username</label>
-                        <input type="text" id="profileUsername" class="form-control" placeholder="Username" value="">
+                        <label class="form-control-label text-light" for="profileUsername">Username</label>
+                        <input type="text" id="profileUsername" class="form-control text-secondary bg-dark" placeholder="Username" value="">
                       </div>
                     </div>
                   </div>
                 </div>
                 <hr class="my-4" />
                 <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <h6 class="heading-small text-secondary mb-4">About me</h6>
                 <div class="pl-lg-4">
                   <div class="form-group">
-                    <label class="form-control-label">About Me</label>
-                    <textarea id="profileAboutMe" rows="4" class="form-control" placeholder="A few words about you ..."></textarea>
+                    <label class="form-control-label text-light">About Me</label>
+                    <textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark" placeholder="A few words about you ..."></textarea>
                   </div>
                 </div>
               </form>
             </div>
-            <div class="card-footer">
+            <div class="card-footer bg-grayish">
               <div class="row align-items-center">
                 <div class="col-12 text-right">
-                  <a href="javascript: saveProfile()" class="btn btn-primary">Save</a>
+                  <a href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
                 </div>
               </div>
             </div>
@@ -725,29 +725,29 @@
           </div>
           <div class="col-sm-12 col-xl-8 order-xl-1">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-grayish">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Blog</h3>
+                    <h3 class="mb-0 text-secondary">Blog</h3>
                   </div>
                   <div class="col-4 text-right">
                     <!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
-                    <small class="float-right">Some other content will be here soon</small>
+                    <small class="float-right text-light">Some other content will be here soon</small>
                   </div>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body bg-grayish">
 
                 <a href="https://skyacc.hns.siasky.net/" target="_blank">
-                  <h2>Example dapp using SkyID</h2>
+                  <h2 class="text-light">Example dapp using SkyID</h2>
                 </a>
-                <a href="https://github.com/DaWe35" class="skygreen" target="_blank">by DaWe</a>
+                <a href="https://github.com/DaWe35" class="skygreenish" target="_blank">by DaWe</a>
                 <br><br>
 
                 <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
-                  <h2>How to Make Decentralized Identity using Skynet</h2>
+                  <h2 class="text-light">How to Make Decentralized Identity using Skynet</h2>
                 </a>
-                <a href="https://medium.com/@davidvorick" class="skygreen" target="_blank">by David Vorick</a>
+                <a href="https://medium.com/@davidvorick" class="skygreenish" target="_blank">by David Vorick</a>
 
               </div>
             </div>
@@ -780,7 +780,7 @@
             var dataRow = respObs.dapps[key]
 
             rows += `
-              <tr>
+              <tr class="text-light">
                 <th scope="row">
                   <div class="media align-items-center">
                     <a href="#" class="avatar rounded-circle mr-3">
@@ -810,8 +810,8 @@
               </tr>`
           }
           if (rows == '') {
-            rows += `<tr>
-                <th scope="row">There are no connected dapps. <a href="https://skyacc.hns.siasky.net/" target="_blank">Try out this example!</a></th>
+            rows += `<tr class="text-light">
+                <th scope="row">There are no connected dapps. <a class="text-skygreenish" href="https://skyacc.hns.siasky.net/" target="_blank">Try out this example!</a></th>
                 <td class="budget"></td>
                 <td class="budget"></td>
                 <td class="text-right"></td>
