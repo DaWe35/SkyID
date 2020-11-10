@@ -23,7 +23,7 @@ window.SkyidConnect = class SkyidConnect {
 			}, false)
 
 		}
-		if (this.appId == null || this.appId == '') {
+		if (this.appId == null || this.appId == '' || typeof this.appId == 'undefined') {
 			this.showAlert('Misconfigured dapp - appId is empty', 'error')
 		}
 
