@@ -9,10 +9,17 @@ Global frontend-only verification system for web3 dapps
 ## Documentation
 
 ### Install
+
+Old SkyID url (broken, only for testing)
 ``` html
 <script src="https://sky-id.hns.siasky.net/skyid.js"></script>
 ```
-🔼 *This URL will change in a week!* 🔼
+
+New SkyID link (will activate in 1- 3 days)
+
+``` html
+<script src="https://sky-id.hns.siasky.net/skyid.js"></script>
+```
 
 ### Initialize
 ``` javascript
