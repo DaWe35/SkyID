@@ -1,4 +1,4 @@
-import { keyPairFromSeed } from "skynet-js";
+import { genKeyPairFromSeed } from "skynet-js";
 import { toHexString } from "./utils"
 
 window.SkyidConnect = class SkyidConnect {
@@ -23,7 +23,7 @@ window.SkyidConnect = class SkyidConnect {
 			}, false)
 
 		}
-		if (this.appId == null || this.appId == '') {
+		if (this.appId == null || this.appId == '' || typeof this.appId == 'undefined') {
 			this.showAlert('Misconfigured dapp - appId is empty', 'error')
 		}
 
@@ -47,12 +47,12 @@ window.SkyidConnect = class SkyidConnect {
 			var appSeed = this.skyid.generateChildSeed(this.appId)
 			
 			// generate private app data
-			const masterKeys = keyPairFromSeed(this.skyid.seed)
+			const masterKeys = genKeyPairFromSeed(this.skyid.seed)
 			let userIdHex = toHexString(masterKeys.publicKey)
 			let appData =  { 'seed': appSeed,'userId': userIdHex, 'url': document.referrer, 'appImg': null }
 
 			// generate public app data
-			const { publicKey, privateKey } = keyPairFromSeed(appSeed)
+			const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
 			let publicKeyHex = toHexString(publicKey)
 			let publicAppData = { 'url': document.referrer, 'publicKey': publicKeyHex, 'img': null }
 			this.addDapp(this.appId, publicAppData, function() {
