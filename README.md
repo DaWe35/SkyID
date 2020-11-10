@@ -1,6 +1,17 @@
 old styling: https://siasky.net/IADUoX_G49GKKr9CsC-kyMBV5xUefCqUVjD0KLvoiwwkkQ/
 
-# SkyID (improved styling)
+new styling (black theme): https://siasky.net/IADLI6XrYIook758BKYCKjUMzBywuRrsSWSTrwDhamEFgA
+
+even newer (and better) styling: https://siasky.net/IACNjsRRCDIl-xk0FOHg-J8GRw6AIWAOPdTncwo5Qc5usQ
+
+# SkyID (newest styling)
+
+![index](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/index-v2.jpg)
+![dashboard](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/dashboard-v2.jpg)
+![connect](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/connect-v2.jpg)
+
+
+# SkyID (new styling: black theme)
 
 ![index](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/index.jpg)
 ![dashboard](https://raw.githubusercontent.com/10000multiplier/SkyID-1/main/screenshots/dashboard.jpg)
