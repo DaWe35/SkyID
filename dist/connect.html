@@ -34,17 +34,17 @@
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
 </head>
 
-<body>
+<body class="bg-dark">
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-darkish">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar links -->
           <a class="navbar-brand" href="dashboard.html">
-            <img src="assets/img/brand/SkyID_Logo_128_white.png" style="width: 30px; vertical-align: text-bottom;">
-            <span class="ml-1 text-white">SkyID</span>
+            <img src="assets/img/brand/SkyID_Logo_128_white.png" style="width: 30px; vertical-align: text-bottom; filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);">
+            <span class="ml-1 text-skygreenish">SkyID</span>
           </a>
           <ul class="navbar-nav align-items-center ml-md-auto ml-auto">
             <li class="nav-item d-lg-none">
@@ -58,10 +58,10 @@
                   <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                 </span> -->
                 <div class="media-body  ml-2 d-lg-block">
-                  <span class="mb-0 text-sm font-weight-bold text-white">Profile</span>
+                  <span class="mb-0 text-sm font-weight-bold text-secondary">Profile</span>
                 </div>
               </div>
-              
+
             </li>
           </ul>
         </div>
@@ -69,11 +69,17 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-9">
+    <div class="header bg-darkish pb-9">
       <div class="container-fluid">
         <div class="header-body">
         </div>
       </div>
+    </div>
+    <div class="header bg-darkish pb-6">
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-dark" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
     </div>
     <!-- Page content -->
     <div class="container mt--6" id="content">
@@ -81,31 +87,31 @@
         <div class="col-sm-0 col-md-2 col-lg-3"></div>
         <div class="col-sm-12 col-md-8 col-lg-6 order-xl-1">
 
-         <div class="card" id="accessCard">
+         <div class="card bg-grayish" id="accessCard">
             <div class="card-body">
               <div class="text-center mt--7">
-                <img class="mb-4" style="background: #3a4169; border-radius: 10px; max-width: 150px; max-height: 150px;" src="assets/img/brand/SkyID_Logo_128_white.png" alt="">
+                <img class="mb-4" style="border-radius: 10px; max-width: 150px; max-height: 150px; filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);" src="assets/img/brand/SkyID_Logo_128_white.png" alt="">
               </div>
 
-              <p>
+              <p class="text-white">
                 <b><span class="appId">...loading...</span></b>
                 wants to get access to your data. Are you sure about this is the real
                 <span class="appId">...loading...</span> and not a phishing site?
               </p>
               <div class="text-right">
-                <a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3">No, deny</a>
-                <button class="btn btn-primary" onclick="javascript: skyidConnect.CloseMySelf(true)">Yes, grant access</button>
+                <a href="javascript: skyidConnect.CloseMySelf(false)" class="mr-3 text-secondary">No, deny</a>
+                <button class="btn btn-success" onclick="javascript: skyidConnect.CloseMySelf(true)">Yes, grant access</button>
               </div>
             </div>
           </div>
 
-          <div class="card" id="needLoginCard" style="display: none;">
+          <div class="card bg-grayish" id="needLoginCard" style="display: none;">
             <div class="card-body">
-              <p>
+              <p class="text-white">
                 Hey, seems like you're logged out from SkyID. Please login to SkyID to be able to allow access to other apps.
               </p>
               <div class="text-right">
-                <button class="btn btn-primary" onclick="javascript: skyidConnect.skyidLogin()">Login to SkyID</button>
+                <button class="btn btn-skygreenish" onclick="javascript: skyidConnect.skyidLogin()">Login to SkyID</button>
               </div>
             </div>
           </div>
@@ -126,7 +132,7 @@
   <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
-  
+
   <script src="skyid.js"></script>
   <script src="connect.js"></script>
 
