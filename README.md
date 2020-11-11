@@ -2,17 +2,24 @@
 
 Global frontend-only verification system for web3 dapps
 
-### SkyID: https://skyaccounts.hns.siasky.net/
+### SkyID: https://sky-id.hns.siasky.net/
 
 ### Demo dapp using SkyID login: https://skyacc.hns.siasky.net/
 
 ## Documentation
 
 ### Install
+
+Old SkyID url (broken, only for testing)
 ``` html
-<script src="https://skyaccounts.hns.siasky.net/skyid.js"></script>
+<script src="https://sky-id.hns.siasky.net/skyid.js"></script>
 ```
-🔼 *This URL will change in a week!* 🔼
+
+New SkyID link (will activate in 1- 3 days)
+
+``` html
+<script src="https://sky-id.hns.siasky.net/skyid.js"></script>
+```
 
 ### Initialize
 ``` javascript
