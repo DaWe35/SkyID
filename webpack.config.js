@@ -19,5 +19,5 @@ module.exports = {
 				extractComments: false,
 			}),
 		],
-	}
+	},	
 }

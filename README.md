@@ -94,9 +94,9 @@ SkyID uses SkyDB under the hood to save, modify, and fetch files. The only diffe
 ``` javascript
 let yourObject = { key1: 'value1' }
 let jsonData = JSON.stringify(yourObject)
-skyid.setFile('filename', jsonData, function(response) {
+skyid.setJSON('filename', jsonData, function(response) {
 	if (response != true) {
-		alert('Sorry, but upload failed :(')
+		alert('Sorry, skyid.setFile failed :(')
 	}
 })
 ```
@@ -105,21 +105,42 @@ You can store any JSON data, for example notes, settings, or a list of your uplo
 
 ### Fetch file
 ``` javascript
-skyid.getFile('filename', function(response) {
+skyid.getJSON('filename', function(response) {
 	if (response == false) {
-		alert('Sorry, but note fetching failed :(')
+		alert('Sorry, skyid.getFile failed :(')
 	}
 	var responseObject = JSON.parse(response)
 	console.log(responseObject)
 })
 ```
 
+### Set registry entry
+``` javascript
+skyid.setRegistry('filename', 'IADUs8d9CQjUO34LmdaaNPK_STuZo24rpKVfYW3wPPM2uQ', function(success) {
+	if (success == false) {
+		alert('Sorry, skyid.setRegistry failed :(')
+	}
+})
+```
+
+### Get registry entry
+``` javascript
+skyid.getRegistry('filename', function(entry) {
+	if (entry == false) {
+		alert('Sorry, skyid.getRegistry failed :(')
+	}
+	console.log(entry)
+})
+```
+
+### Get registry URL
+``` javascript
+skydbFile = skyid.getRegistryUrl('filename')
+```
 ___
 
 
 ### Todo
-
-- Connect page: check if user logged in to SkyID
 
 - Verify app-domain and warn users if app1 wants to access app2 data
 

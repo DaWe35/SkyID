@@ -71,8 +71,15 @@ window.SkyID = class SkyID {
 		return deriveChildSeed(this.seed, derivatePath)
 	}
 
-	
+	// alias for compatibility
 	async getFile(dataKey, callback) {
+		this.getJSON(dataKey, callback)
+	}
+	async setFile(dataKey, json, callback) {
+		this.setJSON(dataKey, json, callback)
+	}
+
+	async getJSON(dataKey, callback) {
 		showOverlay()
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
@@ -85,7 +92,7 @@ window.SkyID = class SkyID {
 		callback(data, revision)
 	}
 
-	async setFile(dataKey, json, callback) {
+	async setJSON(dataKey, json, callback) {
 		showOverlay()
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
@@ -194,7 +201,7 @@ window.SkyID = class SkyID {
 
 		if (checkMnemonic && this.setAccount({"seed": seed}, days)) {
 			var self = this
-			skyid.getFile('profile', function(response, revision) {
+			skyid.getJSON('profile', function(response, revision) {
 				if (response == '') { // file not found
 					self.sessionDestroy()
 					callback(false)
