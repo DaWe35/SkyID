@@ -782,14 +782,16 @@
             rows += `
               <tr class="text-light">
                 <th scope="row">
-                  <div class="media align-items-center">
-                    <a href="#" class="avatar rounded-circle mr-3">
-                      <img alt="Image placeholder" src="assets/img/brand/SkyID_Logo_128.png">
-                    </a>
-                    <div class="media-body">
-                      <span class="name mb-0 text-sm">` + key + `</span>
+                  <a href="` + dataRow.url + `" class="text-white">
+                    <div class="media align-items-center">
+                      <div class="avatar rounded-circle mr-3">
+                        <img alt="Image placeholder" src="assets/img/brand/SkyID_Logo_128.png">
+                      </div>
+                      <div class="media-body">
+                        <span class="name mb-0 text-sm">` + key + `</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </th>
                 <td class="budget"> ` +
                   dataRow.url + `
