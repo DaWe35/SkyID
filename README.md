@@ -2,11 +2,11 @@
 
 Global frontend-only verification system for web3 dapps
 
-### SkyID: https://sky-id.hns.siasky.net/
+## SkyID: https://sky-id.hns.siasky.net/
 
-### Demo dapp using SkyID login: https://skyacc.hns.siasky.net/
+## Demo dapp using SkyID login: https://skyacc.hns.siasky.net/
 
-## Documentation
+## Getting started
 
 ### Install
 
@@ -84,9 +84,9 @@ You can also **combine** these classes:
 *It is important to use `style="display:none"` and not a CSS class the display property (bad example `class="display-none"`) because SkyID will only reset the display attribute and not the CSS class*
 
 
+## Documentation
 
-
-### Save file
+### Save JSON
 
 SkyID uses SkyDB under the hood to save, modify, and fetch files. The only difference is that you don't need to remember for your secret key - SkyID generates deterministic keypairs instead.
 
@@ -103,7 +103,7 @@ skyid.setJSON('filename', jsonData, function(response) {
 You can store any JSON data, for example notes, settings, or a list of your uploaded files.
 
 
-### Fetch file
+### Get JSON
 ``` javascript
 skyid.getJSON('filename', function(response) {
 	if (response == false) {
@@ -140,7 +140,7 @@ skydbFile = skyid.getRegistryUrl('filename')
 ___
 
 
-### Todo
+## Todo
 
 - Verify app-domain and warn users if app1 wants to access app2 data
 
@@ -152,11 +152,11 @@ ___
 
 RFC: https://forum.sia.tech/t/discussion-about-sky-id/64
 
-#### Used libraries:
+## Used libraries:
 [Skynet-js](https://github.com/NebulousLabs/skynet-js)
 [Sia-js](https://github.com/escada-finance/sia-js)
 
-#### Contributors:
+## Contributors:
 
 @Delivator
 
@@ -165,9 +165,9 @@ RFC: https://forum.sia.tech/t/discussion-about-sky-id/64
 #### Brainstorm participants & helpers:
 Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
 
-### Development
+## Development
 
-##### Install development dependencies
+#### Install development dependencies
 
 `cd SkyID`
 
@@ -175,21 +175,21 @@ Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
 
 Download https://siasky.net/BABkHGic4pnWzzJWvh5ifB2BfPdcdBQ71jHhFdEm6GncqQ and extract to node_modules
 
-##### Compiling Javascript
+#### Compiling Javascript
 You need to compile your node-js files (from the `src` folder) to a web-browser friendly javascript. Type
 
 `nxp webpack`
 
 You'll see 3 new .js file in the `dist` folder. If you want to edit javascript, you can make changes inside the `src` folder and run `npx webpack` again. (Of course you can use `npx webpack --watch` so it will watch and compile automatically if you change something.
 
-##### Open in browser
+#### Open in browser
 You can just open the `/dist/index.html` in your browser.
 
 If you're using the `file://` protocol (or `idtest.local` as localhost domain), SkyID will recognise you're in development mode and siasky.net will be used as default Skynet portal.
 
 *Chrome won't savecookies with file:// protocol. YOu can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
 
-##### Testing with example dapp
+#### Testing with example dapp
 
 We have a [SkyID-example-note-dapp](https://github.com/DaWe35/SkyID-example-note-dapp), so you can clone it. Don't forget to change the source of `skyid.js` if you want to test with self-hosted SkyID ([open image](https://raw.githubusercontent.com/DaWe35/SkyID/main/assets/skyid-example.png))
 
