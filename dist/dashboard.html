@@ -678,7 +678,7 @@
             <div class="card-header bg-grayish">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0 text-secondary">Edit profile </h3>
+                  <h3 class="mb-0 text-secondary">Edit profile</h3>
                 </div>
                 <div class="col-4 text-right">
                   <a href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
@@ -687,7 +687,7 @@
             </div>
             <div class="card-body">
               <form>
-                <h6 class="heading-small text-secondary mb-4">User information</h6>
+                <h6 class="heading-small text-secondary mb-4">Public informations</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
@@ -698,15 +698,27 @@
                     </div>
                   </div>
                 </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-secondary mb-4">About me</h6>
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label class="form-control-label text-light">About Me</label>
                     <textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark" placeholder="A few words about you ..."></textarea>
                   </div>
                 </div>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label text-light" for="profileLocation">Location</label>
+                        <input type="text" id="profileLocation" class="form-control text-secondary bg-dark" placeholder="Location" value="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <hr class="my-4" /> -->
+                <!-- Description -->
+                <!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
+                
               </form>
             </div>
             <div class="card-footer bg-grayish">
@@ -828,6 +840,7 @@
     function fetchProfile() {
       var profileUsername = document.getElementById('profileUsername')
       var profileAboutMe = document.getElementById('profileAboutMe')
+      var profileLocation = document.getElementById('profileLocation')
 
       // fetch file
       skyid.getFile('profile', function(response, revision) {
@@ -835,10 +848,12 @@
         if (response == '') { // file not found
           profileUsername.value = ''
           profileAboutMe.value = ''
+          profileLocation.value = ''
         } else { // success
           var respObs = JSON.parse(response)
           profileUsername.value = respObs.username
           profileAboutMe.value = respObs.aboutMe
+          profileLocation.value = respObs.location || ''
         }
       })
     }
@@ -847,9 +862,11 @@
     function saveProfile() {
       var profileUsername = document.getElementById('profileUsername')
       var profileAboutMe = document.getElementById('profileAboutMe')
+      var profileLocation = document.getElementById('profileLocation')
 
       let username = profileUsername.value
       let aboutMe = profileAboutMe.value
+      let location = profileLocation.value
 
       skyid.getFile('profile', function(response, revision) {
         if (response == '') { // file not found
@@ -859,6 +876,7 @@
           var profileObj = JSON.parse(response)
           profileObj.username = username
           profileObj.aboutMe = aboutMe
+          profileObj.location = location
           // set file
           let jsonProfile = JSON.stringify(profileObj)
           skyid.setFile('profile', jsonProfile, function(success) {
