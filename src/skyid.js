@@ -14,11 +14,14 @@ window.SkyID = class SkyID {
 		if (isOptionTrue('devMode', this.opts)) {
 			console.log('devMode on, using https://siasky.net')
 			this.skynetClient = new SkynetClient('https://siasky.net')
-			document.body.innerHTML += `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
-											<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
-											DevMode is on - 
-											<a href="https://github.com/DaWe35/SkyID/blob/main/README.md#development" target="_blank" style="color: lightblue;">More info</a>
-										</div>`
+			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
+					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
+					DevMode is on - 
+					<a href="https://github.com/DaWe35/SkyID/blob/main/README.md#development" target="_blank" style="color: lightblue;">More info</a>
+				</div>`
+			var div = document.createElement("div")
+			div.innerHTML = html
+			document.body.appendChild(div.firstChild)
 		} else {
 			console.log('devMode off, using auto portal')
 			this.skynetClient = new SkynetClient()
