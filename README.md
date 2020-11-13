@@ -21,7 +21,14 @@ var skyid = new SkyID('App name')
 
 ### Initialize with options and callback (optional)
 ``` javascript
-opts = { 'disableLoadingScreen': false }
+// detect if app is opened on localhost for development
+if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
+	var devMode = true
+} else {
+	var devMode = false
+}
+
+var opts = { 'devMode': devMode  }
 var skyid = new SkyID('App name', skyidEventCallback, opts)
 
 function skyidEventCallback(message) {

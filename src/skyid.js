@@ -1,5 +1,5 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
-	toggleElementsDisplay, showOverlay, hideOverlay, toHexString } from "./utils"
+	toggleElementsDisplay, showOverlay, hideOverlay, toHexString, isOptionSet, isOptionTrue } from "./utils"
 import { SkynetClient, genKeyPairFromSeed, deriveChildSeed } from "skynet-js";
 import { pki } from "node-forge";
 const sia = require('sia-js')
@@ -11,9 +11,16 @@ window.SkyID = class SkyID {
 		this.callback = callback
 		this.appId = appId
 		this.opts = opts
-		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
+		if (isOptionTrue('devMode', this.opts)) {
+			console.log('devMode on, using https://siasky.net')
 			this.skynetClient = new SkynetClient('https://siasky.net')
+			document.body.innerHTML += `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
+											<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
+											DevMode is on - 
+											<a href="https://github.com/DaWe35/SkyID/blob/main/README.md#development" style="color: lightblue;">More info</a>
+										</div>`
 		} else {
+			console.log('devMode off, using auto portal')
 			this.skynetClient = new SkynetClient()
 		}
 		let cookie = getCookie()
@@ -34,10 +41,15 @@ window.SkyID = class SkyID {
         var link = document.createElement('link')
         link.rel = 'stylesheet'
 		link.type = 'text/css'
-		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
-			link.href = 'http://idtest.local/assets/css/loading.css'
+		if (isOptionSet('customSkyidUrl', this.opts)) {
+			link.href = this.opts.customSkyidUrl + '/assets/css/loading.css'
+			console.log('CSS url set to', this.opts.customSkyidUrl)
+		} else if (isOptionTrue('devMode', this.opts)) {
+			link.href = 'https://sky-id.hns.siasky.net/assets/css/loading.css'
+			console.log('CSS url set to sky-id.hns.siasky.net')
 		} else {
 			link.href = '/hns/sky-id/assets/css/loading.css'
+			console.log('CSS url set to /hns/sky-id/')
 		}
         
         head.appendChild(link)
@@ -52,14 +64,15 @@ window.SkyID = class SkyID {
 				window.location.href = redirect
 			}
 
-			if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
-				//for testing
+			if (isOptionSet('customSkyidUrl', this.opts)) {
+				console.log('Connect url set to', this.opts.customSkyidUrl)
 				window.windowObjectReference = popupCenter(
-					'http://idtest.local/connect.html?appId=' + this.appId,
+					this.opts.customSkyidUrl + '/connect.html?appId=' + this.appId,
 					'SkyID',
 					400, 500
 				)
 			} else {
+				console.log('Connect url set to sky-id.hns.siasky.net')
 				window.windowObjectReference = popupCenter(
 					'https://sky-id.hns.siasky.net/connect.html?appId=' + this.appId,
 					'SkyID',

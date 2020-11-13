@@ -2,10 +2,10 @@ import { genKeyPairFromSeed } from "skynet-js";
 
 window.SkyidConnect = class SkyidConnect {
 
-	constructor() {
+	constructor(opts = null) {
 		const urlParams = new URLSearchParams(window.location.search)
 		this.appId = urlParams.get('appId')
-		this.skyid = new SkyID()
+		this.skyid = new SkyID('SkyID', null, opts)
 
 		// if login needed to SkyID master account
 		if (typeof this.skyid.seed == 'undefined' || this.skyid.seed == '') {
@@ -67,11 +67,7 @@ window.SkyidConnect = class SkyidConnect {
 	}
 
 	skyidLogin() {
-		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
-			window.location.href = "http://idtest.local?appId=" + this.appId + "&redirect=backConnect"
-		} else {
-			window.location.href = "https://sky-id.hns.siasky.net?appId=" + this.appId + "&redirect=backConnect"
-		}
+		window.location.href = "/?appId=" + this.appId + "&redirect=backConnect"
 	}
 
 	addDapp(appId, appData, callback) {

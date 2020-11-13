@@ -290,7 +290,11 @@
   <script src="skyid.js"></script>
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
   <script>
-    const skyid = new SkyID('SkyID')
+    if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
+      var skyid = new SkyID('SkyID', false, {'devMode': true, 'customSkyidUrl': 'http://idtest.local'})
+    } else {
+      var skyid = new SkyID('SkyID')
+    }
 
     if (skyid.seed == '') {
       window.location.href = 'index.html'

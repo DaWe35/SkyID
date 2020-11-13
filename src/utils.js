@@ -181,8 +181,7 @@ function getFirstAndRemainingPath(pathname) {
 }
 
 export function showOverlay(opts) {
-	// disableLoadingScreen
-	if (opts != null && typeof opts.disableLoadingScreen != 'undefined' && opts.disableLoadingScreen == true) {
+	if (isOptionTrue('disableLoadingScreen', opts)) {
 		return
 	}
 	
@@ -266,11 +265,22 @@ export function showOverlay(opts) {
 }
 
 export function hideOverlay(opts) {
-	// disableLoadingScreen
-	if (opts != null && typeof opts.disableLoadingScreen != 'undefined' && opts.disableLoadingScreen == true) {
+	if (isOptionTrue('disableLoadingScreen', opts)) {
 		return
 	}
 	if (document.getElementById('loadingOverlay')) {
 		document.getElementById("loadingOverlay").remove()
+	}
+}
+
+export function isOptionSet(value, opts) {
+	if (opts != null && typeof opts[value] != 'undefined') {
+		return true
+	}
+}
+
+export function isOptionTrue(value, opts) {
+	if (opts != null && typeof opts[value] != 'undefined' && opts[value] == true) {
+		return true
 	}
 }

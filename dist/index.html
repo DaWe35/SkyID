@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="One account to rule them all.">
   <meta name="author" content="DaWe35">
-  <title>SkyID 1.1.0</title>
+  <title>SkyID 1.2.0</title>
   <!-- Favicon -->
   <link rel="icon" href="assets/img/brand/SkyID_Logo_128_white.png" type="image/png">
   <!-- Fonts -->
@@ -276,7 +276,11 @@
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 
   <script>
-    const skyid = new SkyID()
+    if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
+      var skyid = new SkyID('SkyID', false, {'devMode': true, 'customSkyidUrl': 'http://idtest.local'})
+    } else {
+      var skyid = new SkyID('SkyID')
+    }
 
     if (skyid.seed != '') {
       window.location.href = 'dashboard.html'
