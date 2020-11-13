@@ -31,7 +31,6 @@ export function getCookie() {
 		if (c.indexOf(name) == 0) {
 			let cstring = c.substring(name.length, c.length)
 			try {
-				console.log(cstring)
 				return JSON.parse(cstring)
 			} catch {
 				delCookie()
@@ -181,8 +180,12 @@ function getFirstAndRemainingPath(pathname) {
 	return [firstPath, remainingPath]
 }
 
-export function showOverlay() {
-
+export function showOverlay(opts) {
+	// disableLoadingScreen
+	if (opts != null && typeof opts.disableLoadingScreen != 'undefined' && opts.disableLoadingScreen == true) {
+		return
+	}
+	
 	// multiple loading animations from https://codepen.io/AlexWarnes/pen/jXYYKL - random displayed
 	let loadScreens = [
 		`<!-- GRADIENT SPINNER -->
@@ -262,7 +265,11 @@ export function showOverlay() {
 	}
 }
 
-export function hideOverlay() {
+export function hideOverlay(opts) {
+	// disableLoadingScreen
+	if (opts != null && typeof opts.disableLoadingScreen != 'undefined' && opts.disableLoadingScreen == true) {
+		return
+	}
 	if (document.getElementById('loadingOverlay')) {
 		document.getElementById("loadingOverlay").remove()
 	}

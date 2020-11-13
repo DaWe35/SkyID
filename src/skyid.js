@@ -7,9 +7,10 @@ global.Buffer = global.Buffer || require('buffer').Buffer
 
 
 window.SkyID = class SkyID {
-	constructor(appId, callback = null) {
+	constructor(appId, callback = null, opts = null) {
 		this.callback = callback
 		this.appId = appId
+		this.opts = opts
 		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
 			this.skynetClient = new SkynetClient('https://siasky.net')
 		} else {
@@ -28,12 +29,17 @@ window.SkyID = class SkyID {
 			}
 		}, false)
 
-		//load "loading" css
+		// Load "loading" css
 		var head = document.getElementsByTagName('HEAD')[0]
         var link = document.createElement('link')
         link.rel = 'stylesheet'
-        link.type = 'text/css'
-        link.href = '/hns/sky-id/assets/css/loading.css'
+		link.type = 'text/css'
+		if (window.location.protocol == 'file:' || window.location.hostname == 'idtest.local' || window.location.hostname == 'skynote.local') {
+			link.href = 'http://idtest.local/assets/css/loading.css'
+		} else {
+			link.href = '/hns/sky-id/assets/css/loading.css'
+		}
+        
         head.appendChild(link)
 	}
 
@@ -88,7 +94,7 @@ window.SkyID = class SkyID {
 	}
 
 	async getJSON(dataKey, callback) {
-		showOverlay()
+		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			var { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
@@ -96,12 +102,12 @@ window.SkyID = class SkyID {
 			var data = ''
 			var revision = 0
 		}
-		hideOverlay()
+		hideOverlay(this.opts)
 		callback(data, revision)
 	}
 
 	async setJSON(dataKey, json, callback) {
-		showOverlay()
+		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
@@ -111,24 +117,24 @@ window.SkyID = class SkyID {
 			alert('Failed to save file, please retry.')
 			var success = false
 		}
-		hideOverlay()
+		hideOverlay(this.opts)
 		callback(success)
 	}
 
 	async getRegistry(dataKey, callback) { // needs DaWe's fork of skynet-js-2.4.0
-		showOverlay()
+		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			var entry = await this.skynetClient.registry.getEntry(publicKey, dataKey)
 		} catch (error) {
 			var entry = false
 		}
-		hideOverlay()
+		hideOverlay(this.opts)
 		callback(entry)
 	}
 
 	async setRegistry(dataKey, skylink, callback, revision = null) {
-		showOverlay()
+		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		if (revision === null) {
 			// fetch the current value to find out the revision.

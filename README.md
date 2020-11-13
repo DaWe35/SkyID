@@ -19,9 +19,10 @@ Global frontend-only verification system for web3 dapps
 var skyid = new SkyID('App name')
 ```
 
-### Initialize with callback (optional)
+### Initialize with options and callback (optional)
 ``` javascript
-var skyid = new SkyID('App name', skyidEventCallback)
+opts = { 'disableLoadingScreen': false }
+var skyid = new SkyID('App name', skyidEventCallback, opts)
 
 function skyidEventCallback(message) {
 	switch (message) {
