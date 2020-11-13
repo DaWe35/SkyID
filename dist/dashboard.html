@@ -40,7 +40,7 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="javascript:void(0)">
+        <a class="navbar-brand" href="#blog" onmousedown="loadPage('#blog')">
           <img src="assets/img/brand/SkyID_Logo_128_white.png" style="filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);" class="navbar-brand-img" alt="...">
           <span class="ml-1 text-skygreenish">SkyID</span>
         </a>
@@ -51,19 +51,19 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="#blog">
+              <a class="nav-link text-secondary" href="#blog" onmousedown="loadPage('#blog')">
                 <i class="fa fa-book text-skygreenish"></i>
                 <span class="nav-link-text">Blog</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="#profile">
+              <a class="nav-link text-secondary" href="#profile" onmousedown="loadPage('#profile')">
                 <i class="ni ni-single-02 text-skygreenish"></i>
                 <span class="nav-link-text">Profile</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="#dapps">
+              <a class="nav-link text-secondary" href="#dapps" onmousedown="loadPage('#dapps')">
                 <i class="ni ni-app text-skygreenish"></i>
                 <span class="nav-link-text">Connected dapps</span>
               </a>
@@ -316,7 +316,12 @@
     loadPage(window.location.hash || '#blog')
 
 
+    var currentpage = window.location.hash
     function loadPage(page) {
+      if (currentpage == page) {
+        return
+      }
+      currentpage = page
       if (page == '#dapps') {
         var content = `<div class="card bg-grayish">
             <!-- Card header -->
