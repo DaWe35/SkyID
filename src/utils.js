@@ -4,7 +4,6 @@ import Url from "url-parse"
 
 export function setCookie(values, exdays) {
 	let cvalue = JSON.stringify(values)
-	console.log(cvalue)
 	if (exdays == 0) {
 		var expires = 0
 	} else {
