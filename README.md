@@ -50,6 +50,13 @@ function skyidEventCallback(message) {
 }
 ```
 
+#### Available options:
+| Option               | default |
+|----------------------|---------|
+| devMode              | false   |
+| disableLoadingScreen | false   |
+| customSkyidUrl       | null    |
+
 ### Start session (login)
 
 ``` javascript
