@@ -785,7 +785,6 @@
 
       // fetch file
       skyid.getFile('profile', function(response, revision) {
-        console.log('response', response)
         if (response == '') { // file not found
           table.innerHTML = ''
         } else { // success
@@ -849,7 +848,6 @@
 
       // fetch file
       skyid.getFile('profile', function(response, revision) {
-        console.log('response', response)
         if (response == '') { // file not found
           profileUsername.value = ''
           profileAboutMe.value = ''
@@ -885,7 +883,6 @@
           // set file
           let jsonProfile = JSON.stringify(profileObj)
           skyid.setFile('profile', jsonProfile, function(success) {
-            console.log('File Set')
             if (!success) {
               alert('Error: unable to save profile')
             }

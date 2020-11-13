@@ -90,7 +90,6 @@ var Layout = (function() {
         var action = $this.data('action');
         var target = $this.data('target');
 
-		console.log('action', action)
         // Manage actions
 
         switch (action) {
@@ -168,7 +167,6 @@ var Layout = (function() {
 		if (navbar_menu_visible == 0) {
 			navbar_menu_visible = 1;
 			setTimeout(function(){
-				console.log('active')
 				window.addEventListener('click', removeEvent);
 			}, 100);
 					
@@ -177,7 +175,6 @@ var Layout = (function() {
 
 
 	function removeEvent() {
-		console.log('in')
 		navbar_menu_visible = 0;
 		window.removeEventListener('click', removeEvent);
 		unpinSidenav()
