@@ -45,7 +45,6 @@ var Layout = (function() {
 		
 		$('body').removeClass('nav-open');
 		navbar_menu_visible = 0;
-		$('.bodyClick').remove();
 
         // Store the sidenav state in a cookie session
         Cookies.set('sidenav-state', 'unpinned');
@@ -91,18 +90,16 @@ var Layout = (function() {
         var action = $this.data('action');
         var target = $this.data('target');
 
-
+		console.log('action', action)
         // Manage actions
 
         switch (action) {
             case 'sidenav-pin':
 				pinSidenav();
-				console.log('pinSidenav()')
             break;
 
             case 'sidenav-unpin':
                 unpinSidenav();
-				console.log('unpinSidenav()')
             break;
 
             case 'search-show':
@@ -168,17 +165,23 @@ var Layout = (function() {
 	var navbar_menu_visible = 0;
 
 	$( ".sidenav-toggler" ).click(function() {
-		console.log('toggle')
 		if (navbar_menu_visible == 0) {
-			navbar_menu_visible = 1;			
-			var div = '<div class="bodyClick"></div>';
-			$(div).appendTo('body').click(function() {
-				navbar_menu_visible = 0;
-				$('.bodyClick').remove();
-				unpinSidenav()
-			 });
+			navbar_menu_visible = 1;
+			setTimeout(function(){
+				console.log('active')
+				window.addEventListener('click', removeEvent);
+			}, 100);
+					
 		}
 	});
+
+
+	function removeEvent() {
+		console.log('in')
+		navbar_menu_visible = 0;
+		window.removeEventListener('click', removeEvent);
+		unpinSidenav()
+	}
 
 
 })();
