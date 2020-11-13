@@ -17,7 +17,7 @@ window.SkyID = class SkyID {
 			document.body.innerHTML += `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 											<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
 											DevMode is on - 
-											<a href="https://github.com/DaWe35/SkyID/blob/main/README.md#development" style="color: lightblue;">More info</a>
+											<a href="https://github.com/DaWe35/SkyID/blob/main/README.md#development" target="_blank" style="color: lightblue;">More info</a>
 										</div>`
 		} else {
 			console.log('devMode off, using auto portal')
@@ -57,24 +57,30 @@ window.SkyID = class SkyID {
 
 	sessionStart() {
 		let redirect = redirectToSkappContainer(window.location)
-		if (redirect == null) {
+		let devMode = isOptionTrue('devMode', this.opts)
+		if (redirect == null && !devMode) {
 			alert('Error: unable to detect dapp container URL')
 		} else {
-			if (redirect != false) {
+			if (redirect != false && !devMode) {
 				window.location.href = redirect
 			}
 
+			if (devMode) {
+				var devModeString = '&devMode=true'
+			} else {
+				var devModeString = ''
+			}
 			if (isOptionSet('customSkyidUrl', this.opts)) {
 				console.log('Connect url set to', this.opts.customSkyidUrl)
 				window.windowObjectReference = popupCenter(
-					this.opts.customSkyidUrl + '/connect.html?appId=' + this.appId,
+					this.opts.customSkyidUrl + '/connect.html?appId=' + this.appId + devModeString,
 					'SkyID',
 					400, 500
 				)
 			} else {
 				console.log('Connect url set to sky-id.hns.siasky.net')
 				window.windowObjectReference = popupCenter(
-					'https://sky-id.hns.siasky.net/connect.html?appId=' + this.appId,
+					'https://sky-id.hns.siasky.net/connect.html?appId=' + this.appId + devModeString,
 					'SkyID',
 					400, 500
 				)

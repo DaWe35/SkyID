@@ -104,8 +104,6 @@ export function redirectToSkappContainer(url = null) {
 		return false
 	} else if (base32Regex.test(location.hostname)) { // safe base32 subdomain
 		return false
-	} else if (protocol == 'file:' || hostname == 'skynote.local') { // for development purposes
-		return false
 	} else {
 		return null
 	}

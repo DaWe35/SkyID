@@ -22,7 +22,7 @@ window.SkyidConnect = class SkyidConnect {
 			}, false)
 
 		}
-		if (this.appId == null || this.appId == '' || typeof this.appId == 'undefined') {
+		if (typeof this.appId == 'undefined' || this.appId == null || this.appId == '') {
 			this.showAlert('Misconfigured dapp - appId is empty', 'error')
 		}
 
@@ -30,6 +30,16 @@ window.SkyidConnect = class SkyidConnect {
 		let appId_print_elems = document.getElementsByClassName('appId')
 		for (let index = 0; index < appId_print_elems.length; index++) {
 			appId_print_elems[index].innerHTML = this.appId
+		}
+
+		let devMode = urlParams.get('devMode')
+		if (typeof devMode != 'undefined' && devMode == 'true') {
+			document.body.innerHTML += `<div id="devmode_warn" style="position: fixed; top: 10%; width: 80%; height:80%; left: 10%; background-color: #B71C1C; padding: 5px 20px; z-index: 199999; color: white; font-size: 100%; padding: 10%">
+				<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('devmode_warn').style.display = 'none'">x</span>
+				<p><b>This app wants to save cookies to unsafe domain.</b></p>
+				<p>If you're not a developer, we recommend you to deny access to your data.</p>
+				<p><small>If you're a developer then it's fine, but note that cookie saving won't work on Chrome/Brave because if your dapp is opened directly with file:// protocol. To get it work, you can use any localhost domain or use Firefox.</small></p>
+			</div>`
 		}
 
 		// TODO
