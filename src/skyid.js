@@ -27,6 +27,14 @@ window.SkyID = class SkyID {
 				typeof this.callback === 'function' && this.callback(event.data.eventCode)
 			}
 		}, false)
+
+		//load "loading" css
+		var head = document.getElementsByTagName('HEAD')[0]
+        var link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.type = 'text/css'
+        link.href = '/assets/css/loading.css'
+        head.appendChild(link)
 	}
 
 	sessionStart() {
