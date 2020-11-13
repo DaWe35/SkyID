@@ -33,7 +33,7 @@ window.SkyID = class SkyID {
         var link = document.createElement('link')
         link.rel = 'stylesheet'
         link.type = 'text/css'
-        link.href = '/assets/css/loading.css'
+        link.href = '/hns/sky-id/assets/css/loading.css'
         head.appendChild(link)
 	}
 
