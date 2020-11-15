@@ -53,19 +53,19 @@ window.SkyidConnect = class SkyidConnect {
 
 	CloseMySelf(grantAccess) {
 		if (grantAccess === false) {
-			window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_fail', 'seed': false}, "*")
+			window.opener.postMessage({ 'sender': 'skyid', 'eventCode': 'login_fail', 'seed': false }, "*")
 			window.close()
 		} else if (grantAccess === true) {
 			var appSeed = this.skyid.deriveChildSeed(this.appId)
 			// generate private app data
 			const masterKeys = genKeyPairFromSeed(this.skyid.seed)
-			let appData =  { 'seed': appSeed,'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
+			let appData = { 'seed': appSeed, 'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
 
 			// generate public app data
 			const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
 			let publicAppData = { 'url': document.referrer, 'publicKey': publicKey, 'img': null }
-			this.addDapp(this.appId, publicAppData, function() {
-				window.opener.postMessage({'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData}, "*")
+			this.addDapp(this.appId, publicAppData, function () {
+				window.opener.postMessage({ 'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData }, "*")
 				window.close()
 			})
 		}
@@ -86,7 +86,7 @@ window.SkyidConnect = class SkyidConnect {
 	addDapp(appId, appData, callback) {
 		// fetch file
 		var self = this;
-		this.skyid.getJSON('profile', function(response, revision) {
+		this.skyid.getJSON('profile', function (response, revision) {
 			if (response == '') { // file not found
 				alert('Error: unable to fetch dapp list')
 				console.log('Error: unable to fetch dapp list')
@@ -99,7 +99,7 @@ window.SkyidConnect = class SkyidConnect {
 
 				// set file
 				let jsonProfile = JSON.stringify(profileObj)
-				self.skyid.setJSON('profile', jsonProfile, function(success) {
+				self.skyid.setJSON('profile', jsonProfile, function (success) {
 					if (!success) {
 						alert('Error: unable to save profile.json')
 					} else {

@@ -136,8 +136,8 @@
               Sign in
             </div>
             <div class="col-6 mb-1 text-secondary text-center p-2" id="register_btn" onclick="switchPage('#register')">
-<span id="register_border" class="col-2 p-2 border border-success rounded">
-              Sign up </span>
+              <span id="register_border" class="col-2 p-2 border border-success rounded">
+                Sign up </span>
             </div>
           </div>
           <div id="login_card" class="card bg-grayish border-0 mb-0 rounded-bottom no-top-left-radius">
@@ -196,8 +196,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text bg-dark"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input id="username" class="form-control text-secondary bg-dark" style="font-size: 16px" placeholder="Your username"
-                      required>
+                    <input id="username" class="form-control text-secondary bg-dark" style="font-size: 16px"
+                      placeholder="Your username" required>
                   </div>
 
 
@@ -277,7 +277,7 @@
 
   <script>
     if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
-      var skyid = new SkyID('SkyID', false, {'devMode': true, 'customSkyidUrl': 'http://idtest.local'})
+      var skyid = new SkyID('SkyID', false, { 'devMode': true, 'customSkyidUrl': 'http://idtest.local' })
     } else {
       var skyid = new SkyID('SkyID')
     }
