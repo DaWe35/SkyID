@@ -885,7 +885,7 @@
 					profileAboutMe.value = respObs.aboutMe
 					profileLocation.value = respObs.location || ''
 					console.log('Profile data:', respObs)
-					if (typeof respObs.profilePicture != 'undefined') {
+					if (typeof respObs.avatar != 'undefined') {
 						profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
 						profPictLink.href = getProfPictUrl(respObs.profilePicture, 1920)
 					}
@@ -911,9 +911,10 @@
 			var profilePicture = []
 
 			const sizes = [50, 150, 300, 600, 1920]
+			const maxMB = [0.01, 0.06, 0.2, 0.6, 3]
 			for (let i = 0; i < sizes.length; i++) {
 				const options = {
-					maxSizeMB: 1,
+					maxSizeMB: maxMB[i],
 					maxWidthOrHeight: sizes[i],
 					useWebWorker: true
 				}
