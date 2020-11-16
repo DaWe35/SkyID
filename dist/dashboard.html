@@ -895,7 +895,7 @@
 
 
 		function getProfPictUrl(skyfile, size) {
-			if (skyid.opts.devMode == true) {
+			if (skyid.opts != null && skyid.opts.devMode != null && skyid.opts.devMode == true) {
 				return 'https://siasky.net/' + skyfile + '/' + size
 			} else {
 				return '/' + skyfile + '/' + size
