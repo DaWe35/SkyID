@@ -10,6 +10,7 @@
 	overflow: hidden;
 	font-size: 200%;
 	color: #FFF;
+	text-align: center;
 }
 
 
@@ -29,8 +30,8 @@
 
   .spinner-box {
 	position: inherit;
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	background-color: transparent;
 	right: 0%;
 	bottom: 0%;
