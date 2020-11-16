@@ -1,6 +1,6 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, showOverlay, hideOverlay, toHexString, isOptionSet, isOptionTrue } from "./utils"
-import { SkynetClient, genKeyPairFromSeed, deriveChildSeed } from "skynet-js";
+import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRelativeFilePath, getRootDirectory } from "skynet-js";
 import { pki } from "node-forge";
 const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
@@ -11,6 +11,9 @@ window.SkyID = class SkyID {
 		this.callback = callback
 		this.appId = appId
 		this.opts = opts
+
+		// delete
+		
 		if (isOptionTrue('devMode', this.opts)) {
 			console.log('devMode on, using https://siasky.net')
 			this.skynetClient = new SkynetClient('https://siasky.net')
@@ -197,6 +200,34 @@ window.SkyID = class SkyID {
 		return this.skynetClient.registry.getEntryUrl(publicKey, dataKey)
 	}
 
+	// files can be an array, for example document.getElementById('my_input').files
+	async uploadDirectory(files, callback) {
+		showOverlay(this.opts)
+		try {
+			 // Get the directory name from the list of files.
+			// Can also be named manually, i.e. if you build the files yourself
+			// instead of getting them from an input form.
+			const filename = getRootDirectory(files[0]);
+
+			// Use reduce to build the map of files indexed by filepaths
+			// (relative from the directory).
+			
+			const directory = files.reduce((accumulator, file) => {
+				const path = getRelativeFilePath(file);
+
+				return { ...accumulator, [path]: file };
+			}, {});
+			var skylink = await this.skynetClient.uploadDirectory(directory, 'uploaded_folder_name');
+		} catch (error) {
+			var skylink = false
+			console.log(error);
+		}
+		
+		hideOverlay(this.opts)
+		callback(skylink)
+	}
+
+
 	signData(data, childSecKey) {
 		
 	}
@@ -210,6 +241,13 @@ window.SkyID = class SkyID {
 	Functions below are only for SkyID, so it is better to not use ;)
 	
 	*/
+	showOverlay() {
+		showOverlay(this.opts)
+	}
+
+	hideOverlay() {
+		hideOverlay(this.opts)
+	}
 
 	setAccount(appData) {
 		if (appData == false){
