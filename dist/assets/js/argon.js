@@ -167,7 +167,7 @@ var Layout = (function() {
 		if (navbar_menu_visible == 0) {
 			navbar_menu_visible = 1;
 			setTimeout(function(){
-				window.addEventListener('click', removeEvent);
+				window.addEventListener('mousedown', removeEvent);
 			}, 100);
 					
 		}
@@ -176,7 +176,7 @@ var Layout = (function() {
 
 	function removeEvent() {
 		navbar_menu_visible = 0;
-		window.removeEventListener('click', removeEvent);
+		window.removeEventListener('mousedown', removeEvent);
 		unpinSidenav()
 	}
 

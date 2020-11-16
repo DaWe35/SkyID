@@ -327,6 +327,12 @@
 				return
 			}
 			currentpage = page
+			if (history.pushState) {
+				history.pushState(null, null, page);
+			}
+			else {
+				location.hash = page;
+			}
 			if (page == '#dapps') {
 				var content = `<div class="card bg-grayish">
 						<!-- Card header -->
