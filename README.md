@@ -164,6 +164,24 @@ skyid.uploadDirectory(files, function(skylink) {
 })
 ```
 
+### Upload encrypted file
+``` javascript
+let file = document.getElementById['my_input'].files[0]
+skyid.uploadEncryptedFile(file, 'derivationPath', function(skylink) {
+	console.log('Uploaded:', skylink)
+})
+```
+
+*derivationPath can be any string. It will be hashed with the user's app-seed, no need to make it long since the app-seed is not public. It is recommended to use unique derivationPath to each file, so users can share decription keys for one file without revealing the other files*
+
+### Download encrypted file
+``` javascript
+let skylink = 'sia:/...'
+skyid.downloadEncryptedFile(skylink, 'derivationPath', function(blobUrl){
+	console.log('File downloaded', blobUrl)
+})
+```
+
 ___
 
 ## Todo

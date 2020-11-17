@@ -1,7 +1,8 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, showOverlay, hideOverlay, toHexString, isOptionSet, isOptionTrue } from "./utils"
-import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRelativeFilePath, getRootDirectory } from "skynet-js";
-import { pki } from "node-forge";
+import { encryptFile, decryptFile, fetchFile } from "./encrypt"
+import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRelativeFilePath, getRootDirectory } from "skynet-js"
+import { pki } from "node-forge"
 const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
@@ -163,7 +164,7 @@ window.SkyID = class SkyID {
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		if (revision === null) {
 			// fetch the current value to find out the revision.
-			const privateKeyBuffer = Buffer.from(privateKey, "hex");
+			const privateKeyBuffer = Buffer.from(privateKey, "hex")
 			let entry
 			const publicKey = pki.ed25519.publicKeyFromPrivateKey({ privateKey: privateKeyBuffer })
 			try {
@@ -180,7 +181,7 @@ window.SkyID = class SkyID {
 			datakey: dataKey,
 			data: skylink,
 			revision,
-		};
+		}
 
 		// update the registry
 		try {
@@ -207,20 +208,20 @@ window.SkyID = class SkyID {
 			 // Get the directory name from the list of files.
 			// Can also be named manually, i.e. if you build the files yourself
 			// instead of getting them from an input form.
-			const filename = getRootDirectory(files[0]);
+			const filename = getRootDirectory(files[0])
 
 			// Use reduce to build the map of files indexed by filepaths
 			// (relative from the directory).
 
 			const directory = files.reduce((accumulator, file) => {
-				const path = getRelativeFilePath(file);
+				const path = getRelativeFilePath(file)
 
-				return { ...accumulator, [path]: file };
-			}, {});
-			var skylink = await this.skynetClient.uploadDirectory(directory, 'uploaded_folder_name');
+				return { ...accumulator, [path]: file }
+			}, {})
+			var skylink = await this.skynetClient.uploadDirectory(directory, 'uploaded_folder_name')
 		} catch (error) {
 			var skylink = false
-			console.log(error);
+			console.log(error)
 		}
 
 		hideOverlay(this.opts)
@@ -230,30 +231,41 @@ window.SkyID = class SkyID {
 	async uploadEncryptedFile(file, keyDerivationPath, callback) {
 		showOverlay(this.opts)
 
-		let skykey = this.deriveChildSeed(keyDerivationPath) // this hash will used as encription key
-		try {
-		  var skylink = await this.skynetClient.uploadFile(file, { skykeyName: skykey });
-		} catch (error) {
-		  console.log(error)
-		  var skylink = false
-		}
-		
-		hideOverlay(this.opts)
-		callback(skylink)
+		let encryptSeed = this.deriveChildSeed(keyDerivationPath) // this hash will used as encription key
+		var self = this
+
+		console.log('encryptSeed',encryptSeed)
+		encryptFile(file, encryptSeed, async function (encryptedFile) {
+			console.log('encryptedFile',encryptedFile)
+			
+			const url = URL.createObjectURL(encryptedFile)
+			console.log(url)
+			try {
+			  var skylink = await self.skynetClient.uploadFile(encryptedFile)
+			} catch (error) {
+			  console.log(error)
+			  var skylink = false
+			}
+			
+			hideOverlay(self.opts)
+			callback(skylink)
+		})
 	}
 
 	async downloadEncryptedFile(skylink, keyDerivationPath, callback) {
 		showOverlay(this.opts)
-
-		let skykey = this.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
-		try {
-			this.skynetClient.download(skylink, { skykeyName: skykey });
-		} catch (error) {
-			console.log(error);
-		}
+		let fileUrl = this.skynetClient.getSkylinkUrl(skylink)
+		var self = this
 		
-		hideOverlay(this.opts)
-		callback(skylink)
+		fetchFile(fileUrl, 'Marstorage', function (file) {
+			let encryptSeed = self.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
+			decryptFile(file, encryptSeed, function(decryptedFileBlobUrl) {
+				console.log('decryptedFileBlobUrl', decryptedFileBlobUrl)
+				hideOverlay(self.opts)
+				callback(decryptedFile)
+			})
+		})
+		
 	}
 
 
