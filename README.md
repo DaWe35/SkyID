@@ -1,6 +1,6 @@
 # SkyID
 
-Global frontend-only verification system for web3 dapps
+Global frontend-only verification system for web3 dapps.
 
 #### SkyID: https://sky-id.hns.siasky.net/
 
@@ -152,14 +152,27 @@ skyid.getRegistry('filename', function(entry) {
 ``` javascript
 skydbFile = skyid.getRegistryUrl('filename')
 ```
-___
 
+### Upload directory
+``` html
+<input id="my_input" type="file" multiple="" webkitdirectory="true">
+```
+``` javascript
+let files = document.getElementById['my_input'].files
+skyid.uploadDirectory(files, function(skylink) {
+	console.log('File uploaded:', skylink)
+})
+```
+
+___
 
 ## Todo
 
 - Verify app-domain and warn users if app1 wants to access app2 data
 
 - File encryption & decryption
+
+- Sky-ID central, Twitter login, HNS ownership verify
 
 - Allow multi-account login for dapps, for example `var domain = new SkyIDDomain('app-name')` with `sessionStartAll()`
 

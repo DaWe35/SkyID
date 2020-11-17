@@ -107,7 +107,7 @@ window.SkyID = class SkyID {
 
 
 	deriveChildSeed(derivatePath) {
-		return deriveChildSeed(this.seed, derivatePath)
+		return deriveChildSeed(this.seed, String(derivatePath))
 	}
 
 	// alias for compatibility
@@ -227,20 +227,44 @@ window.SkyID = class SkyID {
 		callback(skylink)
 	}
 
+	async uploadEncryptedFile(file, keyDerivationPath, callback) {
+		showOverlay(this.opts)
+
+		let skykey = this.deriveChildSeed(keyDerivationPath) // this hash will used as encription key
+		try {
+		  var skylink = await this.skynetClient.uploadFile(file, { skykeyName: skykey });
+		} catch (error) {
+		  console.log(error)
+		  var skylink = false
+		}
+		
+		hideOverlay(this.opts)
+		callback(skylink)
+	}
+
+	async downloadEncryptedFile(skylink, keyDerivationPath, callback) {
+		showOverlay(this.opts)
+
+		let skykey = this.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
+		try {
+			this.skynetClient.download(skylink, { skykeyName: skykey });
+		} catch (error) {
+			console.log(error);
+		}
+		
+		hideOverlay(this.opts)
+		callback(skylink)
+	}
+
 
 	signData(data, childSecKey) {
-
+		// NOT IMPLEMENTED YET
 	}
 
 	validateMessage(signedMessage, masterPubKey, childPath) {
 		// NOT IMPLEMENTED YET
 	}
 
-	/*
-
-	Functions below are only for SkyID, so it is better to not use ;)
-
-	*/
 	showOverlay() {
 		showOverlay(this.opts)
 	}
@@ -248,6 +272,12 @@ window.SkyID = class SkyID {
 	hideOverlay() {
 		hideOverlay(this.opts)
 	}
+	
+	/*
+
+	Functions below are only for sky-id.hns.siasky.net ;)
+	
+	*/
 
 	setAccount(appData) {
 		if (appData == false) {
