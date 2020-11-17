@@ -179,12 +179,16 @@
                   <div class="text-secondary mb-4">
                     <small>This is your secure passphrase:</small>
                   </div>
-                  <div class="input-group input-group-merge input-group-alternative">
+
+                  <div data-toggle="tooltip" data-placement="top" data-original-title="Click to copy"
+                    data-animation="true" id="copytoclipboard"
+                    class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text bg-dark"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <span id="passphrase" class="form-control bg-dark text-secondary h-auto"
-                      placeholder="Passphrase"></span>
+                    <div class="form-control position-relative bg-dark text-secondary h-auto">
+                      <span id="passphrase" placeholder="Passphrase"></span>
+                    </div>
                   </div>
                 </div>
                 <div class="text-secondary mb-4">
@@ -292,6 +296,24 @@
         if (skyid.seed == '' && $('#passphrase').html() == '') {
           mnemonic = skyid.generateNewMasterSeed()
           $('#passphrase').html(mnemonic)
+          //save to clipboard when clicked
+          createCopy(mnemonic, 'copytoclipboard', function () {
+            $(copytoclipboard).attr('data-original-title', 'Copied!')
+              .tooltip('show')
+            var elem = $('#passphrase')
+            if (elem.hasClass("copyEffect")) {
+              return
+            }
+            elem.addClass('copyEffect')
+
+            window.setTimeout(function (e) {
+              elem.removeClass("copyEffect");
+              $(copytoclipboard).attr('data-original-title', 'Click to copy')
+            }, 1000);
+
+
+          })
+
         }
         $('#login_btn').removeClass('bg-grayish rounded-top')
         $('#login_btn').addClass('text-secondary mb-1')
@@ -394,7 +416,7 @@
             window.location.href = 'dashboard.html'
           }
         } else {
-          alert('You passphrase is invalid')
+          alert('Your passphrase is invalid')
         }
       }, days, true)
     }
@@ -419,6 +441,7 @@
         input.attr('type', 'password')
       }
     })
+
   </script>
 
   <!-- Argon Scripts -->
@@ -429,6 +452,9 @@
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
+  <script src="assets/js/create-copy.js"></script>
+  <script src="assets/js/components/init/popover.min.js"></script>
+
 
 </body>
 
