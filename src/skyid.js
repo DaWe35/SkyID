@@ -13,13 +13,13 @@ window.SkyID = class SkyID {
 		this.opts = opts
 
 		// delete
-		
+
 		if (isOptionTrue('devMode', this.opts)) {
 			console.log('devMode on, using https://siasky.net')
 			this.skynetClient = new SkynetClient('https://siasky.net')
 			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
-					DevMode is on - 
+					DevMode is on -
 					<a href="https://github.com/DaWe35/SkyID/blob/main/README.md#development" target="_blank" style="color: lightblue;">More info</a>
 				</div>`
 			var div = document.createElement("div")
@@ -31,7 +31,7 @@ window.SkyID = class SkyID {
 		}
 		let cookie = getCookie()
 		this.setAccount(cookie)
-		
+
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
 				if (event.data.eventCode == 'login_success') {
@@ -44,8 +44,8 @@ window.SkyID = class SkyID {
 
 		// Load "loading" css
 		var head = document.getElementsByTagName('HEAD')[0]
-        var link = document.createElement('link')
-        link.rel = 'stylesheet'
+		var link = document.createElement('link')
+		link.rel = 'stylesheet'
 		link.type = 'text/css'
 		if (isOptionSet('customSkyidUrl', this.opts)) {
 			link.href = this.opts.customSkyidUrl + '/assets/css/loading.css'
@@ -57,8 +57,8 @@ window.SkyID = class SkyID {
 			link.href = '/hns/sky-id/assets/css/loading.css'
 			console.log('CSS url set to /hns/sky-id/')
 		}
-        
-        head.appendChild(link)
+
+		head.appendChild(link)
 	}
 
 	sessionStart() {
@@ -171,17 +171,17 @@ window.SkyID = class SkyID {
 				revision = entry.entry.revision + 1
 			} catch (err) {
 				console.log(err)
-			  	revision = 0
+				revision = 0
 			}
 		}
-	
+
 		// build the registry value
 		const newEntry = {
 			datakey: dataKey,
 			data: skylink,
 			revision,
 		};
-	
+
 		// update the registry
 		try {
 			await this.skynetClient.registry.setEntry(privateKey, newEntry)
@@ -191,7 +191,7 @@ window.SkyID = class SkyID {
 			alert('Failed to save entry, please retry.')
 			var success = false
 		}
-		
+
 		callback(success)
 	}
 
@@ -211,7 +211,7 @@ window.SkyID = class SkyID {
 
 			// Use reduce to build the map of files indexed by filepaths
 			// (relative from the directory).
-			
+
 			const directory = files.reduce((accumulator, file) => {
 				const path = getRelativeFilePath(file);
 
@@ -222,12 +222,10 @@ window.SkyID = class SkyID {
 			var skylink = false
 			console.log(error);
 		}
-		
+
 		hideOverlay(this.opts)
 		callback(skylink)
 	}
-
-
 
 	async uploadEncryptedFile(file, keyDerivationPath, callback) {
 		showOverlay(this.opts)
@@ -282,7 +280,7 @@ window.SkyID = class SkyID {
 	*/
 
 	setAccount(appData) {
-		if (appData == false){
+		if (appData == false) {
 			this.seed = ''
 		} else {
 			for (var key in appData) {
@@ -303,11 +301,11 @@ window.SkyID = class SkyID {
 		}
 
 		let seed = toHexString(mnemonicBytes)
-		setCookie({"seed": seed}, days)
+		setCookie({ "seed": seed }, days)
 
-		if (checkMnemonic && this.setAccount({"seed": seed}, days)) {
+		if (checkMnemonic && this.setAccount({ "seed": seed }, days)) {
 			var self = this
-			skyid.getJSON('profile', function(response, revision) {
+			skyid.getJSON('profile', function (response, revision) {
 				if (response == '') { // file not found
 					self.sessionDestroy()
 					callback(false)
@@ -316,15 +314,15 @@ window.SkyID = class SkyID {
 				}
 			})
 		} else {
-			callback(this.setAccount({"seed": seed}, days))
-		}		
+			callback(this.setAccount({ "seed": seed }, days))
+		}
 	}
-	
+
 	generateNewMasterSeed() {
 		if (this.seed != '') {
 			throw "redeclaration of master seed. skyid.generateNewMasterSeed() called after skyid cookie was set already. If you want, you can skyid.sessionDestroy()"
 		} else {
-			let rendomData = sia.keyPair.generateRandomData()		
+			let rendomData = sia.keyPair.generateRandomData()
 			let mnemonic = sia.mnemonics.bytesToMnemonic(rendomData)
 			return mnemonic
 		}

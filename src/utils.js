@@ -8,8 +8,8 @@ export function setCookie(values, exdays) {
 		var expires = 0
 	} else {
 		var d = new Date()
-		d.setTime(d.getTime() + (exdays*24*60*60*1000))
-		var expires = "expires="+ d.toUTCString()
+		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+		var expires = "expires=" + d.toUTCString()
 	}
 	document.cookie = "skyid=" + cvalue + ";" + expires + ";path=/"
 }
@@ -22,7 +22,7 @@ export function getCookie() {
 	var name = "skyid="
 	var decodedCookie = decodeURIComponent(document.cookie)
 	var ca = decodedCookie.split(';')
-	for (var i = 0; i <ca.length; i++) {
+	for (var i = 0; i < ca.length; i++) {
 		var c = ca[i]
 		while (c.charAt(0) == ' ') {
 			c = c.substring(1)
@@ -58,15 +58,15 @@ export function encodeBase32(input) {
 }
 
 export function trimChar(string, charToRemove) {
-    while(string.charAt(0)==charToRemove) {
-        string = string.substring(1)
-    }
+	while (string.charAt(0) == charToRemove) {
+		string = string.substring(1)
+	}
 
-    while(string.charAt(string.length-1)==charToRemove) {
-        string = string.substring(0,string.length-1)
-    }
+	while (string.charAt(string.length - 1) == charToRemove) {
+		string = string.substring(0, string.length - 1)
+	}
 
-    return string
+	return string
 }
 
 // checks if the url an insecure skylink page
@@ -110,25 +110,25 @@ export function redirectToSkappContainer(url = null) {
 }
 
 export function popupCenter(url, title, w, h) {
-    // Fixes dual-screen position                             Most browsers      Firefox
-    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
-    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+	// Fixes dual-screen position                             Most browsers      Firefox
+	const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX;
+	const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY;
 
-    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+	const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+	const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
 
-    const systemZoom = width / window.screen.availWidth;
-    const left = (width - w) / 2 / systemZoom + dualScreenLeft
-    const top = (height - h) / 2 / systemZoom + dualScreenTop
-	const newWindow = window.open(url, title, 
+	const systemZoom = width / window.screen.availWidth;
+	const left = (width - w) / 2 / systemZoom + dualScreenLeft
+	const top = (height - h) / 2 / systemZoom + dualScreenTop
+	const newWindow = window.open(url, title,
 		`
 		scrollbars=yes,
-		width=${w / systemZoom}, 
-		height=${h / systemZoom}, 
-		top=${top}, 
+		width=${w / systemZoom},
+		height=${h / systemZoom},
+		top=${top},
 		left=${left}
 		`
-	  )
+	)
 
 	if (window.focus) newWindow.focus();
 	return newWindow
@@ -138,26 +138,26 @@ export function popupCenter(url, title, w, h) {
 // apply display settings for hide-if-logged-in and show-if-logged-in
 export function toggleElementsDisplay(seed) {
 	// initialize
-	document.querySelectorAll('.show-if-initialized').forEach(function(element) {
+	document.querySelectorAll('.show-if-initialized').forEach(function (element) {
 		element.style.display = ''
 	})
-	document.querySelectorAll('.hide-if-initialized').forEach(function(element) {
+	document.querySelectorAll('.hide-if-initialized').forEach(function (element) {
 		element.style.display = 'none'
 	})
 
-	
+
 	if (seed == '') { // logged out
-		document.querySelectorAll('.hide-if-logged-in').forEach(function(element) {
+		document.querySelectorAll('.hide-if-logged-in').forEach(function (element) {
 			element.style.display = ''
 		})
-		document.querySelectorAll('.show-if-logged-in').forEach(function(element) {
+		document.querySelectorAll('.show-if-logged-in').forEach(function (element) {
 			element.style.display = 'none'
 		})
 	} else { // logged in
-		document.querySelectorAll('.hide-if-logged-in').forEach(function(element) {
+		document.querySelectorAll('.hide-if-logged-in').forEach(function (element) {
 			element.style.display = 'none'
 		})
-		document.querySelectorAll('.show-if-logged-in').forEach(function(element) {
+		document.querySelectorAll('.show-if-logged-in').forEach(function (element) {
 			element.style.display = ''
 		})
 	}
@@ -181,82 +181,20 @@ export function showOverlay(opts) {
 	if (isOptionTrue('disableLoadingScreen', opts)) {
 		return
 	}
-	
-	// multiple loading animations from https://codepen.io/AlexWarnes/pen/jXYYKL - random displayed
-	let loadScreens = [
-		`<!-- GRADIENT SPINNER -->
-		<div class="spinner-box">
-			<div class="circle-border">
-				<div class="circle-core"></div>
-			</div>  
-		</div>`,
 
-		`<!-- SPINNER ORBITS -->
-		<div class="spinner-box">
-			<div class="blue-orbit leo"></div>
-			<div class="green-orbit leo"></div>
-			<div class="red-orbit leo"></div>
-			<div class="white-orbit w1 leo"></div>
-			<div class="white-orbit w2 leo"></div>
-			<div class="white-orbit w3 leo"></div>
-		</div>`,
 
-		`<!-- GRADIENT CIRCLE PLANES -->
-		<div class="spinner-box">
-			<div class="leo-border-1">
-				<div class="leo-core-1"></div>
-			</div> 
-			<div class="leo-border-2">
-				<div class="leo-core-2"></div>
-			</div> 
-		</div>`,
-
-		`<!-- SPINNING SQUARES -->
-		<div class="spinner-box">
-			<div class="configure-border-1">  
-				<div class="configure-core"></div>
-			</div>  
-			<div class="configure-border-2">
-				<div class="configure-core"></div>
-			</div> 
-		</div>`,
-
-		`<!-- LOADING DOTS... -->
-		<div class="spinner-box">
-			<div class="pulse-container">  
-				<div class="pulse-bubble pulse-bubble-1"></div>
-				<div class="pulse-bubble pulse-bubble-2"></div>
-				<div class="pulse-bubble pulse-bubble-3"></div>
-			</div>
-		</div>`,
-
-		`<!-- SOLAR SYSTEM -->
-		<div class="spinner-box">
-			<div class="solar-system">
-				<div class="earth-orbit orbit">
-					<div class="planet earth"></div>
-					<div class="venus-orbit orbit">
-						<div class="planet venus"></div>
-							<div class="mercury-orbit orbit">
-								<div class="planet mercury"></div>
-							<div class="sun"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>`,
-
+	let spinner =
 		`<!-- Three Quarter Spinner -->
 		<div class="spinner-box">
 		  	<div class="three-quarter-spinner"></div>
-		</div>`,
-	]
+		</div>`
+
 
 
 	if (!document.getElementById('loadingOverlay')) {
 		var loadScreen = document.createElement("div")
 		loadScreen.id = 'loadingOverlay'
-		loadScreen.innerHTML = loadScreens[Math.floor(Math.random() * loadScreens.length)]
+		loadScreen.innerHTML = spinner
 		document.body.appendChild(loadScreen)
 	}
 }

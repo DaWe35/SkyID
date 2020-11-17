@@ -19,8 +19,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-	<meta name="author" content="Creative Tim">
+	<meta name="description" content="SkyID Dashboard">
+	<meta name="author" content="DaWe35">
 	<title>SkyID</title>
 	<!-- Favicon -->
 	<link rel="icon" href="assets/img/brand/SkyID_Logo_128.png" type="image/png">
@@ -36,12 +36,15 @@
 
 <body class="bg-dark">
 	<!-- Sidenav -->
-	<nav class="sidenav navbar navbar-vertical    fixed-left    navbar-expand-xs navbar-light bg-darkish" id="sidenav-main">
+	<nav class="sidenav navbar navbar-vertical    fixed-left    navbar-expand-xs navbar-light bg-darkish"
+		id="sidenav-main">
 		<div class="scrollbar-inner">
 			<!-- Brand -->
 			<div class="sidenav-header    align-items-center">
 				<a class="navbar-brand" href="#blog" onmousedown="loadPage('#blog')">
-					<img src="assets/img/brand/SkyID_Logo_128_white.png" style="filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);" class="navbar-brand-img" alt="...">
+					<img src="assets/img/brand/SkyID_Logo_128_white.png"
+						style="filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);"
+						class="navbar-brand-img" alt="...">
 					<span class="ml-1 text-skygreenish">SkyID</span>
 				</a>
 			</div>
@@ -84,7 +87,9 @@
 					<!-- Navigation -->
 					<ul class="navbar-nav mb-md-3">
 						<li class="nav-item">
-							<a class="nav-link" href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
+							<a class="nav-link"
+								href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3"
+								target="_blank">
 								<i class="ni ni-collection text-light"></i>
 								<span class="nav-link-text text-light">Learn</span>
 							</a>
@@ -116,7 +121,8 @@
 					<ul class="navbar-nav align-items-center ml-md-auto ml-auto">
 						<li class="nav-item d-lg-none">
 							<!-- Sidenav toggler -->
-							<div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+							<div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+								data-target="#sidenav-main">
 								<div class="sidenav-toggler-inner">
 									<i class="sidenav-toggler-line"></i>
 									<i class="sidenav-toggler-line"></i>
@@ -206,7 +212,8 @@
 					</ul>
 					<ul class="navbar-nav align-items-center ml-0">
 						<li class="nav-item dropdown">
-							<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">
 								<div class="media align-items-center">
 									<i class="ni ni-circle-08 text-secondary"></i>
 									<!-- <span class="avatar avatar-sm rounded-circle">
@@ -230,7 +237,8 @@
 									<span>Settings</span>
 								</a> -->
 								<div class="dropdown-divider"></div>
-								<a href="javascript: skyid.sessionDestroy('index.html');" class="dropdown-item text-dropdown">
+								<a href="javascript: skyid.sessionDestroy('index.html');"
+									class="dropdown-item text-dropdown">
 									<i class="ni ni-user-run"></i>
 									<span>Logout</span>
 								</a>
@@ -244,7 +252,8 @@
 		<!-- Header -->
 		<div class="header bg-darkish pb-6">
 			<div class="separator separator-bottom separator-skew zindex-100">
-				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+					xmlns="http://www.w3.org/2000/svg">
 					<polygon class="fill-dark" points="2560 0 2560 100 0 100"></polygon>
 				</svg>
 			</div>
@@ -291,7 +300,7 @@
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 	<script>
 		if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
-			var skyid = new SkyID('SkyID', false, {'devMode': true, 'customSkyidUrl': 'http://idtest.local'})
+			var skyid = new SkyID('SkyID', false, { 'devMode': true, 'customSkyidUrl': 'http://idtest.local' })
 		} else {
 			var skyid = new SkyID('SkyID')
 		}
@@ -314,7 +323,7 @@
 
 	<script>
 
-		window.addEventListener("hashchange", function(){
+		window.addEventListener("hashchange", function () {
 			loadPage(window.location.hash)
 		})
 
@@ -697,7 +706,7 @@
 									<h3 class="mb-0 text-secondary">Edit profile</h3>
 								</div>
 								<div class="col-4 text-right">
-									<a title="Click me, the other save button is ugly" href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
+									<a id="btn1" title="Click me, the other save button is ugly" href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
 								</div>
 							</div>
 						</div>
@@ -719,7 +728,7 @@
 										<div class="col-lg-10">
 											<div class="form-group">
 												<label class="form-control-label text-light" for="profilePicture">Profile picture</label>
-												
+
 												<div class="profilePictureInput">
 													<a href="#" id="profPictLink" target="_blank">
 														<img id="profilePictureImg" src="" alt="">
@@ -750,13 +759,13 @@
 								<!-- <hr class="my-4" /> -->
 								<!-- Description -->
 								<!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
-								
+
 							</form>
 						</div>
 						<div class="card-footer bg-grayish">
 							<div class="row align-items-center">
 								<div class="col-12 text-right">
-									<a title="Click me, I'm more green. You know what I mean? Greeeeen hmmm." href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
+									<a id="btn2" title="Click me, I'm more green. You know what I mean? Greeeeen hmmm." href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
 								</div>
 							</div>
 						</div>
@@ -811,7 +820,7 @@
 			var table = document.getElementById('dappsTable')
 
 			// fetch file
-			skyid.getFile('profile', function(response, revision) {
+			skyid.getFile('profile', function (response, revision) {
 				if (response == '') { // file not found
 					table.innerHTML = ''
 				} else { // success
@@ -837,10 +846,10 @@
 									</a>
 								</th>
 								<td class="budget"> ` +
-									dataRow.url + `
+							dataRow.url + `
 								</td>
 								<td class="budget"> ` +
-									dataRow.publicKey + `
+							dataRow.publicKey + `
 								</td>
 								<td class="text-right">
 									<div class="dropdown">
@@ -876,7 +885,7 @@
 			var profPictLink = document.getElementById('profPictLink')
 
 			// fetch file
-			skyid.getFile('profile', function(response, revision) {
+			skyid.getFile('profile', function (response, revision) {
 				if (response == '') { // file not found
 					alert('Profile not found, please check your connection and retry')
 				} else { // success
@@ -926,11 +935,11 @@
 					profilePicture.push(compressedFile)
 				} catch (error) {
 					console.log(error)
-						alert('Failed to compress profile picture (size:', sizes[i], 'px')
+					alert('Failed to compress profile picture (size:', sizes[i], 'px')
 				}
 			}
 			console.log('profilePicture', profilePicture)
-			skyid.uploadDirectory(profilePicture, function(skylink) {
+			skyid.uploadDirectory(profilePicture, function (skylink) {
 				if (skylink.startsWith('sia:')) {
 					var skyfile = skylink.substring(4)
 				} else {
@@ -943,7 +952,8 @@
 
 
 		function saveProfile() {
-			if (document.getElementById("profilePicture").files.length == 0){
+
+			if (document.getElementById("profilePicture").files.length == 0) {
 				saveProfileJson()
 			} else {
 				var profilePictureSkylink = handleImageUpload(saveProfileJson);
@@ -951,11 +961,12 @@
 		}
 
 		function saveProfileJson(profilePicture = false) {
+
 			let username = document.getElementById('profileUsername').value
 			let aboutMe = document.getElementById('profileAboutMe').value
 			let location = document.getElementById('profileLocation').value
 
-			skyid.getFile('profile', function(response, revision) {
+			skyid.getFile('profile', function (response, revision) {
 				if (response == '') { // file not found
 					alert('Error: unable to fetch your profile')
 					console.log('Error: unable to fetch your profile')
@@ -969,9 +980,10 @@
 					}
 					// set file
 					let jsonProfile = JSON.stringify(profileObj)
-					skyid.setFile('profile', jsonProfile, function(success) {
+					skyid.setFile('profile', jsonProfile, function (success) {
 						if (!success) {
 							alert('Error: unable to save profile')
+
 						}
 						if (profilePicture != false) {
 							let profilePictureImg = document.getElementById('profilePictureImg')
