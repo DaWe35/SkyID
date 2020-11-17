@@ -1,6 +1,6 @@
 # SkyID
 
-Global frontend-only verification system for web3 dapps
+Global frontend-only verification system for web3 dapps.
 
 #### SkyID: https://sky-id.hns.siasky.net/
 
