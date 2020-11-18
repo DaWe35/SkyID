@@ -3417,13 +3417,10 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
 
 .dropdown-item:hover, .dropdown-item:focus {
     text-decoration: none;
-    color: #16181b;
-    background-color: #f6f9fc;
 }
 
 .dropdown-item.active, .dropdown-item:active {
     text-decoration: none;
-    color: #16181b;
     background-color: transparent;
 }
 
@@ -22140,7 +22137,7 @@ a.text-darkish:hover, a.text-darkish:focus {
 }
 
 a.text-dropdown:hover, a.text-dropdown:focus {
-    color: black !important;
+    color: rgba(255, 255, 255, .65) !important;
 }
 
 .text-grayish {

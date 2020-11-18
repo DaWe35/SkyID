@@ -237,7 +237,7 @@ window.SkyID = class SkyID {
 		  console.log(error)
 		  var skylink = false
 		}
-		
+
 		hideOverlay(this.opts)
 		callback(skylink)
 	}
@@ -251,7 +251,7 @@ window.SkyID = class SkyID {
 		} catch (error) {
 			console.log(error);
 		}
-		
+
 		hideOverlay(this.opts)
 		callback(skylink)
 	}
@@ -272,11 +272,11 @@ window.SkyID = class SkyID {
 	hideOverlay() {
 		hideOverlay(this.opts)
 	}
-	
+
 	/*
 
 	Functions below are only for sky-id.hns.siasky.net ;)
-	
+
 	*/
 
 	setAccount(appData) {
