@@ -399,9 +399,9 @@
     function singIn() {
       let mnemonic = $('#loginInput').val()
       if ($('#rememberMe').is(':checked')) {
-        var days = 30
+        var rememberMe = true
       } else {
-        var days = 0
+        var rememberMe = false
       }
 
       skyid.setMnemonic(mnemonic, function (success) {
@@ -418,7 +418,7 @@
         } else {
           alert('Your passphrase is invalid')
         }
-      }, days, true)
+      }, rememberMe, true)
     }
 
 

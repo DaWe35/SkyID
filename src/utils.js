@@ -2,41 +2,32 @@ import base32Encode from "base32-encode"
 import base64 from "base64-js"
 import Url from "url-parse"
 
-export function setCookie(values, exdays) {
-	let cvalue = JSON.stringify(values)
-	if (exdays == 0) {
-		var expires = 0
-	} else {
-		var d = new Date()
-		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
-		var expires = "expires=" + d.toUTCString()
+export function setCookie(values, rememberMe = false) {
+	if (typeof(Storage) == 'undefined') {
+		alert('Unable to securely save your passphrase, your browser not supports web storage')
+		return
 	}
-	document.cookie = "skyid=" + cvalue + ";" + expires + ";path=/"
+	let cvalue = JSON.stringify(values)
+
+	if (rememberMe == true) {
+		localStorage.setItem('skyid', cvalue)
+	} else {
+		sessionStorage.setItem('skyid', cvalue)
+	}
 }
 
 export function delCookie() {
-	document.cookie = "skyid=;0;path=/"
+	localStorage.removeItem("skyid")
+	sessionStorage.removeItem("skyid")
 }
 
 export function getCookie() {
-	var name = "skyid="
-	var decodedCookie = decodeURIComponent(document.cookie)
-	var ca = decodedCookie.split(';')
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i]
-		while (c.charAt(0) == ' ') {
-			c = c.substring(1)
-		}
-		if (c.indexOf(name) == 0) {
-			let cstring = c.substring(name.length, c.length)
-			try {
-				return JSON.parse(cstring)
-			} catch {
-				delCookie()
-			}
-		}
+	let cstring = localStorage.getItem("skyid") || sessionStorage.getItem("skyid")
+	if (cstring != null) {
+		return JSON.parse(cstring)
+	} else {
+		return false
 	}
-	return false
 }
 
 export function toHexString(byteArray) {

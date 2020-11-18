@@ -9,6 +9,10 @@ global.Buffer = global.Buffer || require('buffer').Buffer
 
 window.SkyID = class SkyID {
 	constructor(appId, callback = null, opts = null) {
+		// delete skyid cookie if set
+		document.cookie = "skyid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+
 		this.callback = callback
 		this.appId = appId
 		this.opts = opts
@@ -31,6 +35,7 @@ window.SkyID = class SkyID {
 			this.skynetClient = new SkynetClient()
 		}
 		let cookie = getCookie()
+		console.log(cookie)
 		this.setAccount(cookie)
 
 		window.addEventListener("message", (event) => {
@@ -134,6 +139,7 @@ window.SkyID = class SkyID {
 
 	async setJSON(dataKey, json, callback) {
 		showOverlay(this.opts)
+		console.log('t.seed',this.seed)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
@@ -287,7 +293,7 @@ window.SkyID = class SkyID {
 	
 	/*
 
-	Functions below are only for sky-id.hns.siasky.net ;)
+	Functions below are only for sky-id.hns.skyportal.xyz ;)
 	
 	*/
 
@@ -305,18 +311,21 @@ window.SkyID = class SkyID {
 		return true
 	}
 
-	setMnemonic(mnemonic, callback, days = 0, checkMnemonic = false) {
+	setMnemonic(mnemonic, callback, rememberMe = false, checkMnemonic = false) {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
 		if (mnemonicBytes.length != 32) {
+			console.log('Wrong mnemonic length:', mnemonicBytes.length)
 			callback(false)
 			return
 		}
 
 		let seed = toHexString(mnemonicBytes)
-		setCookie({ "seed": seed }, days)
+		setCookie({ "seed": seed }, rememberMe)
+		console.log('setCookie', seed)
 
-		if (checkMnemonic && this.setAccount({ "seed": seed }, days)) {
+		if (checkMnemonic && this.setAccount({ "seed": seed })) {
 			var self = this
+			console.log('self', self)
 			skyid.getJSON('profile', function (response, revision) {
 				if (response == '') { // file not found
 					self.sessionDestroy()
@@ -326,7 +335,7 @@ window.SkyID = class SkyID {
 				}
 			})
 		} else {
-			callback(this.setAccount({ "seed": seed }, days))
+			callback(this.setAccount({ "seed": seed }))
 		}
 	}
 
