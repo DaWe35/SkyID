@@ -35,7 +35,6 @@ window.SkyID = class SkyID {
 			this.skynetClient = new SkynetClient()
 		}
 		let cookie = getCookie()
-		console.log(cookie)
 		this.setAccount(cookie)
 
 		window.addEventListener("message", (event) => {
@@ -139,7 +138,6 @@ window.SkyID = class SkyID {
 
 	async setJSON(dataKey, json, callback) {
 		showOverlay(this.opts)
-		console.log('t.seed',this.seed)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
 			await this.skynetClient.db.setJSON(privateKey, dataKey, json)
@@ -321,11 +319,9 @@ window.SkyID = class SkyID {
 
 		let seed = toHexString(mnemonicBytes)
 		setCookie({ "seed": seed }, rememberMe)
-		console.log('setCookie', seed)
 
 		if (checkMnemonic && this.setAccount({ "seed": seed })) {
 			var self = this
-			console.log('self', self)
 			skyid.getJSON('profile', function (response, revision) {
 				if (response == '') { // file not found
 					self.sessionDestroy()

@@ -2,7 +2,7 @@
 
 #### 2020. 11. 18.
 
-Currently portal owners can read your private keys. While we already need to trust portal owners (in theory they can inject code to any file), and while I think we can trust the two portals what are used nowadays, it means SkyID seeds can be compromised. We will roll out an update today... ([Issue](https://github.com/DaWe35/SkyID/issues/25))
+Before 1.3.4, portals were able to read private keys because it was stored in a cookie and was sent to portals in headers. While we already need to trust portal owners (in theory they can inject code to any file), it means SkyID seeds may have been compromised. We fixed this and changed cookies to [Web Storage](https://www.w3schools.com/html/html5_webstorage.asp) ([Issue](https://github.com/DaWe35/SkyID/issues/25))
 
 There is another [bug](https://github.com/DaWe35/SkyID/issues/28), currently users won't receive addigional notification if dapp1 wants to access dapp2 data. We will restructure the whole process after the cookie issue.
 
