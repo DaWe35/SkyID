@@ -7,7 +7,7 @@ const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
 
-window.SkyID = class SkyID {
+export class SkyID {
 	constructor(appId, callback = null, opts = null) {
 		// delete skyid cookie if set
 		document.cookie = "skyid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
