@@ -1,3 +1,4 @@
 import { SkyID } from '../skyid'
 
-module.exports = SkyID
+export { SkyID }
+export default SkyID
