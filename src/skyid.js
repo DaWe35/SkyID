@@ -7,8 +7,12 @@ const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
 
-window.SkyID = class SkyID {
+export class SkyID {
 	constructor(appId, callback = null, opts = null) {
+		// delete skyid cookie if set
+		document.cookie = "skyid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+
 		this.callback = callback
 		this.appId = appId
 		this.opts = opts
@@ -287,7 +291,7 @@ window.SkyID = class SkyID {
 
 	/*
 
-	Functions below are only for sky-id.hns.siasky.net ;)
+	Functions below are only for sky-id.hns.skyportal.xyz ;)
 
 	*/
 
@@ -305,17 +309,18 @@ window.SkyID = class SkyID {
 		return true
 	}
 
-	setMnemonic(mnemonic, callback, days = 0, checkMnemonic = false) {
+	setMnemonic(mnemonic, callback, rememberMe = false, checkMnemonic = false) {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
 		if (mnemonicBytes.length != 32) {
+			console.log('Wrong mnemonic length:', mnemonicBytes.length)
 			callback(false)
 			return
 		}
 
 		let seed = toHexString(mnemonicBytes)
-		setCookie({ "seed": seed }, days)
+		setCookie({ "seed": seed }, rememberMe)
 
-		if (checkMnemonic && this.setAccount({ "seed": seed }, days)) {
+		if (checkMnemonic && this.setAccount({ "seed": seed })) {
 			var self = this
 			skyid.getJSON('profile', function (response, revision) {
 				if (response == '') { // file not found
@@ -326,7 +331,7 @@ window.SkyID = class SkyID {
 				}
 			})
 		} else {
-			callback(this.setAccount({ "seed": seed }, days))
+			callback(this.setAccount({ "seed": seed }))
 		}
 	}
 

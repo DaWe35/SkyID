@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="SkyID - sign in">
   <meta name="author" content="DaWe35">
-  <title>SkyID 1.3.3</title>
+  <title>SkyID 1.3.4</title>
   <!-- Favicon -->
   <link rel="icon" href="assets/img/brand/SkyID_Logo_128_white.png" type="image/png">
   <!-- Fonts -->
@@ -399,9 +399,9 @@
     function singIn() {
       let mnemonic = $('#loginInput').val()
       if ($('#rememberMe').is(':checked')) {
-        var days = 30
+        var rememberMe = true
       } else {
-        var days = 0
+        var rememberMe = false
       }
 
       skyid.setMnemonic(mnemonic, function (success) {
@@ -418,7 +418,7 @@
         } else {
           alert('Your passphrase is invalid')
         }
-      }, days, true)
+      }, rememberMe, true)
     }
 
 

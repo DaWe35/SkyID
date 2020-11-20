@@ -3,7 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	entry: {
-		skyid: '/src/skyid.js',
+		skyid: '/src/export/browser.js',
 		test: '/src/test.js',
 		connect: '/src/connect.js'
 	},

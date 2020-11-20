@@ -6,12 +6,14 @@ Global frontend-only verification system for web3 dapps.
 
 #### Demo dapp using SkyID login: https://sky-note.hns.siasky.net/
 
+Read security logs in [CHANGELOG.md](https://github.com/DaWe35/SkyID/blob/main/CHANGELOG.md)
+
 ## Getting started
 
 ### Install
 
 ``` html
-<script src="https://sky-id.hns.siasky.net/skyid.js"></script>
+<script src="/hns/sky-id/skyid.js"></script>
 ```
 
 ### Initialize
@@ -181,19 +183,6 @@ skyid.downloadEncryptedFile(skylink, 'derivationPath', function(blobUrl){
 	console.log('File downloaded', blobUrl)
 })
 ```
-
-___
-
-## Todo
-
-- Verify app-domain and warn users if app1 wants to access app2 data
-
-- File encryption & decryption
-
-- Sky-ID central, Twitter login, HNS ownership verify
-
-- Allow multi-account login for dapps, for example `var domain = new SkyIDDomain('app-name')` with `sessionStartAll()`
-
 ___
 
 RFC: https://forum.sia.tech/t/discussion-about-sky-id/64
