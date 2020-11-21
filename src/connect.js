@@ -1,11 +1,10 @@
-import { genKeyPairFromSeed } from "skynet-js";
-
 window.SkyidConnect = class SkyidConnect {
 
-	constructor(opts = null, embedded = false) {
+	constructor(opts = null) {
+		this.skyid = new SkyID('SkyID', null, opts)
+
 		const urlParams = new URLSearchParams(window.location.search)
 		this.appId = urlParams.get('appId')
-		this.skyid = new SkyID('SkyID', null, opts)
 
 		// if login needed to SkyID master account
 		if (typeof this.skyid.seed == 'undefined' || this.skyid.seed == '') {
@@ -22,8 +21,6 @@ window.SkyidConnect = class SkyidConnect {
 			}, false)
 
 		}
-
-		if (embedded === true) return;
 
 		if (typeof this.appId == 'undefined' || this.appId == null || this.appId == '') {
 			this.showAlert('Misconfigured dapp - appId is empty', 'error')
@@ -59,27 +56,14 @@ window.SkyidConnect = class SkyidConnect {
 			window.opener.postMessage({ 'sender': 'skyid', 'eventCode': 'login_fail', 'seed': false }, "*")
 			window.close()
 		} else if (grantAccess === true) {
-			var payload = this.makeLoginSuccessPayload();
+			var { postMessage, publicAppData } = this.skyid.makeLoginSuccessPayload(this.appId, document.referrer);
 
 			this.addDapp(this.appId, publicAppData, function () {
-				window.opener.postMessage(payload, "*")
+				window.opener.postMessage(postMessage, "*")
 				window.close()
 			})
 		}
 
-	}
-
-	makeLoginSuccessPayload() {
-		var appSeed = this.skyid.deriveChildSeed(this.appId)
-		// generate private app data
-		const masterKeys = genKeyPairFromSeed(this.skyid.seed)
-		let appData = { 'seed': appSeed, 'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
-
-		// generate public app data
-		const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
-		let publicAppData = { 'url': document.referrer, 'publicKey': publicKey, 'img': null }
-
-		return { 'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData };
 	}
 
 	showAlert(text, type) {

@@ -303,7 +303,6 @@
 	<!-- Core -->
 
 	<script src="skyid.js"></script>
-	<script src="connect.js"></script>
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 	<script>
 		if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
@@ -1029,16 +1028,9 @@
 		}
 
 		function updateQRCode() {
-			var input = document.getElementById('qr-app');
-
-			var skyidConnect = new SkyidConnect({}, true);
-
-			skyidConnect.appId = input.value;
-
-			var payload = skyidConnect.makeLoginSuccessPayload();
-
-
-			qrCode.makeCode(JSON.stringify(payload.appData)); // make another code.
+			let input = document.getElementById('qr-app');
+			var { postMessage, publicAppData } = skyid.makeLoginSuccessPayload(input.value, 'QR login');
+			qrCode.makeCode(JSON.stringify(postMessage)); // make another code.
 		}
 
 	</script>

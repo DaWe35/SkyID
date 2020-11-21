@@ -344,4 +344,18 @@ export class SkyID {
 			return mnemonic
 		}
 	}
+
+	makeLoginSuccessPayload(appId, referrer) {
+		var appSeed = this.deriveChildSeed(appId)
+		// generate private app data
+		const masterKeys = genKeyPairFromSeed(this.seed)
+		let appData = { 'seed': appSeed, 'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
+
+		// generate public app data
+		const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
+		let publicAppData = { 'url': referrer, 'publicKey': publicKey, 'img': null }
+		let postMessage = { 'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData }
+
+		return { 'postMessage': postMessage, 'publicAppData': publicAppData }
+	}
 }
