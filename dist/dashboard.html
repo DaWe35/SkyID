@@ -72,6 +72,12 @@
 							</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link text-secondary" href="#qr-login" onmousedown="loadPage('#qr-login')">
+								<i class="ni ni-app text-skygreenish"></i>
+								<span class="nav-link-text">QR-Code login</span>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link text-muted cursor-default" href="javascript:alert('soooooon')">
 								<i class="ni ni-chart-bar-32 text-muted"></i>
 								<span class="nav-link-text">Users</span>
@@ -297,6 +303,7 @@
 	<!-- Core -->
 
 	<script src="skyid.js"></script>
+	<script src="connect.js"></script>
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 	<script>
 		if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
@@ -320,6 +327,8 @@
 	<!-- Argon JS -->
 	<script src="assets/js/argon.js?v=1.2.0"></script>
 	<script type="text/javascript" src="assets/js/browser-image-compression.js"></script>
+	<!-- qrcode.js -->
+	<script src="assets/js/qrcode.min.js"></script>
 
 	<script>
 
@@ -329,6 +338,7 @@
 
 		loadPage(window.location.hash || '#blog')
 
+		var qrCode;
 
 		var currentpage = window.location.hash
 		function loadPage(page) {
@@ -364,6 +374,16 @@
 								</tbody>
 							</table>
 						</div>
+					</div>`
+			} else if (page == "#qr-login") {
+				var content = `<div class="card bg-grayish">
+						<!-- Card header -->
+						<div class="card-header border-0 bg-grayish">
+							<h3 class="mb-0 text-white">Login with QR-Code</h3>
+						</div>
+						<input type="text" id="qr-app" placeholder="Enter Skapp name..." oninput="updateQRCode()">
+						<div id="qrcode" style="padding: 16px; background-color: white"></div>
+
 					</div>`
 			} else if (page == "#stats") {
 				content = `<div class="row">
@@ -813,6 +833,16 @@
 				fetchProfile()
 			} else if (page == '#dapps') {
 				fetchDapps()
+			} else if (page == '#qr-login') {
+				qrCode =
+					new QRCode(document.getElementById("qrcode"), {
+						text: "",
+						correctLevel: QRCode.CorrectLevel.L
+					});
+
+				document.getElementById('qr-app').focus();
+
+
 			}
 		}
 
@@ -997,6 +1027,20 @@
 				}
 			})
 		}
+
+		function updateQRCode() {
+			var input = document.getElementById('qr-app');
+
+			var skyidConnect = new SkyidConnect({}, true);
+
+			skyidConnect.appId = input.value;
+
+			var payload = skyidConnect.makeLoginSuccessPayload();
+
+
+			qrCode.makeCode(JSON.stringify(payload.appData)); // make another code.
+		}
+
 	</script>
 </body>
 
