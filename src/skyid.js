@@ -17,11 +17,13 @@ export class SkyID {
 		this.appId = appId
 		this.opts = opts
 
-		// delete
+		let cookie = getCookie()
+		this.setAccount(cookie)
+
 
 		if (isOptionTrue('devMode', this.opts)) {
 			console.log('devMode on, using https://siasky.net')
-			this.skynetClient = new SkynetClient('https://siasky.net')
+			this.skynetClient = new SkynetClient('https://siasky.net', this.opts)
 			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
 					DevMode is on -
@@ -32,10 +34,8 @@ export class SkyID {
 			document.body.appendChild(div.firstChild)
 		} else {
 			console.log('devMode off, using auto portal')
-			this.skynetClient = new SkynetClient()
+			this.skynetClient = new SkynetClient('', this.opts)
 		}
-		let cookie = getCookie()
-		this.setAccount(cookie)
 
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
