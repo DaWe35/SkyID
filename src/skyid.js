@@ -264,9 +264,8 @@ export class SkyID {
 		fetchFile(fileUrl, 'Marstorage', function (file) {
 			let encryptSeed = self.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
 			decryptFile(file, encryptSeed, function(decryptedFileBlobUrl) {
-				console.log('decryptedFileBlobUrl', decryptedFileBlobUrl)
 				hideOverlay(self.opts)
-				callback(decryptedFile)
+				callback(decryptedFileBlobUrl)
 			})
 		})
 		
