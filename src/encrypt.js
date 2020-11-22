@@ -125,8 +125,48 @@ export async function encryptFile(file, encryptSeed, callback) {
 
 
 
-export function fetchFile(url, filename, callback) {
-	fetch(url)
+export async function fetchFile(url, filename, callback, progresscb = false) {
+	let response = await fetch(url);
+
+	const reader = response.body.getReader();
+	
+	// Step 2: get total length
+	const contentLength = + response.headers.get('Content-Length');
+	
+	// Step 3: read the data
+	let receivedLength = 0; // received that many bytes at the moment
+	let chunks = []; // array of received binary chunks (comprises the body)
+	while(true) {
+		const {done, value} = await reader.read();
+		
+		if (done) {
+			break;
+		}
+		
+		chunks.push(value);
+		receivedLength += value.length;
+		
+		if (progresscb !== false) {
+			progresscb(receivedLength/contentLength)
+		}
+	}
+	
+	// Step 4: concatenate chunks into single Uint8Array
+	let chunksAll = new Uint8Array(receivedLength); // (4.1)
+	let position = 0;
+	for(let chunk of chunks) {
+		chunksAll.set(chunk, position); // (4.2)
+		position += chunk.length;
+	}
+
+	var file = new File([chunksAll], filename)
+	console.log('file',file)
+	callback(file)
+
+
+
+	  
+	/* fetch(url)
 	.then(resp => resp.blob())
 	.then(blob => {
 		var file = new File([blob], filename)
@@ -134,7 +174,7 @@ export function fetchFile(url, filename, callback) {
 	})
 	.catch(
 		() => callback(false)
-	);
+	); */
 }
 
 

@@ -58,6 +58,7 @@ function skyidEventCallback(message) {
 | devMode              | false   |
 | disableLoadingScreen | false   |
 | customSkyidUrl       | null    |
+| onUploadProgress     | null    |
 
 ### Start session (login)
 
@@ -176,6 +177,8 @@ skyid.uploadEncryptedFile(file, 'derivationPath', function(skylink) {
 
 *derivationPath can be any string. It will be hashed with the user's app-seed, no need to make it long since the app-seed is not public. It is recommended to use unique derivationPath to each file, so users can share decription keys for one file without revealing the other files*
 
+*You can put a callback function to the `onUploadProgress` option both for upload and download.*
+
 ### Download encrypted file
 ``` javascript
 let skylink = 'sia:/...'
@@ -208,12 +211,10 @@ Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
 
 `npm install`
 
-Download https://siasky.net/BABkHGic4pnWzzJWvh5ifB2BfPdcdBQ71jHhFdEm6GncqQ and extract to node_modules
-
 #### Compiling Javascript
 You need to compile your node-js files (from the `src` folder) to a web-browser friendly javascript. Type
 
-`nxp webpack`
+`npx webpack`
 
 You'll see 3 new .js file in the `dist` folder. If you want to edit javascript, you can make changes inside the `src` folder and run `npx webpack` again. (Of course you can use `npx webpack --watch` so it will watch and compile automatically if you change something.
 

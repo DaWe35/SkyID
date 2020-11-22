@@ -72,6 +72,12 @@
 							</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link text-secondary" href="#qr-login" onmousedown="loadPage('#qr-login')">
+								<i class="ni ni-app text-skygreenish"></i>
+								<span class="nav-link-text">QR-Code login</span>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link text-muted cursor-default" href="javascript:alert('soooooon')">
 								<i class="ni ni-chart-bar-32 text-muted"></i>
 								<span class="nav-link-text">Users</span>
@@ -320,6 +326,8 @@
 	<!-- Argon JS -->
 	<script src="assets/js/argon.js?v=1.2.0"></script>
 	<script type="text/javascript" src="assets/js/browser-image-compression.js"></script>
+	<!-- qrcode.js -->
+	<script src="assets/js/qrcode.min.js"></script>
 
 	<script>
 
@@ -329,6 +337,7 @@
 
 		loadPage(window.location.hash || '#blog')
 
+		var qrCode;
 
 		var currentpage = window.location.hash
 		function loadPage(page) {
@@ -364,6 +373,16 @@
 								</tbody>
 							</table>
 						</div>
+					</div>`
+			} else if (page == "#qr-login") {
+				var content = `<div class="card bg-grayish">
+						<!-- Card header -->
+						<div class="card-header border-0 bg-grayish">
+							<h3 class="mb-0 text-white">Login with QR-Code</h3>
+						</div>
+						<input type="text" id="qr-app" placeholder="Enter Skapp name..." oninput="updateQRCode()">
+						<div id="qrcode" style="padding: 16px; background-color: white"></div>
+
 					</div>`
 			} else if (page == "#stats") {
 				content = `<div class="row">
@@ -812,6 +831,16 @@
 				fetchProfile()
 			} else if (page == '#dapps') {
 				fetchDapps()
+			} else if (page == '#qr-login') {
+				qrCode =
+					new QRCode(document.getElementById("qrcode"), {
+						text: "",
+						correctLevel: QRCode.CorrectLevel.L
+					});
+
+				document.getElementById('qr-app').focus();
+
+
 			}
 		}
 
@@ -895,7 +924,7 @@
 					console.log('Profile data:', respObs)
 					if (typeof respObs.avatar != 'undefined') {
 						profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
-						profPictLink.href = getProfPictUrl(respObs.profilePicture, 1920)
+						profPictLink.href = getProfPictUrl(respObs.avatar, 1920)
 					}
 					else {
 						profilePictureImg.src = "https://avatars.dicebear.com/api/male/dawe.svg"
@@ -1019,6 +1048,12 @@
 					})
 				}
 			})
+		}
+
+		function updateQRCode() {
+			let input = document.getElementById('qr-app');
+			var { postMessage, publicAppData } = skyid.makeLoginSuccessPayload(input.value, 'QR login');
+			qrCode.makeCode(JSON.stringify(postMessage)); // make another code.
 		}
 
 	</script>

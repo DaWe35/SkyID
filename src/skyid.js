@@ -17,11 +17,13 @@ export class SkyID {
 		this.appId = appId
 		this.opts = opts
 
-		// delete
+		let cookie = getCookie()
+		this.setAccount(cookie)
+
 
 		if (isOptionTrue('devMode', this.opts)) {
 			console.log('devMode on, using https://siasky.net')
-			this.skynetClient = new SkynetClient('https://siasky.net')
+			this.skynetClient = new SkynetClient('https://siasky.net', this.opts)
 			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
 					DevMode is on -
@@ -32,10 +34,8 @@ export class SkyID {
 			document.body.appendChild(div.firstChild)
 		} else {
 			console.log('devMode off, using auto portal')
-			this.skynetClient = new SkynetClient()
+			this.skynetClient = new SkynetClient('', this.opts)
 		}
-		let cookie = getCookie()
-		this.setAccount(cookie)
 
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
@@ -264,10 +264,13 @@ export class SkyID {
 		fetchFile(fileUrl, 'Marstorage', function (file) {
 			let encryptSeed = self.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
 			decryptFile(file, encryptSeed, function(decryptedFileBlobUrl) {
-				console.log('decryptedFileBlobUrl', decryptedFileBlobUrl)
 				hideOverlay(self.opts)
-				callback(decryptedFile)
+				callback(decryptedFileBlobUrl)
 			})
+		}, function(progress) {
+			if (isOptionSet('onUploadProgress', self.opts)) {
+				self.opts.onUploadProgress(progress)
+			}
 		})
 
 	}
@@ -343,5 +346,19 @@ export class SkyID {
 			let mnemonic = sia.mnemonics.bytesToMnemonic(rendomData)
 			return mnemonic
 		}
+	}
+
+	makeLoginSuccessPayload(appId, referrer) {
+		var appSeed = this.deriveChildSeed(appId)
+		// generate private app data
+		const masterKeys = genKeyPairFromSeed(this.seed)
+		let appData = { 'seed': appSeed, 'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
+
+		// generate public app data
+		const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
+		let publicAppData = { 'url': referrer, 'publicKey': publicKey, 'img': null }
+		let postMessage = { 'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData }
+
+		return { 'postMessage': postMessage, 'publicAppData': publicAppData }
 	}
 }
