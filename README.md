@@ -58,6 +58,7 @@ function skyidEventCallback(message) {
 | devMode              | false   |
 | disableLoadingScreen | false   |
 | customSkyidUrl       | null    |
+| onUploadProgress     | null    |
 
 ### Start session (login)
 
@@ -175,6 +176,8 @@ skyid.uploadEncryptedFile(file, 'derivationPath', function(skylink) {
 ```
 
 *derivationPath can be any string. It will be hashed with the user's app-seed, no need to make it long since the app-seed is not public. It is recommended to use unique derivationPath to each file, so users can share decription keys for one file without revealing the other files*
+
+*You can put a callback function to the `onUploadProgress` option both for upload and download.*
 
 ### Download encrypted file
 ``` javascript
