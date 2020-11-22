@@ -267,6 +267,10 @@ export class SkyID {
 				hideOverlay(self.opts)
 				callback(decryptedFileBlobUrl)
 			})
+		}, function(progress) {
+			if (isOptionSet('onUploadProgress', self.opts)) {
+				self.opts.onUploadProgress(progress)
+			}
 		})
 		
 	}
