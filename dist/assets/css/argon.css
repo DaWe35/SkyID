@@ -22181,12 +22181,37 @@ a.text-grayish:hover, a.text-grayish:focus {
     box-shadow: none, 0 0 0 0 rgba(45, 206, 137, .5);
 }
 
+
 .profilePictureInput img, .profilePictureInput input {
     display: inline-block;
 }
 
 .profilePictureInput input {
-    width: 50%;
+    width: 80%;
+}
+
+#profilePictureImg {
+    background-size:contain;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 2px solid rgba(45, 206, 137, .5);
+overflow: hidden;
+display: inline-block;
+height: 10vh;
+width: 10vh;
+cursor: pointer;
+}
+
+.file-upload__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 1;
+    width:0;
+    height: 100%;
+    opacity: 0;
 }
 
 #copytoclipboard:hover {

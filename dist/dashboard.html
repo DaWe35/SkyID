@@ -712,29 +712,28 @@
 						</div>
 						<div class="card-body">
 							<form>
-								<h6 class="heading-small text-secondary mb-4">Public informations</h6>
+								<h6 class="heading-small text-secondary mb-4">Public information</h6>
 								<div class="pl-lg-4">
 									<div class="row">
-										<div class="col-lg-6">
+										<div class="col-lg-10">
 											<div class="form-group">
-												<label class="form-control-label text-light" for="profileUsername">Username</label>
-												<input type="text" id="profileUsername" class="form-control text-secondary bg-dark" placeholder="Username" value="">
+												<label class="form-control-label text-light" for="profilePicture">Avatar</label>
+												<div class="profilePictureInput">
+													<a href="#" id="profPictLink" target="_blank">
+														<img id="profilePictureImg" src="" alt="">
+														<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
+														</a>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="pl-lg-4">
 									<div class="row">
-										<div class="col-lg-10">
+										<div class="col-lg-6">
 											<div class="form-group">
-												<label class="form-control-label text-light" for="profilePicture">Profile picture</label>
-
-												<div class="profilePictureInput">
-													<a href="#" id="profPictLink" target="_blank">
-														<img id="profilePictureImg" src="" alt="">
-													</a>
-													<input type="file" id="profilePicture" accept="image/*" class="form-control text-secondary bg-dark">
-												</div>
+												<label class="form-control-label text-light" for="profileUsername">Username</label>
+												<input type="text" id="profileUsername" class="form-control text-secondary bg-dark" placeholder="Username" value="">
 											</div>
 										</div>
 									</div>
@@ -898,9 +897,33 @@
 						profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
 						profPictLink.href = getProfPictUrl(respObs.profilePicture, 1920)
 					}
+					else {
+						profilePictureImg.src = "https://avatars.dicebear.com/api/male/dawe.svg"
+					}
+
 				}
 			})
 		}
+
+		//instant visual feedback when switching avatars
+		var profilePictureImg = $("#profilePictureImg"),
+			profilePicture = $("#profilePicture")
+
+
+
+		profilePicture.change(function () {
+
+			if (this.files && this.files[0]) {
+				var reader = new FileReader()
+
+				reader.onload = function (e) {
+					profilePictureImg.attr("src", e.target.result).fadeIn(300)
+				}
+
+				reader.readAsDataURL(this.files[0])
+			}
+
+		});
 
 
 		function getProfPictUrl(skyfile, size) {
@@ -997,6 +1020,7 @@
 				}
 			})
 		}
+
 	</script>
 </body>
 
