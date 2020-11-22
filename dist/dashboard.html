@@ -925,7 +925,7 @@
 					console.log('Profile data:', respObs)
 					if (typeof respObs.avatar != 'undefined') {
 						profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
-						profPictLink.href = getProfPictUrl(respObs.profilePicture, 1920)
+						profPictLink.href = getProfPictUrl(respObs.avatar, 1920)
 					}
 				}
 			})
