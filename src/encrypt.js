@@ -126,7 +126,36 @@ export async function encryptFile(file, encryptSeed, callback) {
 
 
 export function fetchFile(url, filename, callback) {
-	fetch(url)
+	fetch(url).then((response) => {
+		var reader = response.body.getReader();
+		var bytesReceived = 0;
+
+		return reader.read().then(function processResult(result) {
+			// Result objects contain two properties:
+			// done  - true if the stream has already given
+			//         you all its data.
+			// value - some data. Always undefined when
+			//         done is true.
+			if (result.done) {
+				console.log('Fetch complete');
+				let blob = response.blob()
+				var file = new File([blob], filename)
+				callback(file)
+				return;
+			}
+	  
+		  // result.value for fetch streams is a Uint8Array
+		  bytesReceived += result.value.length;
+		  console.log('Received', bytesReceived, 'bytes of data so far');
+	  
+		  return reader.read().then(processResult);
+		});
+	  });
+
+
+
+	  
+	/* fetch(url)
 	.then(resp => resp.blob())
 	.then(blob => {
 		var file = new File([blob], filename)
@@ -134,7 +163,7 @@ export function fetchFile(url, filename, callback) {
 	})
 	.catch(
 		() => callback(false)
-	);
+	); */
 }
 
 
