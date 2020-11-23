@@ -739,7 +739,7 @@
 								<div class="col-4 text-right">
 
 									<a id="edit" title="Edit profile" href="javascript: editProfile()" class="btn btn-dark">Edit</a>
-									<a id="undo" title="Undo edit" href="javascript: undoEdit()" class="btn btn-danger" style="display:none;"><i class="fas fa-undo-alt"></i> Undo</a>
+									<a id="undo" title="Undo edit" href="javascript: undoEdit()" class="btn btn-dark" style="display:none;">Undo</a>
 								</div>
 							</div>
 						</div>
@@ -848,7 +848,7 @@
 			document.getElementById('content').innerHTML = content
 			if (page == '#profile') {
 				fetchProfile(),
-					updateAvatar()
+				updateAvatar()
 			} else if (page == '#dapps') {
 				fetchDapps()
 			} else if (page == '#qr-login') {
@@ -923,7 +923,25 @@
 				}
 			})
 		}
+//instant visual feedback when switching avatars
+function updateAvatar() {
+			var profilePictureImg = $("#profilePictureImg"),
+				profilePicture = $("#profilePicture")
+			profilePicture.change(function () {
 
+				if (this.files && this.files[0]) {
+					var reader = new FileReader()
+
+					reader.onload = function (e) {
+						profilePictureImg.attr("src", e.target.result)
+					}
+
+					reader.readAsDataURL(this.files[0])
+					$('#save').show()
+				}
+
+			})
+		}
 
 		function fetchProfile() {
 			var profileUsernameDiv = document.getElementById('profileUsernameDiv')
@@ -980,7 +998,6 @@
 				try {
 					const compressedFile = await imageCompression(imageFile, options);
 					console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-
 					compressedFile.name = String(sizes[i])
 					profilePicture.push(compressedFile)
 				} catch (error) {
@@ -999,6 +1016,7 @@
 				callback(skyfile)
 			})
 		}
+
 
 
 		function saveProfile() {
@@ -1020,7 +1038,7 @@
 				$(this).html(content)
 				$(this).contents().unwrap()
 			})
-			$('textarea').each(function () {
+			$('#profileAboutMe').each(function () {
 				var content = $(this).val()//.replace(/\n/g,"<br>")
 				$(this).html(content)
 				$(this).contents().unwrap()
@@ -1084,25 +1102,6 @@
 			qrCode.makeCode(JSON.stringify(postMessage)); // make another code.
 		}
 
-		//instant visual feedback when switching avatars
-		function updateAvatar() {
-			var profilePictureImg = $("#profilePictureImg"),
-				profilePicture = $("#profilePicture")
-			profilePicture.change(function () {
-
-				if (this.files && this.files[0]) {
-					var reader = new FileReader()
-
-					reader.onload = function (e) {
-						profilePictureImg.attr("src", e.target.result).fadeIn(300)
-					}
-
-					reader.readAsDataURL(this.files[0])
-					$('#save').show()
-				}
-
-			})
-		}
 		function editProfile() {
 
 			$('#edit').hide()
