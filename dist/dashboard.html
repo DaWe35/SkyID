@@ -674,8 +674,8 @@
 				</div>
 			</div>`
 			} else if (page == '#profile') {
-				var content = `<div class="row">
-				<!-- <div class="col-lg-4 order-xl-2">
+				var content = `<div class="row-auto d-flex justify-content-center align-items-center">
+					<!--<div class="col-lg-4 order-xl-2">
 					<div class="card card-profile">
 						<img src="assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
 						<div class="row justify-content-center">
@@ -727,30 +727,30 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div> -->
-				<div class="col-lg-2 order-xl-1">
-				</div>
+					 </div>
+				</div> --!>
 				<div class="col-sm-12 col-xl-8 order-xl-1">
 					<div class="card bg-grayish">
 						<div class="card-header bg-grayish">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0 text-secondary">Edit profile</h3>
+									<h3 class="mb-0 text-secondary">Profile</h3>
 								</div>
 								<div class="col-4 text-right">
-									<a id="btn1" title="Click me, the other save button is ugly" href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
+
+									<a id="edit" title="Edit profile" href="javascript: editProfile()" class="btn btn-dark">Edit</a>
+									<a id="undo" title="Undo edit" href="javascript: undoEdit()" class="btn btn-danger" style="display:none;"><i class="fas fa-undo-alt"></i> Undo</a>
 								</div>
 							</div>
 						</div>
-						<div class="card-body">
+						<div class="card-body text-center">
 							<form>
-								<h6 class="heading-small text-secondary mb-4">Public information</h6>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-10">
+								<h6 id="psa" style="display:none;" class="heading-small text-secondary mb-4">Public information</h6>
+								<div class="p-auto">
+									<div class="row-auto">
+										<div class="col-auto">
 											<div class="form-group">
-												<label class="form-control-label text-light" for="profilePicture">Avatar</label>
+												<label style="display: none;" class="form-control-label text-light" for="profilePicture">Avatar</label>
 												<div class="profilePictureInput">
 													<a href="#" id="profPictLink" target="_blank">
 														<img id="profilePictureImg" alt="">
@@ -761,28 +761,33 @@
 										</div>
 									</div>
 								</div>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-6">
+								<div class="p-auto">
+									<div class="row-auto">
+										<div class="col-auto">
 											<div class="form-group">
-												<label class="form-control-label text-light" for="profileUsername">Username</label>
-												<input type="text" id="profileUsername" class="form-control text-secondary bg-dark" placeholder="Username" value="">
+												<label style="display: none;" class="form-control-label text-light" for="profileUsername">Username</label>
+												<h3 id="profileUsernameDiv" class="text-secondary"></h3>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="pl-lg-4">
+								<div class="p-auto">
+									<div class="row-auto">
+										<div class="col-auto">
 									<div class="form-group">
-										<label class="form-control-label text-light">About Me</label>
-										<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark" placeholder="A few words about you ..."></textarea>
+										<label style="display: none;" class="form-control-label text-light">About Me</label>
+										<div id="profileAboutMeDiv" class="h5 text-secondary"></div>
 									</div>
 								</div>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-6">
+							</div>
+										</div>
+								<div class="p-auto">
+									<div class="row-auto">
+										<div class="col-auto">
 											<div class="form-group">
-												<label class="form-control-label text-light" for="profileLocation">Location</label>
-												<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" placeholder="Location" value="">
+												<label style="display: none;" class="form-control-label text-light" for="profileLocation">Location</label>
+												<div type="text" id="profileLocationDiv" class="h5 font-weight-300 text-secondary" placeholder="Location"></div>
+
 											</div>
 										</div>
 									</div>
@@ -795,9 +800,9 @@
 							</form>
 						</div>
 						<div class="card-footer bg-grayish">
-							<div class="row align-items-center">
-								<div class="col-12 text-right">
-									<a id="btn2" title="Click me, I'm more green. You know what I mean? Greeeeen hmmm." href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
+							<div class="row-auto align-items-center">
+								<div class="col-auto text-right pb-2">
+									<a id="save" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</a>
 								</div>
 							</div>
 						</div>
@@ -921,9 +926,9 @@
 
 
 		function fetchProfile() {
-			var profileUsername = document.getElementById('profileUsername')
-			var profileAboutMe = document.getElementById('profileAboutMe')
-			var profileLocation = document.getElementById('profileLocation')
+			var profileUsernameDiv = document.getElementById('profileUsernameDiv')
+			var profileAboutMeDiv = document.getElementById('profileAboutMeDiv')
+			var profileLocationDiv = document.getElementById('profileLocationDiv')
 			var profilePictureImg = document.getElementById('profilePictureImg')
 			var profPictLink = document.getElementById('profPictLink')
 
@@ -933,9 +938,9 @@
 					alert('Profile not found, please check your connection and retry')
 				} else { // success
 					var respObs = JSON.parse(response)
-					profileUsername.value = respObs.username
-					profileAboutMe.value = respObs.aboutMe
-					profileLocation.value = respObs.location || ''
+					profileUsernameDiv.innerHTML = respObs.username
+					profileAboutMeDiv.innerHTML = respObs.aboutMe
+					profileLocationDiv.innerHTML = respObs.location || ''
 					console.log('Profile data:', respObs)
 					if (typeof respObs.avatar != 'undefined') {
 						profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
@@ -950,27 +955,6 @@
 			})
 		}
 
-		//instant visual feedback when switching avatars
-
-		function updateAvatar() {
-			var profilePictureImg = $("#profilePictureImg"),
-				profilePicture = $("#profilePicture")
-			profilePicture.change(function () {
-
-				if (this.files && this.files[0]) {
-					var reader = new FileReader()
-
-					reader.onload = function (e) {
-						profilePictureImg.attr("src", e.target.result).fadeIn(300)
-					}
-
-					reader.readAsDataURL(this.files[0])
-				}
-
-			})
-		}
-
-
 		function getProfPictUrl(skyfile, size) {
 			if (skyid.opts != null && skyid.opts.devMode != null && skyid.opts.devMode == true) {
 				return 'https://siasky.net/' + skyfile + '/' + size
@@ -978,8 +962,6 @@
 				return '/' + skyfile + '/' + size
 			}
 		}
-
-
 
 		async function handleImageUpload(callback) {
 			skyid.showOverlay()
@@ -1026,7 +1008,37 @@
 			} else {
 				var profilePictureSkylink = handleImageUpload(saveProfileJson);
 			}
+
+			$('#save').hide()
+			$('#profileLocation').each(function () {
+				var content = $(this).val()//.replace(/\n/g,"<br>")
+				$(this).html(content)
+				$(this).contents().unwrap()
+			})
+			$('#profileUsername').each(function () {
+				var content = $(this).val()//.replace(/\n/g,"<br>")
+				$(this).html(content)
+				$(this).contents().unwrap()
+			})
+			$('textarea').each(function () {
+				var content = $(this).val()//.replace(/\n/g,"<br>")
+				$(this).html(content)
+				$(this).contents().unwrap()
+			})
+
+			$('label').each(function () {
+				$(this).css('display', 'none')
+			})
+			$('#psa').each(function () {
+				$(this).css('display', 'none')
+			})
+
+			$('#undo').hide()
+			$('#edit').show()
 		}
+
+
+
 
 		function saveProfileJson(profilePicture = false) {
 
@@ -1070,6 +1082,75 @@
 			let input = document.getElementById('qr-app');
 			var { postMessage, publicAppData } = skyid.makeLoginSuccessPayload(input.value, 'QR login');
 			qrCode.makeCode(JSON.stringify(postMessage)); // make another code.
+		}
+
+		//instant visual feedback when switching avatars
+		function updateAvatar() {
+			var profilePictureImg = $("#profilePictureImg"),
+				profilePicture = $("#profilePicture")
+			profilePicture.change(function () {
+
+				if (this.files && this.files[0]) {
+					var reader = new FileReader()
+
+					reader.onload = function (e) {
+						profilePictureImg.attr("src", e.target.result).fadeIn(300)
+					}
+
+					reader.readAsDataURL(this.files[0])
+					$('#save').show()
+				}
+
+			})
+		}
+		function editProfile() {
+
+			$('#edit').hide()
+			$('#undo').show()
+
+			$('label').each(function () {
+				$(this).css('display', 'block')
+			})
+			$('#psa').each(function () {
+				$(this).css('display', 'block')
+			})
+
+			$('#profileUsernameDiv').each(function () {
+				var content1 = $(this).html()
+				$(this).html('<input id="profileUsername" type="text" class="form-control text-secondary bg-dark" placeholder="Username" value="' + content1 + '">')
+			})
+			$('#profileAboutMeDiv').each(function () {
+				var content2 = $(this).html()
+				$(this).html('<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark" placeholder="A few words about you ...">' + content2 + '</textarea>')
+			})
+			$('#profileLocationDiv').each(function () {
+				var content3 = $(this).html()
+				$(this).html('<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" placeholder="Location" value="' + content3 + '">')
+			})
+
+			$('#save').show()
+
+		}
+
+		function undoEdit() {
+
+			$('#undo').hide()
+			$('#edit').show()
+
+			$('label').each(function () {
+				$(this).css('display', 'none')
+			})
+			$('#psa').each(function () {
+				$(this).css('display', 'none')
+			})
+
+			$('#profileUsernameDiv').empty()
+			$('#profileAboutMeDiv').empty()
+			$('#profileLocationDiv').empty()
+
+			fetchProfile()
+
+			$('#save').hide()
 		}
 
 	</script>

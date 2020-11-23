@@ -22190,6 +22190,7 @@ a.text-grayish:hover, a.text-grayish:focus {
     width: 80%;
 }
 
+
 #profilePictureImg {
     background-size:contain;
     background-repeat: no-repeat;
@@ -22236,4 +22237,8 @@ cursor: pointer;
         bottom: 2em;
         opacity: 0;
     }
+}
+
+#save {
+    display: none;
 }
