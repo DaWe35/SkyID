@@ -369,7 +369,7 @@
           if (success) {
             console.log('nmset')
               // upload
-              let profile = { 'username': username, 'aboutMe': '"An ordinary visionary."', 'location': 'Nowheres, Ville' }
+              let profile = { 'username': username, 'aboutMe': '' }
             let jsonProfile = JSON.stringify(profile)
 
             skyid.setFile('profile', jsonProfile, function (success) {

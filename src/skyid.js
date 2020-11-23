@@ -112,7 +112,11 @@ export class SkyID {
 
 
 	deriveChildSeed(derivatePath) {
-		return deriveChildSeed(this.seed, String(derivatePath))
+		if (isOptionSet('customChildSeed', this.opts)) {
+			return this.opts.customChildSeed
+		} else {
+			return deriveChildSeed(this.seed, String(derivatePath))
+		}
 	}
 
 	// alias for compatibility
@@ -234,16 +238,12 @@ export class SkyID {
 
 	async uploadEncryptedFile(file, keyDerivationPath, callback) {
 		showOverlay(this.opts)
+		var encryptSeed = self.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
 
-		let encryptSeed = this.deriveChildSeed(keyDerivationPath) // this hash will used as encription key
 		var self = this
-
-		console.log('encryptSeed',encryptSeed)
 		encryptFile(file, encryptSeed, async function (encryptedFile) {
-			console.log('encryptedFile',encryptedFile)
 
 			const url = URL.createObjectURL(encryptedFile)
-			console.log(url)
 			try {
 			  var skylink = await self.skynetClient.uploadFile(encryptedFile)
 			} catch (error) {
@@ -272,7 +272,6 @@ export class SkyID {
 				self.opts.onUploadProgress(progress)
 			}
 		})
-
 	}
 
 

@@ -923,25 +923,6 @@
 				}
 			})
 		}
-//instant visual feedback when switching avatars
-function updateAvatar() {
-			var profilePictureImg = $("#profilePictureImg"),
-				profilePicture = $("#profilePicture")
-			profilePicture.change(function () {
-
-				if (this.files && this.files[0]) {
-					var reader = new FileReader()
-
-					reader.onload = function (e) {
-						profilePictureImg.attr("src", e.target.result)
-					}
-
-					reader.readAsDataURL(this.files[0])
-					$('#save').show()
-				}
-
-			})
-		}
 
 		function fetchProfile() {
 			var profileUsernameDiv = document.getElementById('profileUsernameDiv')
@@ -1100,6 +1081,26 @@ function updateAvatar() {
 			let input = document.getElementById('qr-app');
 			var { postMessage, publicAppData } = skyid.makeLoginSuccessPayload(input.value, 'QR login');
 			qrCode.makeCode(JSON.stringify(postMessage)); // make another code.
+		}
+
+		//instant visual feedback when switching avatars
+function updateAvatar() {
+			var profilePictureImg = $("#profilePictureImg"),
+				profilePicture = $("#profilePicture")
+			profilePicture.change(function () {
+
+				if (this.files && this.files[0]) {
+					var reader = new FileReader()
+
+					reader.onload = function (e) {
+						profilePictureImg.attr("src", e.target.result)
+					}
+
+					reader.readAsDataURL(this.files[0])
+					$('#save').show()
+				}
+
+			})
 		}
 
 		function editProfile() {
