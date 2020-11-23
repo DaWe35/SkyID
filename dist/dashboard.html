@@ -68,13 +68,13 @@
 						<li class="nav-item">
 							<a class="nav-link text-secondary" href="#dapps" onmousedown="loadPage('#dapps')">
 								<i class="ni ni-app text-skygreenish"></i>
-								<span class="nav-link-text">Connected dapps</span>
+								<span class="nav-link-text">Dapps</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-secondary" href="#qr-login" onmousedown="loadPage('#qr-login')">
-								<i class="ni ni-app text-skygreenish"></i>
-								<span class="nav-link-text">QR-Code login</span>
+								<i class="fa fa-qrcode text-skygreenish"></i>
+								<span class="nav-link-text">QR-Code</span>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -329,6 +329,7 @@
 	<!-- qrcode.js -->
 	<script src="assets/js/qrcode.min.js"></script>
 
+
 	<script>
 
 		window.addEventListener("hashchange", function () {
@@ -375,14 +376,27 @@
 						</div>
 					</div>`
 			} else if (page == "#qr-login") {
-				var content = `<div class="card bg-grayish">
-						<!-- Card header -->
-						<div class="card-header border-0 bg-grayish">
-							<h3 class="mb-0 text-white">Login with QR-Code</h3>
-						</div>
-						<input type="text" id="qr-app" placeholder="Enter Skapp name..." oninput="updateQRCode()">
-						<div id="qrcode" style="padding: 16px; background-color: white"></div>
+				var content = `<div class="row flex justify-content-center align-items-center">
+					<div class="col-auto order-xl-1">
+					</div>
+					<div class="col-auto order-xl-1">
+						<div class="card">
+							<div class="card-header bg-grayish">
+								<div class="row">
+									<div class="col-auto">
+										<h3 class="mb-0 text-secondary">Login with QR-Code</h3>
+									</div>
+								</div>
+								</div>
+									<div class="card-body bg-grayish">
+										<label class="form-control-label text-light" for="qr-app">Enter Skapp name:</label>
+									<input type="text" id="qr-app" placeholder="Skapp name" oninput="updateQRCode()" class="form-control text-secondary bg-dark">
+									<br>
+									<div id="qrcode"></div>
+									</div>
 
+</div>
+</div>
 					</div>`
 			} else if (page == "#stats") {
 				content = `<div class="row">
@@ -739,7 +753,7 @@
 												<label class="form-control-label text-light" for="profilePicture">Avatar</label>
 												<div class="profilePictureInput">
 													<a href="#" id="profPictLink" target="_blank">
-														<img id="profilePictureImg" src="" alt="">
+														<img id="profilePictureImg" alt="">
 														<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
 														</a>
 												</div>
@@ -828,7 +842,8 @@
 			}
 			document.getElementById('content').innerHTML = content
 			if (page == '#profile') {
-				fetchProfile()
+				fetchProfile(),
+					updateAvatar()
 			} else if (page == '#dapps') {
 				fetchDapps()
 			} else if (page == '#qr-login') {
@@ -927,7 +942,8 @@
 						profPictLink.href = getProfPictUrl(respObs.avatar, 1920)
 					}
 					else {
-						profilePictureImg.src = "https://avatars.dicebear.com/api/male/dawe.svg"
+						profilePictureImg.src = "https://avatars.dicebear.com/api/avataaars/" + (new Date).getTime() + ".svg"
+
 					}
 
 				}
@@ -935,24 +951,24 @@
 		}
 
 		//instant visual feedback when switching avatars
-		var profilePictureImg = $("#profilePictureImg"),
-			profilePicture = $("#profilePicture")
 
+		function updateAvatar() {
+			var profilePictureImg = $("#profilePictureImg"),
+				profilePicture = $("#profilePicture")
+			profilePicture.change(function () {
 
+				if (this.files && this.files[0]) {
+					var reader = new FileReader()
 
-		profilePicture.change(function () {
+					reader.onload = function (e) {
+						profilePictureImg.attr("src", e.target.result).fadeIn(300)
+					}
 
-			if (this.files && this.files[0]) {
-				var reader = new FileReader()
-
-				reader.onload = function (e) {
-					profilePictureImg.attr("src", e.target.result).fadeIn(300)
+					reader.readAsDataURL(this.files[0])
 				}
 
-				reader.readAsDataURL(this.files[0])
-			}
-
-		});
+			})
+		}
 
 
 		function getProfPictUrl(skyfile, size) {

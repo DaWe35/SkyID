@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/DaWe35/SkyID#readme",
   "dependencies": {
+    "@dicebear/avatars": "^4.4.1",
+    "@dicebear/avatars-male-sprites": "^4.4.1",
     "base32-encode": "^1.1.1",
     "base64-js": "^1.3.1",
     "buffer": "^5.7.0",
