@@ -22223,9 +22223,9 @@ cursor: pointer;
 
 .copyEffect:after {
     animation: 1s ease-in-out 0s 1 normal forwards running copyit;
-    display: block;
+    display: flex;
     position: absolute;
-    content: "baby last jeers abrasive loudly people vulture payment vats nineteen tomorrow narrate dads dolphin auctions firm dwelt owls fight soggy insult left goggles pelican textbook zoom enhanced nutshell adjust";
+    content: attr(data);
 }
 
 @keyframes copyit {
