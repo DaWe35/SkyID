@@ -238,7 +238,7 @@ export class SkyID {
 
 	async uploadEncryptedFile(file, keyDerivationPath, callback) {
 		showOverlay(this.opts)
-		var encryptSeed = self.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
+		var encryptSeed = this.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
 
 		var self = this
 		encryptFile(file, encryptSeed, async function (encryptedFile) {
