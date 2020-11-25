@@ -22231,3 +22231,16 @@ background-color: #19cf86;
 #profileCard {
     background-color: dark;
 }
+
+#navProfilePictureImg {
+    background-color: #19cf86;
+
+}
+
+#logout.text-dropdown:hover > #logouticon, #logout.text-dropdown:focus > #logouticon {
+    color: red !important;
+}
+
+#myprofile.text-dropdown:hover > #myprofileicon, #myprofile.text-dropdown:focus > #myprofileicon {
+    color: #19cf86 !important;
+}
