@@ -189,7 +189,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text bg-dark"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <div class="form-control position-relative bg-dark text-secondary h-auto">
+                    <div class="form-control position-relative bg-dark text-secondary h-auto w-auto">
                       <span id="passphrase" placeholder="Passphrase"></span>
                     </div>
                   </div>
@@ -299,6 +299,7 @@
         if (skyid.seed == '' && $('#passphrase').html() == '') {
           mnemonic = skyid.generateNewMasterSeed()
           $('#passphrase').html(mnemonic)
+          $('#passphrase').attr('data', mnemonic)
           //save to clipboard when clicked
           createCopy(mnemonic, 'copytoclipboard', function () {
             $(copytoclipboard).attr('data-original-title', 'Copied!')
