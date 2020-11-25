@@ -734,7 +734,7 @@
 						<div class="card-header bg-grayish">
 							<div class="row align-items-center">
 								<div class="col-8">
-									<h3 class="mb-0 text-secondary">Profile</h3>
+									<h3 id="profileTitle" class="mb-0 text-secondary">Profile</h3>
 								</div>
 								<div class="col-4 text-right">
 
@@ -745,16 +745,19 @@
 						</div>
 						<div class="card-body text-center">
 							<form>
+								<div id="profileCard" class="bg-dark mx-lg-7 mx-md-6 mx-sm-5 pb-4 rounded shadow">
 								<h6 id="psa" style="display:none;" class="heading-small text-secondary mb-4">Public information</h6>
 								<div class="p-auto">
 									<div class="row-auto">
 										<div class="col-auto">
 											<div class="form-group">
-												<label style="display: none;" class="form-control-label text-light" for="profilePicture">Avatar</label>
-												<div class="profilePictureInput">
-													<a href="#" id="profPictLink" target="_blank">
-														<img id="profilePictureImg" alt="">
-														<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
+												<label id="avatarLabel" style="display: none;" class="form-control-label text-light" for="profilePicture">Avatar</label>
+												<div id="avatarPosition" class="profilePictureInput card-profile-image">
+													<a id="profPictLink" target="_blank">
+														<label>
+															<img id="profilePictureImg" alt="">
+															<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
+														</label>
 														</a>
 												</div>
 											</div>
@@ -765,8 +768,8 @@
 									<div class="row-auto">
 										<div class="col-auto">
 											<div class="form-group">
-												<label style="display: none;" class="form-control-label text-light" for="profileUsername">Username</label>
-												<h3 id="profileUsernameDiv" class="text-secondary"></h3>
+												<label id="usernameLabel" style="display: none;" class="form-control-label text-light" for="profileUsername">Username</label>
+												<h3 id="profileUsernameDiv" class="text-secondary pt-4"></h3>
 											</div>
 										</div>
 									</div>
@@ -775,7 +778,7 @@
 									<div class="row-auto">
 										<div class="col-auto">
 									<div class="form-group">
-										<label style="display: none;" class="form-control-label text-light">About Me</label>
+										<label id="aboutMeLabel" style="display: none;" class="form-control-label text-light">About Me</label>
 										<div id="profileAboutMeDiv" class="h5 text-secondary"></div>
 									</div>
 								</div>
@@ -785,7 +788,7 @@
 									<div class="row-auto">
 										<div class="col-auto">
 											<div class="form-group">
-												<label style="display: none;" class="form-control-label text-light" for="profileLocation">Location</label>
+												<label id="locationLabel" style="display: none;" class="form-control-label text-light" for="profileLocation">Location</label>
 												<div type="text" id="profileLocationDiv" class="h5 font-weight-300 text-secondary" placeholder="Location"></div>
 
 											</div>
@@ -799,14 +802,14 @@
 
 							</form>
 						</div>
-						<div class="card-footer bg-grayish">
+					</div>
+					<div class="card-footer bg-grayish">
 							<div class="row-auto align-items-center">
-								<div class="col-auto text-right pb-2">
+								<div class="col-auto text-right pb-4">
 									<a id="save" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</a>
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>`
 			} else if (page == "#blog") {
 				var content = `
@@ -848,7 +851,7 @@
 			document.getElementById('content').innerHTML = content
 			if (page == '#profile') {
 				fetchProfile(),
-				updateAvatar()
+					updateAvatar()
 			} else if (page == '#dapps') {
 				fetchDapps()
 			} else if (page == '#qr-login') {
@@ -1008,7 +1011,13 @@
 				var profilePictureSkylink = handleImageUpload(saveProfileJson);
 			}
 
+			$('#profileCard').addClass('bg-dark mx-lg-7 mx-md-6 mx-sm-5 pb-4 rounded shadow')
+			$('#avatarPosition').addClass('card-profile-image')
+
 			$('#save').hide()
+
+			$('#profileTitle').empty().html("Profile")
+
 			$('#profileLocation').each(function () {
 				var content = $(this).val()//.replace(/\n/g,"<br>")
 				$(this).html(content)
@@ -1025,12 +1034,16 @@
 				$(this).contents().unwrap()
 			})
 
-			$('label').each(function () {
-				$(this).css('display', 'none')
-			})
-			$('#psa').each(function () {
-				$(this).css('display', 'none')
-			})
+			$('#avatarLabel').css('display', 'none')
+
+			$('#usernameLabel').css('display', 'none')
+
+			$('#aboutMeLabel').css('display', 'none')
+
+			$('#locationLabel').css('display', 'none')
+
+			$('#psa').css('display', 'none')
+
 
 			$('#undo').hide()
 			$('#edit').show()
@@ -1084,7 +1097,7 @@
 		}
 
 		//instant visual feedback when switching avatars
-function updateAvatar() {
+		function updateAvatar() {
 			var profilePictureImg = $("#profilePictureImg"),
 				profilePicture = $("#profilePicture")
 			profilePicture.change(function () {
@@ -1105,15 +1118,24 @@ function updateAvatar() {
 
 		function editProfile() {
 
+			$('#profileCard').removeClass('bg-dark mx-lg-7 mx-md-6 mx-sm-5 pb-4 rounded shadow')
+			$('#avatarPosition').removeClass('card-profile-image')
+
 			$('#edit').hide()
 			$('#undo').show()
 
-			$('label').each(function () {
-				$(this).css('display', 'block')
-			})
-			$('#psa').each(function () {
-				$(this).css('display', 'block')
-			})
+			$('#profileTitle').empty().html("Edit profile")
+
+			$('#psa').css({'display': 'block'})
+
+			$('#avatarLabel').css({'display': 'block'})
+
+			$('#usernameLabel').css({'display': 'block', 'float': 'left'})
+
+			$('#aboutMeLabel').css({'display': 'block', 'float': 'left'})
+
+			$('#locationLabel').css({'display': 'block', 'float': 'left'})
+
 
 			$('#profileUsernameDiv').each(function () {
 				var content1 = $(this).html()
@@ -1134,15 +1156,24 @@ function updateAvatar() {
 
 		function undoEdit() {
 
+			$('#profileCard').addClass('bg-dark mx-lg-7 mx-md-6 mx-sm-5 pb-4 rounded shadow')
+			$('#avatarPosition').addClass('card-profile-image')
+
 			$('#undo').hide()
 			$('#edit').show()
 
-			$('label').each(function () {
-				$(this).css('display', 'none')
-			})
-			$('#psa').each(function () {
-				$(this).css('display', 'none')
-			})
+			$('#profileTitle').empty().html("Profile")
+
+			$('#avatarLabel').css('display', 'none')
+
+			$('#usernameLabel').css('display', 'none')
+
+			$('#aboutMeLabel').css('display', 'none')
+
+			$('#locationLabel').css('display', 'none')
+
+			$('#psa').css('display', 'none')
+
 
 			$('#profileUsernameDiv').empty()
 			$('#profileAboutMeDiv').empty()

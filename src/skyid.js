@@ -7,23 +7,17 @@ const sia = require('sia-js')
 global.Buffer = global.Buffer || require('buffer').Buffer
 
 
-export class SkyID {
+window.SkyID = class SkyID {
 	constructor(appId, callback = null, opts = null) {
-		// delete skyid cookie if set
-		document.cookie = "skyid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-
 		this.callback = callback
 		this.appId = appId
 		this.opts = opts
 
-		let cookie = getCookie()
-		this.setAccount(cookie)
-
+		// delete
 
 		if (isOptionTrue('devMode', this.opts)) {
 			console.log('devMode on, using https://siasky.net')
-			this.skynetClient = new SkynetClient('https://siasky.net', this.opts)
+			this.skynetClient = new SkynetClient('https://siasky.net')
 			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
 					DevMode is on -
@@ -34,8 +28,10 @@ export class SkyID {
 			document.body.appendChild(div.firstChild)
 		} else {
 			console.log('devMode off, using auto portal')
-			this.skynetClient = new SkynetClient('', this.opts)
+			this.skynetClient = new SkynetClient()
 		}
+		let cookie = getCookie()
+		this.setAccount(cookie)
 
 		window.addEventListener("message", (event) => {
 			if (typeof event.data.sender != 'undefined' && event.data.sender == 'skyid') {
@@ -112,11 +108,7 @@ export class SkyID {
 
 
 	deriveChildSeed(derivatePath) {
-		if (isOptionSet('customChildSeed', this.opts)) {
-			return this.opts.customChildSeed
-		} else {
-			return deriveChildSeed(this.seed, String(derivatePath))
-		}
+		return deriveChildSeed(this.seed, String(derivatePath))
 	}
 
 	// alias for compatibility
@@ -238,12 +230,16 @@ export class SkyID {
 
 	async uploadEncryptedFile(file, keyDerivationPath, callback) {
 		showOverlay(this.opts)
-		var encryptSeed = this.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
 
+		let encryptSeed = this.deriveChildSeed(keyDerivationPath) // this hash will used as encription key
 		var self = this
+
+		console.log('encryptSeed',encryptSeed)
 		encryptFile(file, encryptSeed, async function (encryptedFile) {
+			console.log('encryptedFile',encryptedFile)
 
 			const url = URL.createObjectURL(encryptedFile)
+			console.log(url)
 			try {
 			  var skylink = await self.skynetClient.uploadFile(encryptedFile)
 			} catch (error) {
@@ -264,14 +260,12 @@ export class SkyID {
 		fetchFile(fileUrl, 'Marstorage', function (file) {
 			let encryptSeed = self.deriveChildSeed(keyDerivationPath) // this hash will used as decription key
 			decryptFile(file, encryptSeed, function(decryptedFileBlobUrl) {
+				console.log('decryptedFileBlobUrl', decryptedFileBlobUrl)
 				hideOverlay(self.opts)
-				callback(decryptedFileBlobUrl)
+				callback(decryptedFile)
 			})
-		}, function(progress) {
-			if (isOptionSet('onUploadProgress', self.opts)) {
-				self.opts.onUploadProgress(progress)
-			}
 		})
+
 	}
 
 
@@ -293,7 +287,7 @@ export class SkyID {
 
 	/*
 
-	Functions below are only for sky-id.hns.skyportal.xyz ;)
+	Functions below are only for sky-id.hns.siasky.net ;)
 
 	*/
 
@@ -311,18 +305,17 @@ export class SkyID {
 		return true
 	}
 
-	setMnemonic(mnemonic, callback, rememberMe = false, checkMnemonic = false) {
+	setMnemonic(mnemonic, callback, days = 0, checkMnemonic = false) {
 		let mnemonicBytes = sia.mnemonics.mnemonicToBytes(mnemonic)
 		if (mnemonicBytes.length != 32) {
-			console.log('Wrong mnemonic length:', mnemonicBytes.length)
 			callback(false)
 			return
 		}
 
 		let seed = toHexString(mnemonicBytes)
-		setCookie({ "seed": seed }, rememberMe)
+		setCookie({ "seed": seed }, days)
 
-		if (checkMnemonic && this.setAccount({ "seed": seed })) {
+		if (checkMnemonic && this.setAccount({ "seed": seed }, days)) {
 			var self = this
 			skyid.getJSON('profile', function (response, revision) {
 				if (response == '') { // file not found
@@ -333,7 +326,7 @@ export class SkyID {
 				}
 			})
 		} else {
-			callback(this.setAccount({ "seed": seed }))
+			callback(this.setAccount({ "seed": seed }, days))
 		}
 	}
 
@@ -345,19 +338,5 @@ export class SkyID {
 			let mnemonic = sia.mnemonics.bytesToMnemonic(rendomData)
 			return mnemonic
 		}
-	}
-
-	makeLoginSuccessPayload(appId, referrer) {
-		var appSeed = this.deriveChildSeed(appId)
-		// generate private app data
-		const masterKeys = genKeyPairFromSeed(this.seed)
-		let appData = { 'seed': appSeed, 'userId': masterKeys.publicKey, 'url': document.referrer, 'appImg': null }
-
-		// generate public app data
-		const { publicKey, privateKey } = genKeyPairFromSeed(appSeed)
-		let publicAppData = { 'url': referrer, 'publicKey': publicKey, 'img': null }
-		let postMessage = { 'sender': 'skyid', 'eventCode': 'login_success', 'appData': appData }
-
-		return { 'postMessage': postMessage, 'publicAppData': publicAppData }
 	}
 }

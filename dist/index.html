@@ -372,7 +372,7 @@
         skyid.setMnemonic(mnemonic, function (success) {
           if (success) {
             console.log('nmset')
-            let profile = { 'username': username, 'aboutMe': '' }
+            let profile = { 'username': username, 'aboutMe': '"an extraordinary individual"', 'location': 'Nowhere\'s, Ville' }
             let jsonProfile = JSON.stringify(profile)
             skyid.setFile('profile', jsonProfile, function (success) {
               if (success) {
