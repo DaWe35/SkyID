@@ -229,7 +229,7 @@
 									</div>
 								</div>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right bg-darkish">
+							<div class="dropdown-menu bg-darkish">
 								<!-- <div class="dropdown-header noti-title">
 									<h6 class="text-overflow m-0 text-secondary"></h6>
 								</div> -->
@@ -241,10 +241,10 @@
 									<i class="ni ni-settings-gear-65"></i>
 									<span>Settings</span>
 								</a> -->
-								<div class="dropdown-divider"></div>
+								<div class="py-1"></div>
 								<a id="logout" href="javascript: skyid.sessionDestroy('index.html');"
 									class="dropdown-item text-dropdown">
-									<i id="logouticon" class="ni ni-user-run"></i>
+									<i id="logouticon" class="ni ni-button-power"></i>
 									<span>Logout</span>
 								</a>
 							</div>
@@ -352,15 +352,15 @@
 				location.hash = page;
 			}
 			if (page == '#dapps') {
-				var content = `<div class="card bg-grayish">
+				var content = `<div class="card bg-dark">
 						<!-- Card header -->
-						<div class="card-header border-0 bg-grayish">
+						<div class="card-header border-0 bg-dark">
 							<h3 class="mb-0 text-white">Connected dapps</h3>
 						</div>
 						<!-- Light table -->
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<thead class="bg-grayish text-secondary">
+								<thead class="bg-dark text-secondary">
 									<tr>
 										<th scope="col" class="sort" data-sort="name">Dapp</th>
 										<th scope="col" class="sort" data-sort="budget">Url</th>
@@ -375,28 +375,30 @@
 						</div>
 					</div>`
 			} else if (page == "#qr-login") {
-				var content = `<div class="row flex justify-content-center align-items-center">
-					<div class="col-auto order-xl-1">
-					</div>
-					<div class="col-auto order-xl-1">
-						<div class="card">
-							<div class="card-header bg-grayish">
-								<div class="row">
-									<div class="col-auto">
-										<h3 class="mb-0 text-secondary">Login with QR-Code</h3>
+				var content = `<div class="wrapper">
+					<div class="row d-flex justify-content-center align-items-center">
+						<div class="col-auto order-xl-1">
+						</div>
+						<div class="col-auto order-xl-1">
+							<div class="card">
+								<div class="card-header bg-dark">
+									<div class="row">
+										<div class="col-auto">
+											<h3 class="mb-0 text-secondary">Login with QR-Code</h3>
+										</div>
 									</div>
-								</div>
-								</div>
-									<div class="card-body bg-grayish">
-										<label class="form-control-label text-light" for="qr-app">Enter Skapp name:</label>
-									<input type="text" id="qr-app" placeholder="Skapp name" oninput="updateQRCode()" class="form-control text-secondary bg-dark">
-									<br>
-									<div id="qrcode"></div>
 									</div>
+										<div class="card-body bg-dark">
+											<label class="form-control-label text-light" for="qr-app">Enter Skapp name:</label>
+										<input type="text" id="qr-app" placeholder="Skapp name" oninput="updateQRCode()" class="form-control text-secondary bg-grayish">
+										<br>
+										<div id="qrcode"></div>
+										</div>
 
-</div>
-</div>
-					</div>`
+				</div>
+				</div>
+						</div>
+				</div>`
 			} else if (page == "#stats") {
 				content = `<div class="row">
 				<div class="col-lg-8">
@@ -673,142 +675,144 @@
 				</div>
 			</div>`
 			} else if (page == '#profile') {
-				var content = `<div class="row-auto d-flex justify-content-center align-items-center">
-					<!--<div class="col-lg-4 order-xl-2">
-					<div class="card card-profile">
-						<img src="assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
-						<div class="row justify-content-center">
-							<div class="col-lg-3 order-lg-2">
-								<div class="card-profile-image">
-									<a href="#">
-										<img src="assets/img/theme/team-4.jpg" class="rounded-circle">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-							<div class="d-flex justify-content-between">
-								<a href="#" class="btn btn-sm btn-info    mr-4 ">Connect</a>
-								<a href="#" class="btn btn-sm btn-default float-right">Message</a>
-							</div>
-						</div>
-						<div class="card-body pt-0">
-							<div class="row">
-								<div class="col">
-									<div class="card-profile-stats d-flex justify-content-center">
-										<div>
-											<span class="heading">22</span>
-											<span class="description">Friends</span>
-										</div>
-										<div>
-											<span class="heading">10</span>
-											<span class="description">Photos</span>
-										</div>
-										<div>
-											<span class="heading">89</span>
-											<span class="description">Comments</span>
-										</div>
+				var content = `<div class="wrapper">
+					<div class="row-auto d-flex justify-content-center align-items-stretch">
+						<!--<div class="col-lg-4 order-xl-2">
+						<div class="card card-profile">
+							<img src="assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+							<div class="row justify-content-center">
+								<div class="col-lg-3 order-lg-2">
+									<div class="card-profile-image">
+										<a href="#">
+											<img src="assets/img/theme/team-4.jpg" class="rounded-circle">
+										</a>
 									</div>
 								</div>
 							</div>
-							<div class="text-center">
-								<h5 class="h3">
-									Jessica Jones<span class="font-weight-light">, 27</span>
-								</h5>
-								<div class="h5 font-weight-300">
-									<i class="ni location_pin mr-2"></i>Bucharest, Romania
-								</div>
-								<div class="h5 mt-4">
-									<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-								</div>
-								<div>
-									<i class="ni education_hat mr-2"></i>University of Computer Science
+							<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+								<div class="d-flex justify-content-between">
+									<a href="#" class="btn btn-sm btn-info    mr-4 ">Connect</a>
+									<a href="#" class="btn btn-sm btn-default float-right">Message</a>
 								</div>
 							</div>
-						</div>
-					 </div>
-				</div> --!>
-				<div class="col-sm-12 col-xl-8 order-xl-1">
-					<div class="card bg-grayish">
-						<div class="card-header bg-grayish">
-							<div class="row align-items-center">
-								<div class="col-8">
-									<h3 id="profileTitle" class="mb-0 text-secondary">Profile</h3>
+							<div class="card-body pt-0">
+								<div class="row">
+									<div class="col">
+										<div class="card-profile-stats d-flex justify-content-center">
+											<div>
+												<span class="heading">22</span>
+												<span class="description">Friends</span>
+											</div>
+											<div>
+												<span class="heading">10</span>
+												<span class="description">Photos</span>
+											</div>
+											<div>
+												<span class="heading">89</span>
+												<span class="description">Comments</span>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="col-4 text-right">
+								<div class="text-center">
+									<h5 class="h3">
+										Jessica Jones<span class="font-weight-light">, 27</span>
+									</h5>
+									<div class="h5 font-weight-300">
+										<i class="ni location_pin mr-2"></i>Bucharest, Romania
+									</div>
+									<div class="h5 mt-4">
+										<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+									</div>
+									<div>
+										<i class="ni education_hat mr-2"></i>University of Computer Science
+									</div>
+								</div>
+							</div>
+						 </div>
+					</div> --!>
+					<div class="col-sm-12 order-xl-1">
+						<div class="card bg-darkish">
+							<div class="card-header bg-darkish">
+								<div class="row align-items-center">
+									<div class="col-8">
+										<h3 id="profileTitle" class="mb-0 text-secondary">Profile</h3>
+									</div>
+									<div class="col-4 text-right">
 
-									<a id="edit" title="Edit profile" href="javascript: editProfile()" class="btn btn-dark">Edit</a>
-									<a id="undo" title="Undo changes" href="javascript: undoEdit()" class="btn btn-dark" style="display:none;">Undo</a>
+										<a id="edit" title="Edit profile" href="javascript: editProfile()" class="btn btn-dark">Edit</a>
+										<a id="undo" title="Undo changes" href="javascript: undoEdit()" class="btn btn-dark" style="display:none;">Undo</a>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="card-body text-center">
-							<form>
-								<div id="profileCard" class="bg-dark mx-lg-7 mx-md-6 mx-sm-5 pb-4 rounded shadow">
-								<h6 id="psa" style="display:none;" class="heading-small text-secondary mb-4">Public information</h6>
-								<div class="p-auto">
-									<div class="row-auto">
-										<div class="col-auto">
-											<div class="form-group">
-												<label id="avatarLabel" style="display: none;" class="form-control-label text-light" for="profilePicture">Avatar</label>
-												<div id="avatarPosition" class="profilePictureInput card-profile-image">
-													<a id="profPictLink" target="_blank">
-														<label>
-															<img id="profilePictureImg" alt="">
-															<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
-														</label>
-														</a>
+							<div class="card-body pt-0 text-center">
+								<form>
+									<div id="profileCard" class="bg-dark mx-md-6 mx-sm-5 pb-5 rounded">
+									<h6 id="psa" style="display:none;" class="heading-small text-secondary mb-4">Public information</h6>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+													<label id="avatarLabel" style="display: none;" class="form-control-label text-light" for="profilePicture">Avatar</label>
+													<div id="avatarPosition" class="profilePictureInput card-profile-image">
+														<a id="profPictLink" target="_blank">
+															<label>
+																<img id="profilePictureImg" alt="">
+																<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
+															</label>
+															</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="p-auto">
-									<div class="row-auto">
-										<div class="col-auto">
-											<div class="form-group">
-												<label id="usernameLabel" style="display: none;" class="form-control-label text-light" for="profileUsername">Username</label>
-												<h3 id="profileUsernameDiv" class="text-secondary pt-4"></h3>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+													<label id="usernameLabel" style="display: none;" class="form-control-label text-light" for="profileUsername">Username</label>
+													<h3 id="profileUsernameDiv" class="text-secondary pt-4"></h3>
+												</div>
 											</div>
 										</div>
 									</div>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+										<div class="form-group">
+											<label id="aboutMeLabel" style="display: none;" class="form-control-label text-light">About Me</label>
+											<div id="profileAboutMeDiv" class="h5 text-secondary"></div>
+										</div>
+									</div>
 								</div>
-								<div class="p-auto">
-									<div class="row-auto">
-										<div class="col-auto">
-									<div class="form-group">
-										<label id="aboutMeLabel" style="display: none;" class="form-control-label text-light">About Me</label>
-										<div id="profileAboutMeDiv" class="h5 text-secondary"></div>
+											</div>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+													<label id="locationLabel" style="display: none;" class="form-control-label text-light" for="profileLocation">Location</label>
+													<div type="text" id="profileLocationDiv" class="h5 font-weight-300 text-secondary" placeholder="Location"></div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- <hr class="my-4" /> -->
+									<!-- Description -->
+									<!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
+
+								</form>
+							</div>
+						</div>
+						<div class="card-footer bg-darkish">
+								<div class="row-auto align-items-center">
+									<div class="col-auto text-right mt--4 pb-4">
+										<a id="save" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</a>
 									</div>
 								</div>
 							</div>
-										</div>
-								<div class="p-auto">
-									<div class="row-auto">
-										<div class="col-auto">
-											<div class="form-group">
-												<label id="locationLabel" style="display: none;" class="form-control-label text-light" for="profileLocation">Location</label>
-												<div type="text" id="profileLocationDiv" class="h5 font-weight-300 text-secondary" placeholder="Location"></div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- <hr class="my-4" /> -->
-								<!-- Description -->
-								<!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
-
-							</form>
-						</div>
 					</div>
-					<div class="card-footer bg-grayish">
-							<div class="row-auto align-items-center">
-								<div class="col-auto text-right pb-4">
-									<a id="save" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</a>
-								</div>
-							</div>
-						</div>
 				</div>`
 			} else if (page == "#blog") {
 				var content = `
@@ -817,7 +821,7 @@
 					</div>
 					<div class="col-sm-12 col-xl-8 order-xl-1">
 						<div class="card">
-							<div class="card-header bg-grayish">
+							<div class="card-header bg-dark">
 								<div class="row align-items-center">
 									<div class="col-8">
 										<h3 class="mb-0 text-secondary">Blog</h3>
@@ -828,7 +832,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="card-body bg-grayish">
+							<div class="card-body bg-dark">
 
 								<a href="https://sky-note.hns.siasky.net/" target="_blank">
 									<h2 class="text-light">Example dapp using SkyID</h2>
@@ -1012,7 +1016,7 @@
 				var profilePictureSkylink = handleImageUpload(saveProfileJson);
 			}
 
-			$('#profileCard').addClass('bg-dark pb-4 rounded shadow')
+			$('#profileCard').addClass('bg-dark pb-5 rounded')
 			$('#avatarPosition').addClass('card-profile-image')
 
 			$('#save').hide()
@@ -1120,7 +1124,7 @@
 
 		function editProfile() {
 
-			$('#profileCard').removeClass('bg-dark pb-4 rounded shadow')
+			$('#profileCard').removeClass('bg-dark pb-5 rounded')
 			$('#avatarPosition').removeClass('card-profile-image')
 
 			$('#edit').hide()
@@ -1158,7 +1162,7 @@
 
 		function undoEdit() {
 
-			$('#profileCard').addClass('bg-dark pb-4 rounded shadow')
+			$('#profileCard').addClass('bg-dark pb-5 rounded')
 			$('#avatarPosition').addClass('card-profile-image')
 
 			$('#undo').hide()

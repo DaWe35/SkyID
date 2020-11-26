@@ -18479,15 +18479,15 @@ a.section-darker:hover, a.section-darker:focus, button.section-darker:hover, but
 }
 
 .shadow-sm--hover:hover {
-    box-shadow: 0 0 .5rem rgba(136, 152, 170, .075) !important;
+    box-shadow: 0 0 .5rem rgb(25, 207, 134, .075) !important;
 }
 
 .shadow--hover:hover {
-    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15) !important;
+    box-shadow: 0 0 2rem 0 rgb(25, 207, 134, .15) !important;
 }
 
 .shadow-lg--hover:hover {
-    box-shadow: 0 0 3rem rgba(136, 152, 170, .175) !important;
+    box-shadow: 0 0 3rem rgb(25, 207, 134, .175) !important;
 }
 
 .shadow-none--hover:hover {
@@ -22243,4 +22243,10 @@ background-color: #19cf86;
 
 #myprofile.text-dropdown:hover > #myprofileicon, #myprofile.text-dropdown:focus > #myprofileicon {
     color: #19cf86 !important;
+}
+
+@media (min-width: 1200px) {
+    .wrapper {
+        width:100vh;
+    }
 }
