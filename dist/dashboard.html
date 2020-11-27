@@ -762,6 +762,9 @@
 															</label>
 															</a>
 													</div>
+													<div class="d-flex justify-content-center">
+														<a style="display: none;" id="generateAvatarBtn" href="javascript: generateRandomAvatar()" class="btn btn-sm btn-dark">generate random avatar</a>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -1060,6 +1063,7 @@
 			$('#psa').css('display', 'none')
 
 
+			$('#generateAvatarBtn').hide()
 			$('#undo').hide()
 			$('#edit').show()
 		}
@@ -1140,6 +1144,7 @@
 			$('#undo').show()
 
 			$('#save2').hide()
+			$('#generateAvatarBtn').show()
 
 			$('#profileTitle').empty().html("Edit profile")
 
@@ -1179,6 +1184,8 @@
 			$('#undo').hide()
 			$('#edit').show()
 
+			$('#generateAvatarBtn').hide()
+
 			$('#profileTitle').empty().html("Profile")
 
 			$('#avatarLabel').css('display', 'none')
@@ -1199,6 +1206,10 @@
 			fetchProfile()
 
 			$('#save').hide()
+		}
+
+		function generateRandomAvatar() {
+			profilePictureImg.src = "https://avatars.dicebear.com/api/avataaars/" + (new Date).getTime() + ".svg"
 		}
 
 	</script>
