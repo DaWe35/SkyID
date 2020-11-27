@@ -1037,19 +1037,41 @@
 
 			$('#profileLocation').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
-				$(this).html(content)
-			    $(this).contents().unwrap()
+				if ($(this).is(':empty')) {
+					$(this).html(" ")
+					$(this).contents().unwrap()
+					$(this).empty()
+				}
+				else {
+					$(this).html(content)
+					$(this).contents().unwrap()
+				}
 
 			})
 			$('#profileUsername').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
-				$(this).html(content)
-				$(this).contents().unwrap()
+				if ($(this).is(':empty')) {
+					$(this).html(" ")
+					$(this).contents().unwrap()
+					$(this).empty()
+				}
+				else {
+					$(this).html(content)
+					$(this).contents().unwrap()
+				}
+
 			})
 			$('#profileAboutMe').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
-				$(this).html(content)
-				$(this).contents().unwrap()
+				if ($(this).is(':empty')) {
+					$(this).html(" ")
+					$(this).contents().unwrap()
+					$(this).empty()
+				}
+				else {
+					$(this).html(content)
+					$(this).contents().unwrap()
+				}
 			})
 
 			$('#avatarLabel').css('display', 'none')
@@ -1161,15 +1183,15 @@
 
 			$('#profileUsernameDiv').each(function () {
 				var content1 = $(this).html()
-				$(this).html('<input id="profileUsername" type="text" class="form-control text-secondary bg-dark" placeholder="Username" value="' + content1 + '">')
+				$(this).html('<input id="profileUsername" type="text" class="form-control text-secondary bg-dark" value="' + content1 + '">')
 			})
 			$('#profileAboutMeDiv').each(function () {
 				var content2 = $(this).html()
-				$(this).html('<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark" placeholder="A few words about you ...">' + content2 + '</textarea>')
+				$(this).html('<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark">' + content2 + '</textarea>')
 			})
 			$('#profileLocationDiv').each(function () {
 				var content3 = $(this).html()
-				$(this).html('<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" placeholder="Location" value="' + content3 + '">')
+				$(this).html('<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" value="' + content3 + '">')
 			})
 
 			$('#save').show()
