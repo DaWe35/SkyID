@@ -229,7 +229,7 @@
 									</div>
 								</div>
 							</a>
-							<div class="dropdown-menu bg-darkish">
+							<div class="dropdown-menu dropdown-menu-right bg-darkish">
 								<!-- <div class="dropdown-header noti-title">
 									<h6 class="text-overflow m-0 text-secondary"></h6>
 								</div> -->
@@ -801,14 +801,22 @@
 									<!-- <hr class="my-4" /> -->
 									<!-- Description -->
 									<!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
-
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+									<a id="save" title="Save profile" type="submit" href="javascript: saveProfile()" class="btn btn-skygreenish float-right" style="display: none;">Save</a>
+								</div>
+											</div>
+										</div>
+									</div>
 								</form>
 							</div>
 						</div>
 						<div class="card-footer bg-darkish">
-								<div class="row-auto align-items-center">
-									<div class="col-auto text-right mt--4 pb-4">
-										<a id="save" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</a>
+								<div class="row-auto">
+									<div class="col-auto text-right">
+										<a id="save2" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</a>
 									</div>
 								</div>
 							</div>
@@ -1020,11 +1028,12 @@
 			$('#avatarPosition').addClass('card-profile-image')
 
 			$('#save').hide()
+			$('#save2').hide()
 
 			$('#profileTitle').empty().html("Profile")
 
 			$('#profileLocation').each(function () {
-				var content = $(this).val()//.replace(/\n/g,"<br>")
+				let content = $(this).val()//.replace(/\n/g,"<br>")
 				$(this).html(content)
 			    $(this).contents().unwrap()
 
@@ -1116,7 +1125,7 @@
 					}
 
 					reader.readAsDataURL(this.files[0])
-					$('#save').show()
+					$('#save2').show()
 				}
 
 			})
@@ -1129,6 +1138,8 @@
 
 			$('#edit').hide()
 			$('#undo').show()
+
+			$('#save2').hide()
 
 			$('#profileTitle').empty().html("Edit profile")
 
