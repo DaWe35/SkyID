@@ -747,7 +747,7 @@
 							</div>
 							<div class="card-body pt-0 text-center">
 								<form>
-									<div id="profileCard" class="bg-dark mx-md-6 mx-sm-5 pb-5 rounded">
+									<div id="profileCard" class="bg-dark mx-2 pb-5 rounded">
 									<h6 id="psa" style="display:none;" class="heading-small text-secondary mb-4">Public information</h6>
 									<div class="p-auto">
 										<div class="row-auto">
@@ -842,9 +842,9 @@
 										</div>
 									</div>
 								</div>
-								<div class="card-body pb-6 pt-0 bg-darkish">
+								<div class="card-body pb-5 bg-darkish">
 
-									<div class="bg-dark mx-md-6 mx-sm-5 p-5 rounded">
+									<div class="bg-dark mx-2 p-4 rounded">
 										<a href="https://sky-note.hns.siasky.net/" target="_blank">
 											<h2 class="text-light">Example dapp using SkyID</h2>
 										</a>
@@ -1039,19 +1039,22 @@
 
 			$('#profileLocation').each(function () {
 				var content = $(this).val()//.replace(/\n/g,"<br>")
-				$(this).html(content)
-			    $(this).contents().unwrap()
+				$('#profileLocationDiv').empty()
+				$('#profileLocationDiv').html(content)
+			    $(this).hide()
 
 			})
 			$('#profileUsername').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
-				$(this).html(content)
-				$(this).contents().unwrap()
+				$('#profileUsernameDiv').empty()
+				$('#profileUsernameDiv').html(content)
+			    $(this).hide()
 			})
 			$('#profileAboutMe').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
-				$(this).html(content)
-				$(this).contents().unwrap()
+				$('#profileAboutMeDiv').empty()
+				$('#profileAboutMeDiv').html(content)
+			    $(this).hide()
 			})
 
 
