@@ -53,16 +53,17 @@
 
     .custom-control-input:checked~.custom-control-label::before,
     .custom-control-input:not(:disabled):active~.custom-control-label::before {
-      background-color:#25272a !important;
-      border-color:#25272a !important;
+      background-color:#3d3d3d !important;
+      border-color:#3d3d3d !important;
       background-position: center;
       background-repeat:no-repeat;
       background-image: url('data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'8\' height=\'8\' viewBox=\'0 0 8 8\'%3e%3cpath fill=\'%2319cf86\' d=\'M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z\'/%3e%3c/svg%3e')
     }
 
     .custom-control-label::before {
-      background-color: #25272a;
+      background-color: #3d3d3d;
     }
+
   </style>
 </head>
 
@@ -134,7 +135,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-12">
           <div class="row m-0">
-            <div class="col-6 bg-grayish rounded-top text-center text-secondary p-2" id="login_btn"
+            <div class="col-6 bg-dark rounded-top text-center text-secondary p-2" id="login_btn"
               onclick="switchPage('#login')">
               Sign in
             </div>
@@ -143,7 +144,7 @@
                 Sign up </span>
             </div>
           </div>
-          <div id="login_card" class="card bg-grayish border-0 mb-0 rounded-bottom no-top-left-radius">
+          <div id="login_card" class="card bg-dark border-0 mb-0 rounded-bottom no-top-left-radius">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" id="signInForm">
                 <div class="form-group">
@@ -152,11 +153,13 @@
                   </div>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-dark"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text bg-grayish"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input id="loginInput" class="form-control text-secondary bg-dark" placeholder="Your passphrase"
+                    <input id="loginInput" class="form-control text-secondary bg-grayish"
                       type="password" required>
-                    <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    <div class="bg-grayish rounded-righter">
+                    	<span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
                   </div>
                 </div>
 
@@ -168,14 +171,14 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-skygreenish mt-4">Sign in</button>
+                  <button id="sign_in_btn" type="submit" onclick="loadSpinner()" class="btn btn-skygreenish btn-icon mt-4">Sign in</button>
                 </div>
               </form>
             </div>
           </div>
 
 
-          <div id="register_card" class="card bg-grayish border-0 mb-0 rounded-bottom no-top-right-radius display-none">
+          <div id="register_card" class="card bg-dark border-0 mb-0 rounded-bottom no-top-right-radius display-none">
             <div class="card-body px-lg-5 pt-lg-5 pb-lg-5">
               <form role="form" id="createAccountForm">
                 <div class="form-group">
@@ -187,24 +190,26 @@
                     data-animation="true" id="copytoclipboard"
                     class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-dark"><i class="ni ni-lock-circle-open"></i></span>
+                      <span class="input-group-text bg-grayish"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <div class="form-control position-relative bg-dark text-secondary h-auto w-auto">
-                      <span id="passphrase" placeholder="Passphrase"></span>
+                    <div class="form-control position-relative bg-grayish text-secondary h-auto w-auto">
+                      <span id="passphrase"></span>
                     </div>
                   </div>
                 </div>
                 <div class="text-secondary mb-4">
-                  <small>Please keep your passphrase secret. If you lose your passphrase, you lose your
-                    accounts.</small>
+                  <small>Please keep your passphrase secret. You can only access your accounts with your passphrase.</small>
+                </div>
+                <div class="text-secondary mb-4">
+                  <small>Enter your desired username:</small>
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-dark"><i class="ni ni-single-02"></i></span>
+                      <span class="input-group-text bg-grayish"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input id="username" class="form-control text-secondary bg-dark" style="font-size: 16px"
-                      placeholder="Your username" required>
+                    <input id="username" class="form-control text-secondary bg-grayish" style="font-size: 16px"
+                      required>
                   </div>
 
 
@@ -214,11 +219,11 @@
                 <div class="custom-control custom-control-alternative custom-checkbox text-secondary mb-3">
                   <input class="custom-control-input" id="customCheckReg" type="checkbox" required>
                   <label class="custom-control-label" for="customCheckReg">
-                    <span>I wrote down my passphrase in several places</span>
+                    <span>I securely stored my passphrase</span>
                   </label>
                 </div>
                 <div class="text-center">
-                  <button id="createAccountBtn" type="submit" class="btn btn-skygreenish mt-4">Sign up</button>
+                  <button id="createAccountBtn" type="submit" class="btn btn-skygreenish btn-icon mt-4">Sign up</button>
                 </div>
 
 
@@ -319,9 +324,9 @@
           })
 
         }
-        $('#login_btn').removeClass('bg-grayish rounded-top')
+        $('#login_btn').removeClass('bg-dark rounded-top')
         $('#login_btn').addClass('text-secondary mb-1')
-        $('#register_btn').addClass('bg-grayish rounded-top')
+        $('#register_btn').addClass('bg-dark rounded-top')
         // $('#register_btn').removeClass('text-secondary mb-1')
         $('#register_btn').removeClass('mb-1')
         $('#pagecard').removeClass('no-top-left-radius')
@@ -329,10 +334,10 @@
         $('#login_card').addClass('display-none')
         $('#register_border').removeClass('rounded border border-success')
       } else if (page == '#login' || page == '') {
-        $('#login_btn').addClass('bg-grayish   rounded-top')
+        $('#login_btn').addClass('bg-dark   rounded-top')
         // $('#login_btn').removeClass('text-secondary mb-1')
         $('#login_btn').removeClass('mb-1')
-        $('#register_btn').removeClass('bg-grayish rounded-top')
+        $('#register_btn').removeClass('bg-dark rounded-top')
         $('#register_btn').addClass('text-secondary mb-1')
         $('#pagecard').addClass('no-top-left-radius')
         $('#pagecard').removeClass('no-top-right-radius')
@@ -367,12 +372,12 @@
         let createAccountBtn = document.getElementById('createAccountBtn')
         createAccountBtn.disabled = 'disabled'
         createAccountBtn.className += ' disabled'
-        createAccountBtn.innerHTML = 'Initializing profile...'
+        createAccountBtn.innerHTML = '<div class="float-left spinner"> </div>  Initializing profile...'
 
         skyid.setMnemonic(mnemonic, function (success) {
           if (success) {
             console.log('nmset')
-            let profile = { 'username': username, 'aboutMe': '"an extraordinary individual"', 'location': 'Nowhere\'s, Ville' }
+            let profile = { 'username': username, 'aboutMe': '"an extraordinary individual"', 'location': 'Nowheres, Ville' }
             let jsonProfile = JSON.stringify(profile)
             skyid.setFile('profile', jsonProfile, function (success) {
               if (success) {
@@ -397,10 +402,10 @@
 
     $('#signInForm').submit((event) => {
       event.preventDefault()
-      singIn()
+      signIn()
     })
 
-    function singIn() {
+    function signIn() {
       let mnemonic = $('#loginInput').val()
       if ($('#rememberMe').is(':checked')) {
         var rememberMe = true
@@ -411,6 +416,8 @@
       skyid.setMnemonic(mnemonic, function (success) {
         console.log('success', success)
         if (success) {
+
+
           var urlParams = new URLSearchParams(window.location.search)
           var redirect = urlParams.get('redirect')
           var appId = urlParams.get('appId')
@@ -445,6 +452,21 @@
         input.attr('type', 'password')
       }
     })
+
+    function loadSpinner() {
+
+      var wrong_passphrase = window.alert;
+      var sign_in_btn = document.getElementById('sign_in_btn')
+      if ($('#loginInput').val() == ""){
+        sign_in_btn.innerHTML = 'Sign in'
+        return
+      }
+      sign_in_btn.innerHTML = '<div class="float-left spinner"></div> Sign in'
+      window.alert = function() {
+        sign_in_btn.innerHTML = 'Sign in'
+        wrong_passphrase.apply(window,arguments)
+      }
+  }
 
   </script>
 
