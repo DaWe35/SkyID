@@ -225,7 +225,8 @@
 										<img id="navProfilePictureImg" alt="" src="">
 									</span>
 									<div class="media-body ml-2 d-none d-lg-block">
-										<span id="navProfileUsername" class="mb-0 text-sm font-weight-bold text-secondary"></span>
+										<span id="navProfileUsername"
+											class="mb-0 text-sm font-weight-bold text-secondary"></span>
 									</div>
 								</div>
 							</a>
@@ -376,25 +377,24 @@
 					</div>`
 			} else if (page == "#qr-login") {
 				var content = `<div class="wrapper">
-					<div class="row d-flex justify-content-center align-items-center">
-						<div class="col-auto order-xl-1">
-						</div>
-						<div class="col-auto order-xl-1">
-							<div class="card">
-								<div class="card-header bg-dark">
-									<div class="row">
+					<div class="row-auto d-flex justify-content-center align-items-stretch">
+						<div class="col-auto pt-0 order-xl-1">
+							<div class="card bg-darkish">
+								<div class="card-header bg-darkish">
+									<div class="row align-items-center">
 										<div class="col-auto">
 											<h3 class="mb-0 text-secondary">Login with QR-Code</h3>
 										</div>
 									</div>
 									</div>
 										<div class="card-body bg-dark">
+											<div class="bg-dark mx-2 pb-5 rounded">
 											<label class="form-control-label text-light" for="qr-app">Enter Skapp name:</label>
-										<input type="text" id="qr-app" oninput="updateQRCode()" class="form-control text-secondary bg-grayish">
+										<input type="text" id="qr-app" oninput="updateQRCode()" class="form-control text-secondary bg-grayish" autofocus>
 										<br>
 										<div id="qrcode"></div>
 										</div>
-
+</div>
 				</div>
 				</div>
 						</div>
@@ -1041,20 +1041,20 @@
 				var content = $(this).val()//.replace(/\n/g,"<br>")
 				$('#profileLocationDiv').empty()
 				$('#profileLocationDiv').html(content)
-			    $(this).hide()
+				$(this).hide()
 
 			})
 			$('#profileUsername').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
 				$('#profileUsernameDiv').empty()
 				$('#profileUsernameDiv').html(content)
-			    $(this).hide()
+				$(this).hide()
 			})
 			$('#profileAboutMe').each(function () {
 				let content = $(this).val()//.replace(/\n/g,"<br>")
 				$('#profileAboutMeDiv').empty()
 				$('#profileAboutMeDiv').html(content)
-			    $(this).hide()
+				$(this).hide()
 			})
 
 
@@ -1156,15 +1156,15 @@
 
 			$('#profileTitle').empty().html("Edit profile")
 
-			$('#psa').css({'display': 'block'})
+			$('#psa').css({ 'display': 'block' })
 
-			$('#avatarLabel').css({'display': 'block'})
+			$('#avatarLabel').css({ 'display': 'block' })
 
-			$('#usernameLabel').css({'display': 'block', 'float': 'left'})
+			$('#usernameLabel').css({ 'display': 'block', 'float': 'left' })
 
-			$('#aboutMeLabel').css({'display': 'block', 'float': 'left'})
+			$('#aboutMeLabel').css({ 'display': 'block', 'float': 'left' })
 
-			$('#locationLabel').css({'display': 'block', 'float': 'left'})
+			$('#locationLabel').css({ 'display': 'block', 'float': 'left' })
 
 
 			$('#profileUsernameDiv').each(function () {
