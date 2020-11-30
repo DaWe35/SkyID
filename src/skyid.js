@@ -290,6 +290,24 @@ export class SkyID {
 	hideOverlay() {
 		hideOverlay(this.opts)
 	}
+
+	async getProfile(callback = null) {
+		if (this.userId.length != 64) {
+			callback(false)
+			return false
+		}
+
+		try {
+			var { data, revision } = await this.skynetClient.db.getJSON(this.userId, 'profile')
+		} catch (error) {
+			var data = ''
+			var revision = 0
+		}
+		
+		if (callback != null) {
+			callback(data, revision)
+		}
+	}
 	
 	/*
 
