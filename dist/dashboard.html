@@ -41,7 +41,7 @@
 		<div class="scrollbar-inner">
 			<!-- Brand -->
 			<div class="sidenav-header    align-items-center">
-				<a class="navbar-brand" href="#blog" onmousedown="loadPage('#blog')">
+				<a class="navbar-brand" href="#profile" onmousedown="loadPage('#profile')">
 					<img src="assets/img/brand/SkyID_Logo_128_white.png"
 						style="filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);"
 						class="navbar-brand-img" alt="...">
@@ -68,13 +68,13 @@
 						<li class="nav-item">
 							<a class="nav-link text-secondary" href="#dapps" onmousedown="loadPage('#dapps')">
 								<i class="ni ni-app text-skygreenish"></i>
-								<span class="nav-link-text">Connected dapps</span>
+								<span class="nav-link-text">Dapps</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-secondary" href="#qr-login" onmousedown="loadPage('#qr-login')">
-								<i class="ni ni-app text-skygreenish"></i>
-								<span class="nav-link-text">QR-Code login</span>
+								<i class="fa fa-qrcode text-skygreenish"></i>
+								<span class="nav-link-text">QR-Code</span>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -221,31 +221,31 @@
 							<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">
 								<div class="media align-items-center">
-									<i class="ni ni-circle-08 text-secondary"></i>
-									<!-- <span class="avatar avatar-sm rounded-circle">
-										<img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-									</span> -->
-									<div class="media-body    ml-2 d-none d-lg-block">
-										<span class="mb-0 text-sm font-weight-bold text-secondary">Profile</span>
+									<span class="avatar avatar avatar-sm text-right rounded-circle">
+										<img id="navProfilePictureImg" alt="" src="">
+									</span>
+									<div class="media-body ml-2 d-none d-lg-block">
+										<span id="navProfileUsername"
+											class="mb-0 text-sm font-weight-bold text-secondary"></span>
 									</div>
 								</div>
 							</a>
-							<div class="dropdown-menu    dropdown-menu-right bg-darkish">
-								<div class="dropdown-header noti-title">
-									<h6 class="text-overflow m-0 text-secondary">Welcome!</h6>
-								</div>
-								<a href="#profile" class="dropdown-item text-dropdown">
-									<i class="ni ni-single-02"></i>
+							<div class="dropdown-menu dropdown-menu-right bg-darkish">
+								<!-- <div class="dropdown-header noti-title">
+									<h6 class="text-overflow m-0 text-secondary"></h6>
+								</div> -->
+								<a id="myprofile" href="#profile" class="dropdown-item text-dropdown">
+									<i id="myprofileicon" class="ni ni-single-02"></i>
 									<span>My profile</span>
 								</a>
 								<!-- <a href="#!" class="dropdown-item">
 									<i class="ni ni-settings-gear-65"></i>
 									<span>Settings</span>
 								</a> -->
-								<div class="dropdown-divider"></div>
-								<a href="javascript: skyid.sessionDestroy('index.html');"
+								<div class="py-1"></div>
+								<a id="logout" href="javascript: skyid.sessionDestroy('index.html');"
 									class="dropdown-item text-dropdown">
-									<i class="ni ni-user-run"></i>
+									<i id="logouticon" class="ni ni-button-power"></i>
 									<span>Logout</span>
 								</a>
 							</div>
@@ -329,13 +329,14 @@
 	<!-- qrcode.js -->
 	<script src="assets/js/qrcode.min.js"></script>
 
+
 	<script>
 
 		window.addEventListener("hashchange", function () {
 			loadPage(window.location.hash)
 		})
 
-		loadPage(window.location.hash || '#blog')
+		loadPage(window.location.hash || '#profile')
 
 		var qrCode;
 
@@ -352,15 +353,15 @@
 				location.hash = page;
 			}
 			if (page == '#dapps') {
-				var content = `<div class="card bg-grayish">
+				var content = `<div class="card bg-dark">
 						<!-- Card header -->
-						<div class="card-header border-0 bg-grayish">
+						<div class="card-header border-0 bg-dark">
 							<h3 class="mb-0 text-white">Connected dapps</h3>
 						</div>
 						<!-- Light table -->
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<thead class="bg-grayish text-secondary">
+								<thead class="bg-dark text-secondary">
 									<tr>
 										<th scope="col" class="sort" data-sort="name">Dapp</th>
 										<th scope="col" class="sort" data-sort="budget">Url</th>
@@ -375,15 +376,29 @@
 						</div>
 					</div>`
 			} else if (page == "#qr-login") {
-				var content = `<div class="card bg-grayish">
-						<!-- Card header -->
-						<div class="card-header border-0 bg-grayish">
-							<h3 class="mb-0 text-white">Login with QR-Code</h3>
+				var content = `<div class="wrapper">
+					<div class="row-auto d-flex justify-content-center align-items-stretch">
+						<div class="col-auto pt-0 order-xl-1">
+							<div class="card bg-darkish">
+								<div class="card-header bg-darkish">
+									<div class="row align-items-center">
+										<div class="col-auto">
+											<h3 class="mb-0 text-secondary">Login with QR-Code</h3>
+										</div>
+									</div>
+									</div>
+										<div class="card-body bg-dark">
+											<div class="bg-dark mx-2 pb-5 rounded">
+											<label class="form-control-label text-light" for="qr-app">Enter Skapp name:</label>
+										<input type="text" id="qr-app" oninput="updateQRCode()" class="form-control text-secondary bg-grayish" autofocus>
+										<br>
+										<div id="qrcode"></div>
+										</div>
+</div>
+				</div>
+				</div>
 						</div>
-						<input type="text" id="qr-app" placeholder="Enter Skapp name..." oninput="updateQRCode()">
-						<div id="qrcode" style="padding: 16px; background-color: white"></div>
-
-					</div>`
+				</div>`
 			} else if (page == "#stats") {
 				content = `<div class="row">
 				<div class="col-lg-8">
@@ -660,167 +675,189 @@
 				</div>
 			</div>`
 			} else if (page == '#profile') {
-				var content = `<div class="row">
-				<!-- <div class="col-lg-4 order-xl-2">
-					<div class="card card-profile">
-						<img src="assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
-						<div class="row justify-content-center">
-							<div class="col-lg-3 order-lg-2">
-								<div class="card-profile-image">
-									<a href="#">
-										<img src="assets/img/theme/team-4.jpg" class="rounded-circle">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-							<div class="d-flex justify-content-between">
-								<a href="#" class="btn btn-sm btn-info    mr-4 ">Connect</a>
-								<a href="#" class="btn btn-sm btn-default float-right">Message</a>
-							</div>
-						</div>
-						<div class="card-body pt-0">
-							<div class="row">
-								<div class="col">
-									<div class="card-profile-stats d-flex justify-content-center">
-										<div>
-											<span class="heading">22</span>
-											<span class="description">Friends</span>
-										</div>
-										<div>
-											<span class="heading">10</span>
-											<span class="description">Photos</span>
-										</div>
-										<div>
-											<span class="heading">89</span>
-											<span class="description">Comments</span>
-										</div>
+				var content = `<div class="wrapper">
+					<div class="row-auto d-flex justify-content-center align-items-stretch">
+						<!--<div class="col-lg-4 order-xl-2">
+						<div class="card card-profile">
+							<img src="assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+							<div class="row justify-content-center">
+								<div class="col-lg-3 order-lg-2">
+									<div class="card-profile-image">
+										<a href="#">
+											<img src="assets/img/theme/team-4.jpg" class="rounded-circle">
+										</a>
 									</div>
 								</div>
 							</div>
-							<div class="text-center">
-								<h5 class="h3">
-									Jessica Jones<span class="font-weight-light">, 27</span>
-								</h5>
-								<div class="h5 font-weight-300">
-									<i class="ni location_pin mr-2"></i>Bucharest, Romania
-								</div>
-								<div class="h5 mt-4">
-									<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-								</div>
-								<div>
-									<i class="ni education_hat mr-2"></i>University of Computer Science
+							<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+								<div class="d-flex justify-content-between">
+									<a href="#" class="btn btn-sm btn-info    mr-4 ">Connect</a>
+									<a href="#" class="btn btn-sm btn-default float-right">Message</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div> -->
-				<div class="col-lg-2 order-xl-1">
-				</div>
-				<div class="col-sm-12 col-xl-8 order-xl-1">
-					<div class="card bg-grayish">
-						<div class="card-header bg-grayish">
-							<div class="row align-items-center">
-								<div class="col-8">
-									<h3 class="mb-0 text-secondary">Edit profile</h3>
-								</div>
-								<div class="col-4 text-right">
-									<a id="btn1" title="Click me, the other save button is ugly" href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<form>
-								<h6 class="heading-small text-secondary mb-4">Public informations</h6>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label class="form-control-label text-light" for="profileUsername">Username</label>
-												<input type="text" id="profileUsername" class="form-control text-secondary bg-dark" placeholder="Username" value="">
+							<div class="card-body pt-0">
+								<div class="row">
+									<div class="col">
+										<div class="card-profile-stats d-flex justify-content-center">
+											<div>
+												<span class="heading">22</span>
+												<span class="description">Friends</span>
+											</div>
+											<div>
+												<span class="heading">10</span>
+												<span class="description">Photos</span>
+											</div>
+											<div>
+												<span class="heading">89</span>
+												<span class="description">Comments</span>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-10">
-											<div class="form-group">
-												<label class="form-control-label text-light" for="profilePicture">Profile picture</label>
+								<div class="text-center">
+									<h5 class="h3">
+										Jessica Jones<span class="font-weight-light">, 27</span>
+									</h5>
+									<div class="h5 font-weight-300">
+										<i class="ni location_pin mr-2"></i>Bucharest, Romania
+									</div>
+									<div class="h5 mt-4">
+										<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+									</div>
+									<div>
+										<i class="ni education_hat mr-2"></i>University of Computer Science
+									</div>
+								</div>
+							</div>
+						 </div>
+					</div> --!>
+					<div class="col-sm-12 order-xl-1">
+						<div class="card bg-darkish">
+							<div class="card-header bg-darkish">
+								<div class="row align-items-center">
+									<div class="col-8">
+										<h3 id="profileTitle" class="mb-0 text-secondary">Profile</h3>
+									</div>
+									<div class="col-4 text-right">
 
-												<div class="profilePictureInput">
-													<a href="#" id="profPictLink" target="_blank">
-														<img id="profilePictureImg" src="" alt="">
-													</a>
-													<input type="file" id="profilePicture" accept="image/*" class="form-control text-secondary bg-dark">
+										<a id="edit" title="Edit profile" href="javascript: editProfile()" class="btn btn-dark">Edit</a>
+										<a id="undo" title="Undo changes" href="javascript: undoEdit()" class="btn btn-dark" style="display:none;">Undo</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body pt-0 text-center">
+								<form>
+									<div id="profileCard" class="bg-dark mx-2 pb-5 rounded">
+									<h6 id="psa" style="display:none;" class="heading-small text-secondary mb-4">Public information</h6>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+													<label id="avatarLabel" style="display: none;" class="form-control-label text-light" for="profilePicture">Avatar</label>
+													<div id="avatarPosition" class="profilePictureInput card-profile-image">
+														<a id="profPictLink" target="_blank">
+															<label>
+																<img id="profilePictureImg" alt="">
+																<input type="file" id="profilePicture" accept="image/*" class="file-upload__input">
+															</label>
+															</a>
+													</div>
+													<div class="d-flex justify-content-center">
+														<a style="display: none;" id="generateAvatarBtn" href="javascript: generateRandomAvatar()" class="btn btn-sm btn-dark">generate random avatar</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="pl-lg-4">
-									<div class="form-group">
-										<label class="form-control-label text-light">About Me</label>
-										<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark" placeholder="A few words about you ..."></textarea>
-									</div>
-								</div>
-								<div class="pl-lg-4">
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label class="form-control-label text-light" for="profileLocation">Location</label>
-												<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" placeholder="Location" value="">
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+													<label id="usernameLabel" style="display: none;" class="form-control-label text-light" for="profileUsername">Username</label>
+													<h3 id="profileUsernameDiv" class="text-secondary pt-4"></h3>
+												</div>
 											</div>
 										</div>
 									</div>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+										<div class="form-group">
+											<label id="aboutMeLabel" style="display: none;" class="form-control-label text-light">About Me</label>
+											<div id="profileAboutMeDiv" class="h5 text-secondary"></div>
+										</div>
+									</div>
 								</div>
+											</div>
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+													<label id="locationLabel" style="display: none;" class="form-control-label text-light" for="profileLocation">Location</label>
+													<div type="text" id="profileLocationDiv" class="h5 font-weight-300 text-secondary" placeholder="Location"></div>
 
-								<!-- <hr class="my-4" /> -->
-								<!-- Description -->
-								<!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
+												</div>
+											</div>
+										</div>
+									</div>
 
-							</form>
-						</div>
-						<div class="card-footer bg-grayish">
-							<div class="row align-items-center">
-								<div class="col-12 text-right">
-									<a id="btn2" title="Click me, I'm more green. You know what I mean? Greeeeen hmmm." href="javascript: saveProfile()" class="btn btn-skygreenish">Save</a>
+									<!-- <hr class="my-4" /> -->
+									<!-- Description -->
+									<!-- <h6 class="heading-small text-secondary mb-4">Private informations</h6> -->
+									<div class="p-auto">
+										<div class="row-auto">
+											<div class="col-auto">
+												<div class="form-group">
+									<a id="save" title="Save profile" type="submit" href="javascript: saveProfile()" class="btn btn-skygreenish float-right" style="display: none;">Save</a>
 								</div>
+											</div>
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
+						<div class="card-footer bg-darkish">
+								<div class="row-auto">
+									<div class="col-auto text-right">
+										<button type="submit" id="save2" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</button>
+									</div>
+								</div>
+							</div>
 					</div>
 				</div>`
 			} else if (page == "#blog") {
 				var content = `
-				<div class="row">
-					<div class="col-lg-2 order-xl-1">
-					</div>
-					<div class="col-sm-12 col-xl-8 order-xl-1">
-						<div class="card">
-							<div class="card-header bg-grayish">
-								<div class="row align-items-center">
-									<div class="col-8">
-										<h3 class="mb-0 text-secondary">Blog</h3>
-									</div>
-									<div class="col-4 text-right">
-										<!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
-										<small class="float-right text-light">Some other content will be here soon</small>
+				<div class="wrapper">
+					<div class="row-auto d-flex justify-content-stretch align-items-center">
+						<div class="col-sm-12 order-xl-1">
+							<div class="card" style="min-width:60vw;">
+								<div class="card-header bg-darkish">
+									<div class="row align-items-center">
+										<div class="col-8">
+											<h3 class="mb-0 text-secondary">Blog</h3>
+										</div>
+										<div class="col-4 text-right">
+											<!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
+											<small class="float-right text-light">More content coming soon</small>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card-body bg-grayish">
+								<div class="card-body pb-5 bg-darkish">
 
-								<a href="https://sky-note.hns.siasky.net/" target="_blank">
-									<h2 class="text-light">Example dapp using SkyID</h2>
-								</a>
-								<a href="https://github.com/DaWe35" class="skygreenish" target="_blank">by DaWe</a>
-								<br><br>
+									<div class="bg-dark mx-2 p-4 rounded">
+										<a href="https://sky-note.hns.siasky.net/" target="_blank">
+											<h2 class="text-light">Example dapp using SkyID</h2>
+										</a>
+										<a href="https://github.com/DaWe35" class="skygreenish" target="_blank">by DaWe</a>
+										<br><br>
 
-								<a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
-									<h2 class="text-light">How to Make Decentralized Identity using Skynet</h2>
-								</a>
-								<a href="https://medium.com/@davidvorick" class="skygreenish" target="_blank">by David Vorick</a>
+										<a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3" target="_blank">
+											<h2 class="text-light">How to Make Decentralized Identity using Skynet</h2>
+										</a>
+										<a href="https://medium.com/@davidvorick" class="skygreenish" target="_blank">by David Vorick</a>
+									</div>
 
+								</div>
 							</div>
 						</div>
 					</div>
@@ -829,7 +866,8 @@
 			}
 			document.getElementById('content').innerHTML = content
 			if (page == '#profile') {
-				fetchProfile()
+				fetchProfile(),
+					updateAvatar()
 			} else if (page == '#dapps') {
 				fetchDapps()
 			} else if (page == '#qr-login') {
@@ -905,13 +943,13 @@
 			})
 		}
 
-
 		function fetchProfile() {
-			var profileUsername = document.getElementById('profileUsername')
-			var profileAboutMe = document.getElementById('profileAboutMe')
-			var profileLocation = document.getElementById('profileLocation')
+			var profileUsernameDiv = document.getElementById('profileUsernameDiv')
+			var profileAboutMeDiv = document.getElementById('profileAboutMeDiv')
+			var profileLocationDiv = document.getElementById('profileLocationDiv')
 			var profilePictureImg = document.getElementById('profilePictureImg')
 			var profPictLink = document.getElementById('profPictLink')
+			var navProfilePictureImg = document.getElementById('navProfilePictureImg')
 
 			// fetch file
 			skyid.getFile('profile', function (response, revision) {
@@ -919,18 +957,23 @@
 					alert('Profile not found, please check your connection and retry')
 				} else { // success
 					var respObs = JSON.parse(response)
-					profileUsername.value = respObs.username
-					profileAboutMe.value = respObs.aboutMe
-					profileLocation.value = respObs.location || ''
+					navProfileUsername.innerHTML = profileUsernameDiv.innerHTML = respObs.username
+					profileAboutMeDiv.innerHTML = respObs.aboutMe
+					profileLocationDiv.innerHTML = respObs.location || ''
 					console.log('Profile data:', respObs)
 					if (typeof respObs.avatar != 'undefined') {
-						profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
+						navProfilePictureImg.src = profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
 						profPictLink.href = getProfPictUrl(respObs.avatar, 1920)
 					}
+					else {
+						navProfilePictureImg.src = profilePictureImg.src = "https://avatars.dicebear.com/api/avataaars/" + (new Date).getTime() + ".svg"
+
+
+					}
+
 				}
 			})
 		}
-
 
 		function getProfPictUrl(skyfile, size) {
 			if (skyid.opts != null && skyid.opts.devMode != null && skyid.opts.devMode == true) {
@@ -939,8 +982,6 @@
 				return '/' + skyfile + '/' + size
 			}
 		}
-
-
 
 		async function handleImageUpload(callback) {
 			skyid.showOverlay()
@@ -959,7 +1000,6 @@
 				try {
 					const compressedFile = await imageCompression(imageFile, options);
 					console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-
 					compressedFile.name = String(sizes[i])
 					profilePicture.push(compressedFile)
 				} catch (error) {
@@ -980,6 +1020,7 @@
 		}
 
 
+
 		function saveProfile() {
 
 			if (document.getElementById("profilePicture").files.length == 0) {
@@ -987,7 +1028,56 @@
 			} else {
 				var profilePictureSkylink = handleImageUpload(saveProfileJson);
 			}
+
+			$('#profileCard').addClass('bg-dark pb-5 rounded')
+			$('#avatarPosition').addClass('card-profile-image')
+
+			$('#save').hide()
+			$('#save2').hide()
+
+			$('#profileTitle').empty().html("Profile")
+
+			$('#profileLocation').each(function () {
+				var content = $(this).val()//.replace(/\n/g,"<br>")
+				$('#profileLocationDiv').empty()
+				$('#profileLocationDiv').html(content)
+				$(this).hide()
+
+			})
+			$('#profileUsername').each(function () {
+				let content = $(this).val()//.replace(/\n/g,"<br>")
+				$('#profileUsernameDiv').empty()
+				$('#profileUsernameDiv').html(content)
+				$(this).hide()
+			})
+			$('#profileAboutMe').each(function () {
+				let content = $(this).val()//.replace(/\n/g,"<br>")
+				$('#profileAboutMeDiv').empty()
+				$('#profileAboutMeDiv').html(content)
+				$(this).hide()
+			})
+
+
+
+			$('#avatarLabel').css('display', 'none')
+
+			$('#usernameLabel').css('display', 'none')
+
+			$('#aboutMeLabel').css('display', 'none')
+
+			$('#locationLabel').css('display', 'none')
+
+			$('#psa').css('display', 'none')
+
+
+			$('#generateAvatarBtn').hide()
+			$('#undo').hide()
+			$('#edit').show()
+
 		}
+
+
+
 
 		function saveProfileJson(profilePicture = false) {
 
@@ -1031,6 +1121,103 @@
 			let input = document.getElementById('qr-app');
 			var { postMessage, publicAppData } = skyid.makeLoginSuccessPayload(input.value, 'QR login');
 			qrCode.makeCode(JSON.stringify(postMessage)); // make another code.
+		}
+
+		//instant visual feedback when switching avatars
+		function updateAvatar() {
+			var profilePictureImg = $("#profilePictureImg"),
+				profilePicture = $("#profilePicture")
+			profilePicture.change(function () {
+
+				if (this.files && this.files[0]) {
+					var reader = new FileReader()
+
+					reader.onload = function (e) {
+						profilePictureImg.attr("src", e.target.result)
+					}
+
+					reader.readAsDataURL(this.files[0])
+					$('#save2').show()
+				}
+
+			})
+		}
+
+		function editProfile() {
+
+			$('#profileCard').removeClass('bg-dark pb-5 rounded')
+			$('#avatarPosition').removeClass('card-profile-image')
+
+			$('#edit').hide()
+			$('#undo').show()
+
+			$('#save2').hide()
+			$('#generateAvatarBtn').show()
+
+			$('#profileTitle').empty().html("Edit profile")
+
+			$('#psa').css({ 'display': 'block' })
+
+			$('#avatarLabel').css({ 'display': 'block' })
+
+			$('#usernameLabel').css({ 'display': 'block', 'float': 'left' })
+
+			$('#aboutMeLabel').css({ 'display': 'block', 'float': 'left' })
+
+			$('#locationLabel').css({ 'display': 'block', 'float': 'left' })
+
+
+			$('#profileUsernameDiv').each(function () {
+				var content1 = $(this).html()
+				$(this).html('<input id="profileUsername" type="text" class="form-control text-secondary bg-dark" value="' + content1 + '">')
+			})
+			$('#profileAboutMeDiv').each(function () {
+				var content2 = $(this).html()
+				$(this).html('<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark">' + content2 + '</textarea>')
+			})
+			$('#profileLocationDiv').each(function () {
+				var content3 = $(this).html()
+				$(this).html('<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" value="' + content3 + '">')
+			})
+
+			$('#save').show()
+
+		}
+
+		function undoEdit() {
+
+			$('#profileCard').addClass('bg-dark pb-5 rounded')
+			$('#avatarPosition').addClass('card-profile-image')
+
+			$('#undo').hide()
+			$('#edit').show()
+
+			$('#generateAvatarBtn').hide()
+
+			$('#profileTitle').empty().html("Profile")
+
+			$('#avatarLabel').css('display', 'none')
+
+			$('#usernameLabel').css('display', 'none')
+
+			$('#aboutMeLabel').css('display', 'none')
+
+			$('#locationLabel').css('display', 'none')
+
+			$('#psa').css('display', 'none')
+
+
+			$('#profileUsernameDiv').empty()
+			$('#profileAboutMeDiv').empty()
+			$('#profileLocationDiv').empty()
+
+			fetchProfile()
+
+			$('#save').hide()
+		}
+
+		function generateRandomAvatar() {
+			profilePictureImg.src = "https://avatars.dicebear.com/api/avataaars/" + (new Date).getTime() + ".svg"
 		}
 
 	</script>

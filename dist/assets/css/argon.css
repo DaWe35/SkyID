@@ -1880,7 +1880,7 @@ pre code {
     padding: .625rem .75rem;
     transition: all .15s cubic-bezier(.68, -.55, .265, 1.55);
     color: #8898aa;
-    border: 1px solid #dee2e6;
+    border: 1px solid #1d1e21;
     border-radius: .25rem;
     background-color: #fff;
     background-clip: padding-box;
@@ -3417,13 +3417,10 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
 
 .dropdown-item:hover, .dropdown-item:focus {
     text-decoration: none;
-    color: #16181b;
-    background-color: #f6f9fc;
 }
 
 .dropdown-item.active, .dropdown-item:active {
     text-decoration: none;
-    color: #16181b;
     background-color: transparent;
 }
 
@@ -6807,6 +6804,10 @@ a.bg-darker:hover, a.bg-darker:focus, button.bg-darker:hover, button.bg-darker:f
 .rounded-right {
     border-top-right-radius: .375rem !important;
     border-bottom-right-radius: .375rem !important;
+}
+.rounded-righter {
+    border-top-right-radius: .25rem !important;
+    border-bottom-right-radius: .25rem !important;
 }
 
 .rounded-bottom {
@@ -18482,15 +18483,15 @@ a.section-darker:hover, a.section-darker:focus, button.section-darker:hover, but
 }
 
 .shadow-sm--hover:hover {
-    box-shadow: 0 0 .5rem rgba(136, 152, 170, .075) !important;
+    box-shadow: 0 0 .5rem rgb(25, 207, 134, .075) !important;
 }
 
 .shadow--hover:hover {
-    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15) !important;
+    box-shadow: 0 0 2rem 0 rgb(25, 207, 134, .15) !important;
 }
 
 .shadow-lg--hover:hover {
-    box-shadow: 0 0 3rem rgba(136, 152, 170, .175) !important;
+    box-shadow: 0 0 3rem rgb(25, 207, 134, .175) !important;
 }
 
 .shadow-none--hover:hover {
@@ -22140,7 +22141,7 @@ a.text-darkish:hover, a.text-darkish:focus {
 }
 
 a.text-dropdown:hover, a.text-dropdown:focus {
-    color: black !important;
+    color: rgba(255, 255, 255, .65) !important;
 }
 
 .text-grayish {
@@ -22184,12 +22185,23 @@ a.text-grayish:hover, a.text-grayish:focus {
     box-shadow: none, 0 0 0 0 rgba(45, 206, 137, .5);
 }
 
-.profilePictureInput img, .profilePictureInput input {
-    display: inline-block;
+
+.profilePictureInput img {
+    display: flex;
+    justify-content: center;
+    background-size:contain;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 2px solid rgba(45, 206, 137, .5);
+overflow: hidden;
+height: 10vh;
+width: 10vh;
+cursor: pointer;
+background-color: #19cf86;
 }
 
-.profilePictureInput input {
-    width: 50%;
+.file-upload__input {
+    display: none;
 }
 
 #copytoclipboard:hover {
@@ -22215,3 +22227,66 @@ a.text-grayish:hover, a.text-grayish:focus {
         opacity: 0;
     }
 }
+
+#save {
+    display: none;
+}
+
+#profileCard {
+    background-color: dark;
+}
+
+#navProfilePictureImg {
+    background-color: #19cf86;
+
+}
+
+#logout.text-dropdown:hover > #logouticon, #logout.text-dropdown:focus > #logouticon {
+    color: red !important;
+}
+
+#myprofile.text-dropdown:hover > #myprofileicon, #myprofile.text-dropdown:focus > #myprofileicon {
+    color: #19cf86 !important;
+}
+
+@media (min-width: 1200px) {
+    .wrapper {
+        width:100vh;
+    }
+}
+
+input, textarea {
+    caret-color: #19cf86;
+  }
+
+  @keyframes spin {
+	from {
+	  transform: rotate(0);
+	}
+	to{
+	  transform: rotate(359deg);
+	}
+  }
+
+
+  /* GRID STYLING */
+
+  .spin-box {
+	position: inherit;
+	width: 40px;
+	height: 40px;
+	background-color: transparent;
+	right: 0%;
+	bottom: 0%;
+  }
+
+  .spinner {
+	width: 20px;
+	height: 20px;
+	border: 3px solid white;
+	border-top: 3px solid transparent;
+	border-radius: 50%;
+    animation: spin .5s linear 0s infinite;
+    overflow: hidden;
+    margin-right: 1vw;
+  }
