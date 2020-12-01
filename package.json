@@ -1,6 +1,6 @@
 {
   "name": "skyid",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Sky ID auth system for Skynet",
   "main": "src/export/module.js",
   "files": [
