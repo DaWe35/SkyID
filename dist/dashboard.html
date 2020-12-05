@@ -68,13 +68,13 @@
 						<li class="nav-item">
 							<a class="nav-link text-secondary" href="#dapps" onmousedown="loadPage('#dapps')">
 								<i class="ni ni-app text-skygreenish"></i>
-								<span class="nav-link-text">Dapps</span>
+								<span class="nav-link-text">Connected apps</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-secondary" href="#qr-login" onmousedown="loadPage('#qr-login')">
 								<i class="fa fa-qrcode text-skygreenish"></i>
-								<span class="nav-link-text">QR-Code</span>
+								<span class="nav-link-text">QR-Code login</span>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -816,13 +816,6 @@
 								</form>
 							</div>
 						</div>
-						<div class="card-footer bg-darkish">
-								<div class="row-auto">
-									<div class="col-auto text-right">
-										<button type="submit" id="save2" title="Save profile" href="javascript: saveProfile()" class="btn btn-skygreenish" style="display: none;">Save</button>
-									</div>
-								</div>
-							</div>
 					</div>
 				</div>`
 			} else if (page == "#blog") {
@@ -845,7 +838,7 @@
 								<div class="card-body pb-5 bg-darkish">
 
 									<div class="bg-dark mx-2 p-4 rounded">
-										<a href="https://sky-note.hns.siasky.net/" target="_blank">
+										<a href="https://sky-note.hns.skyportal.xyz/" target="_blank">
 											<h2 class="text-light">Example dapp using SkyID</h2>
 										</a>
 										<a href="https://github.com/DaWe35" class="skygreenish" target="_blank">by DaWe</a>
@@ -932,7 +925,7 @@
 					}
 					if (rows == '') {
 						rows += `<tr class="text-light">
-								<th scope="row">There are no connected dapps. <a class="text-skygreenish" href="https://sky-note.hns.siasky.net/" target="_blank">Try out this example!</a></th>
+								<th scope="row">There are no connected dapps. <a class="text-skygreenish" href="https://sky-note.hns.skyportal.xyz/" target="_blank">Try out this example!</a></th>
 								<td class="budget"></td>
 								<td class="budget"></td>
 								<td class="text-right"></td>
@@ -962,7 +955,8 @@
 					profileLocationDiv.innerHTML = respObs.location || ''
 					console.log('Profile data:', respObs)
 					if (typeof respObs.avatar != 'undefined') {
-						navProfilePictureImg.src = profilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
+						navProfilePictureImg.src = getProfPictUrl(respObs.avatar, 50)
+						profilePictureImg.src = getProfPictUrl(respObs.avatar, 150)
 						profPictLink.href = getProfPictUrl(respObs.avatar, 1920)
 					}
 					else {
@@ -977,7 +971,7 @@
 
 		function getProfPictUrl(skyfile, size) {
 			if (skyid.opts != null && skyid.opts.devMode != null && skyid.opts.devMode == true) {
-				return 'https://siasky.net/' + skyfile + '/' + size
+				return 'https://skyportal.xyz/' + skyfile + '/' + size
 			} else {
 				return '/' + skyfile + '/' + size
 			}
@@ -1026,17 +1020,24 @@
 			if (document.getElementById("profilePicture").files.length == 0) {
 				saveProfileJson()
 			} else {
-				var profilePictureSkylink = handleImageUpload(saveProfileJson);
+				handleImageUpload(saveProfileJson);
 			}
+
+		}
+
+
+
+
+		function saveProfileJson(profilePicture = false) {
+
+			let username = document.getElementById('profileUsername').value
+			let aboutMe = document.getElementById('profileAboutMe').value
+			let location = document.getElementById('profileLocation').value
 
 			$('#profileCard').addClass('bg-dark pb-5 rounded')
 			$('#avatarPosition').addClass('card-profile-image')
-
 			$('#save').hide()
-			$('#save2').hide()
-
 			$('#profileTitle').empty().html("Profile")
-
 			$('#profileLocation').each(function () {
 				var content = $(this).val()//.replace(/\n/g,"<br>")
 				$('#profileLocationDiv').empty()
@@ -1057,33 +1058,14 @@
 				$(this).hide()
 			})
 
-
-
 			$('#avatarLabel').css('display', 'none')
-
 			$('#usernameLabel').css('display', 'none')
-
 			$('#aboutMeLabel').css('display', 'none')
-
 			$('#locationLabel').css('display', 'none')
-
 			$('#psa').css('display', 'none')
-
-
 			$('#generateAvatarBtn').hide()
 			$('#undo').hide()
 			$('#edit').show()
-
-		}
-
-
-
-
-		function saveProfileJson(profilePicture = false) {
-
-			let username = document.getElementById('profileUsername').value
-			let aboutMe = document.getElementById('profileAboutMe').value
-			let location = document.getElementById('profileLocation').value
 
 			skyid.getFile('profile', function (response, revision) {
 				if (response == '') { // file not found
@@ -1106,8 +1088,10 @@
 						}
 						if (profilePicture != false) {
 							let profilePictureImg = document.getElementById('profilePictureImg')
+							let navProfilePictureImg = document.getElementById('navProfilePictureImg')
 							let profPictLink = document.getElementById('profPictLink')
-							profilePictureImg.src = getProfPictUrl(profilePicture, 50)
+							profilePictureImg.src = getProfPictUrl(profilePicture, 150)
+							navProfilePictureImg.src = getProfPictUrl(profilePicture, 50)
 							profPictLink.href = getProfPictUrl(profilePicture, 1920)
 
 							document.getElementById("profilePicture").value = ""
@@ -1137,51 +1121,43 @@
 					}
 
 					reader.readAsDataURL(this.files[0])
-					$('#save2').show()
+					editProfile()
 				}
 
 			})
 		}
 
 		function editProfile() {
+			if ($('#undo').is(":hidden")) {
+				$('#undo').show()
+				$('#edit').hide()
 
-			$('#profileCard').removeClass('bg-dark pb-5 rounded')
-			$('#avatarPosition').removeClass('card-profile-image')
+				$('#profileCard').removeClass('bg-dark pb-5 rounded')
+				$('#avatarPosition').removeClass('card-profile-image')
 
-			$('#edit').hide()
-			$('#undo').show()
+				$('#generateAvatarBtn').show()
+				$('#profileTitle').empty().html("Edit profile")
+				$('#psa').css({ 'display': 'block' })
+				$('#avatarLabel').css({ 'display': 'block' })
+				$('#usernameLabel').css({ 'display': 'block', 'float': 'left' })
+				$('#aboutMeLabel').css({ 'display': 'block', 'float': 'left' })
+				$('#locationLabel').css({ 'display': 'block', 'float': 'left' })
 
-			$('#save2').hide()
-			$('#generateAvatarBtn').show()
+				$('#profileUsernameDiv').each(function () {
+					var content1 = $(this).html()
+					$(this).html('<input id="profileUsername" type="text" class="form-control text-secondary bg-dark" value="' + content1 + '">')
+				})
+				$('#profileAboutMeDiv').each(function () {
+					var content2 = $(this).html()
+					$(this).html('<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark">' + content2 + '</textarea>')
+				})
+				$('#profileLocationDiv').each(function () {
+					var content3 = $(this).html()
+					$(this).html('<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" value="' + content3 + '">')
+				})
 
-			$('#profileTitle').empty().html("Edit profile")
-
-			$('#psa').css({ 'display': 'block' })
-
-			$('#avatarLabel').css({ 'display': 'block' })
-
-			$('#usernameLabel').css({ 'display': 'block', 'float': 'left' })
-
-			$('#aboutMeLabel').css({ 'display': 'block', 'float': 'left' })
-
-			$('#locationLabel').css({ 'display': 'block', 'float': 'left' })
-
-
-			$('#profileUsernameDiv').each(function () {
-				var content1 = $(this).html()
-				$(this).html('<input id="profileUsername" type="text" class="form-control text-secondary bg-dark" value="' + content1 + '">')
-			})
-			$('#profileAboutMeDiv').each(function () {
-				var content2 = $(this).html()
-				$(this).html('<textarea style="font-size: 16px" id="profileAboutMe" rows="4" class="form-control text-secondary bg-dark">' + content2 + '</textarea>')
-			})
-			$('#profileLocationDiv').each(function () {
-				var content3 = $(this).html()
-				$(this).html('<input type="text" id="profileLocation" class="form-control text-secondary bg-dark" value="' + content3 + '">')
-			})
-
-			$('#save').show()
-
+				$('#save').show()
+			}
 		}
 
 		function undoEdit() {
