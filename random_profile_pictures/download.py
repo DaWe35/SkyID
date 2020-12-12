@@ -14,12 +14,15 @@ def download(url, id):
 	
 	# write to file
 	for size in sizes:
+		""" 
+		You need to convert the SVG to PNG here!
+ 		"""
 		file_name = os.path.join(folder_name, str(size) + '.svg')
 		with open(file_name, "wb") as file:
 			file.write(response.content)
 
 i = 0
-while i < 1000:
+while i < 10:
 	print(i)
 	download('https://avatars.dicebear.com/4.4/api/avataaars/' + str(i) + '.svg', i)
 	i += 1
