@@ -1,6 +1,6 @@
 function generateRandomAvatarUrl() {
-	let rand = getRandomInt(0, 1000)
-	return 'vAO0h_ICCAc91xxxNIbd4aAEz9B7pnJet-6rrrf64cyXxA/' + rand
+	let rand = getRandomInt(0, 99)
+	return 'RABycdgWznT8YeIk57CDE9w0CiwWeHi7JoYOyTwq_UaSXQ/' + rand
 }
 
 function getRandomInt(min, max) {
