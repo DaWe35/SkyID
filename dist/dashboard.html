@@ -328,6 +328,7 @@
 	<script type="text/javascript" src="assets/js/browser-image-compression.js"></script>
 	<!-- qrcode.js -->
 	<script src="assets/js/qrcode.min.js"></script>
+	<script src="frontend.js"></script>
 
 
 	<script>
@@ -763,7 +764,7 @@
 															</a>
 													</div>
 													<div class="d-flex justify-content-center">
-														<a style="display: none;" id="generateAvatarBtn" href="javascript: generateRandomAvatar()" class="btn btn-sm btn-dark">generate random avatar</a>
+														<a style="display: none;" id="generateAvatarBtn" href="javascript: generateRandomAvatarButton()" class="btn btn-sm btn-dark">generate random avatar</a>
 													</div>
 												</div>
 											</div>
@@ -1192,8 +1193,10 @@
 			$('#save').hide()
 		}
 
-		function generateRandomAvatar() {
-			profilePictureImg.src = "https://avatars.dicebear.com/api/avataaars/" + (new Date).getTime() + ".svg"
+		function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 
 	</script>
