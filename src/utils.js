@@ -4,7 +4,7 @@ import Url from "url-parse"
 
 export function setCookie(values, rememberMe = false) {
 	if (typeof(Storage) == 'undefined') {
-		alert('Unable to securely save your passphrase, your browser not supports web storage')
+		alert('Unable to securely save your passphrase, your browser does not support web storage')
 		return
 	}
 	let cvalue = JSON.stringify(values)
