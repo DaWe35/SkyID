@@ -22,7 +22,7 @@ export class SkyID {
 
 
 		if (isOptionTrue('devMode', this.opts)) {
-			console.log('devMode on, using https://skyportal.xyz.net')
+			console.log('devMode on, using https://skyportal.xyz')
 			this.skynetClient = new SkynetClient('https://skyportal.xyz', this.opts)
 			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
