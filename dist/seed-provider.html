@@ -1,0 +1,535 @@
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="SkyID - sign in">
+  <meta name="author" content="DaWe35">
+  <title>SkyID 1.3.7</title>
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/brand/SkyID_Logo_128_white.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <style>
+    #login_btn,
+    #register_btn {
+      cursor: pointer;
+    }
+
+    .display-none {
+      display: none;
+    }
+
+    .disabled {
+      background-color: gray !important;
+    }
+
+    .field-icon {
+      float: right;
+      margin-right: 15px;
+      margin-left: 15px;
+      margin-top: 15px;
+      position: relative;
+      z-index: 2;
+      color: #adb5bd;
+    }
+
+    .custom-control-input:checked~.custom-control-label::before,
+    .custom-control-input:not(:disabled):active~.custom-control-label::before {
+      background-color: #3d3d3d !important;
+      border-color: #3d3d3d !important;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url('data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'8\' height=\'8\' viewBox=\'0 0 8 8\'%3e%3cpath fill=\'%2319cf86\' d=\'M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z\'/%3e%3c/svg%3e')
+    }
+
+    .custom-control-label::before {
+      background-color: #3d3d3d;
+    }
+  </style>
+</head>
+
+<body class="bg-darkish">
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-top navbar-transparent navbar-main navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="dashboard.html">
+        <img
+          style="width: 30px; vertical-align: text-bottom; filter: invert(27%) sepia(59%) saturate(2764%) hue-rotate(103deg) brightness(96%) contrast(80%);"
+          src="assets/img/brand/SkyID_Logo_128_white.png">
+        <span class="ml-1 text-skygreenish">SkyID</span>
+      </a>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <!-- <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-link-inner--text">Dashboard</span>
+            </a>
+          </li>
+        </ul> -->
+        <hr class="d-lg-none" />
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://github.com/dawe35/skyid" target="_blank"
+              data-toggle="tooltip" data-original-title="Star us on Github">
+              <i class="fab fa-github"></i>
+              <span class="nav-link-inner--text d-lg-none">Github</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://twitter.com/creativetim" target="_blank" data-toggle="tooltip" data-original-title="Follow us on Twitter">
+              <i class="fab fa-twitter-square"></i>
+              <span class="nav-link-inner--text d-lg-none">Twitter</span>
+            </a>
+          </li> -->
+          <li class="nav-item d-none d-lg-block ml-lg-4">
+            <a href="https://blog.sia.tech/skyid-how-to-make-decentralized-identity-using-skynet-2b282682f5b3"
+              target="_blank" class="btn btn-grayish btn-icon">
+              <span class="btn-inner--icon">
+                <i class="fas fa-book mr-2"></i>
+              </span>
+              <span class="nav-link-inner--text">Learn more</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-darkish">
+      <div class="container-fluid">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <h1 class="text-secondary">SkyID</h1>
+              <p class="text-lead text-light">
+                one account to rule them all.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--8 py-5 pt-6 py-lg-5 pt-lg-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12">
+          <div class="row m-0">
+            <div class="col-6 bg-dark rounded-top text-center text-secondary p-2" id="login_btn"
+              onclick="switchPage('#login')">
+              Sign in
+            </div>
+            <div class="col-6 mb-1 text-secondary text-center p-2" id="register_btn" onclick="switchPage('#register')">
+              <span id="register_border" class="col-2 p-2 border border-success rounded">
+                Sign up </span>
+            </div>
+          </div>
+          <div id="login_card" class="card bg-dark border-0 mb-0 rounded-bottom no-top-left-radius">
+            <div class="card-body px-lg-5 py-lg-5">
+              <form role="form" id="signInForm">
+                <div class="form-group">
+                  <div class="text-secondary mb-4">
+                    <small>Enter your passphrase:</small>
+                  </div>
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-grayish"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input id="loginInput" class="form-control text-secondary bg-grayish" type="password" autofocus
+                      required>
+                    <div class="bg-grayish rounded-righter">
+                      <span toggle="#loginInput" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+                  <input class="custom-control-input" id="rememberMe" type="checkbox">
+                  <label class="custom-control-label" for="rememberMe">
+                    <span class="text-light">Remember me</span>
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button id="sign_in_btn" type="submit" onclick="loadSpinner()"
+                    class="btn btn-skygreenish btn-icon mt-4">Sign in</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+          <div id="register_card" class="card bg-dark border-0 mb-0 rounded-bottom no-top-right-radius display-none">
+            <div class="card-body px-lg-5 pt-lg-5 pb-lg-5">
+              <form role="form" id="createAccountForm">
+                <div class="form-group">
+                  <div class="text-secondary mb-4">
+                    <small>You can only access your accounts with your
+                      passphrase:</small>
+                  </div>
+
+                  <div data-toggle="tooltip" data-placement="top" data-original-title="Click to copy"
+                    data-animation="true" id="copytoclipboard"
+                    class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-grayish"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <div class="form-control position-relative bg-grayish text-secondary h-auto w-auto">
+                      <span id="passphrase"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-secondary mb-4">
+                  <small>Please keep your passphrase secret. You cannot retrieve your accounts if you lose it.</small>
+                </div>
+                <div class="text-secondary mb-4">
+                  <small>Enter your desired username:</small>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-grayish"><i class="ni ni-single-02"></i></span>
+                    </div>
+                    <input id="username" class="form-control text-secondary bg-grayish" style="font-size: 16px"
+                      autofocus required>
+                  </div>
+
+
+                </div>
+
+
+                <div class="custom-control custom-control-alternative custom-checkbox text-secondary mb-3">
+                  <input class="custom-control-input" id="customCheckReg" type="checkbox" required>
+                  <label class="custom-control-label" for="customCheckReg">
+                    <span>I securely stored my passphrase</span>
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button id="createAccountBtn" type="submit" class="btn btn-skygreenish btn-icon mt-4">Sign up</button>
+                </div>
+
+
+                <!--
+                <div class="form-group">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Passphrase" type="password">
+                  </div>
+                </div>
+               -->
+
+              </form>
+            </div>
+          </div>
+          <!-- <div class="row mt-3"> -->
+          <!-- <div class="col-6">
+              <a href="#" class="text-light"><small>Forgot password?</small></a>
+            </div> -->
+          <!-- <div class="col-6 text-right">
+              <a href="#" class="text-light"><small>Create new account</small></a>
+            </div> -->
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <!-- <footer class="py-5" id="footer-main">
+    <div class="container">
+      <div class="row align-items-center justify-content-xl-between">
+        <div class="col-xl-6">
+          <div class="copyright text-center text-xl-left text-muted">
+            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer> -->
+
+
+  <script src="skyid.js"></script>
+  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="frontend.js"></script>
+
+    <script>
+
+      let readySeed = "";
+      let parentConnection = null;
+
+      // ======
+      // Events
+      // ======
+
+      window.onerror = function (error) {
+        console.log(error);
+        if (parentConnection) {
+          if (typeof error === "string") {
+            parentConnection.remoteHandle().call("catchError", error);
+          } else {
+            parentConnection.remoteHandle().call("catchError", error.type);
+          }
+        }
+      };
+
+      // Code that runs on page load.
+      window.onload = async () => {
+        await init();
+      };
+
+      // ==========
+      // Core Logic
+      // ==========
+
+      /**
+       * Initialize the communication with the UI.
+       */
+      async function init() {
+        // Establish handshake with parent window.
+
+        const messenger = new WindowMessenger({
+          localWindow: window,
+          remoteWindow: window.parent,
+          remoteOrigin: "*",
+        });
+        const methods = {
+          getRootSeed,
+        };
+        parentConnection = await ChildHandshake(messenger, methods);
+      }
+
+      /**
+       * Called by MySky UI. Checks for the ready seed at an interval.
+       */
+      async function getRootSeed() {
+        const checkInterval = 100;
+
+        return new Promise((resolve) => {
+          const checkFunc = () => {
+            if (readySeed !== "") {
+              resolve(readySeed);
+            }
+          };
+
+          window.setInterval(checkFunc, checkInterval);
+        });
+      }
+
+    if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
+      var skyid = new SkyID('SkyID', false, { 'devMode': true, 'customSkyidUrl': 'https://idtest.local' })
+    } else {
+      var skyid = new SkyID('SkyID')
+    }
+
+    if (skyid.seed != '') {
+      window.location.href = 'dashboard.html'
+    }
+
+    var mnemonic = ''
+    function switchPage(page) {
+      if (page == '#register') {
+        if (skyid.seed == '' && $('#passphrase').html() == '') {
+          mnemonic = skyid.generateNewMasterSeed()
+          $('#passphrase').html(mnemonic)
+          $('#passphrase').attr('data', mnemonic)
+          //save to clipboard when clicked
+          createCopy(mnemonic, 'copytoclipboard', function () {
+            $(copytoclipboard).attr('data-original-title', 'Copied!')
+              .tooltip('show')
+            var elem = $('#passphrase')
+            if (elem.hasClass("copyEffect")) {
+              return
+            }
+            elem.addClass('copyEffect')
+
+            window.setTimeout(function (e) {
+              elem.removeClass("copyEffect");
+              $(copytoclipboard).attr('data-original-title', 'Click to copy')
+            }, 1000);
+
+
+          })
+
+        }
+        $('#login_btn').removeClass('bg-dark rounded-top')
+        $('#login_btn').addClass('text-secondary mb-1')
+        $('#register_btn').addClass('bg-dark rounded-top')
+        // $('#register_btn').removeClass('text-secondary mb-1')
+        $('#register_btn').removeClass('mb-1')
+        $('#pagecard').removeClass('no-top-left-radius')
+        $('#register_card').removeClass('display-none')
+        $('#login_card').addClass('display-none')
+        $('#register_border').removeClass('rounded border border-success')
+      } else if (page == '#login' || page == '') {
+        $('#login_btn').addClass('bg-dark   rounded-top')
+        // $('#login_btn').removeClass('text-secondary mb-1')
+        $('#login_btn').removeClass('mb-1')
+        $('#register_btn').removeClass('bg-dark rounded-top')
+        $('#register_btn').addClass('text-secondary mb-1')
+        $('#pagecard').addClass('no-top-left-radius')
+        $('#pagecard').removeClass('no-top-right-radius')
+        $('#register_card').addClass('display-none')
+        $('#login_card').removeClass('display-none')
+        $('#register_border').addClass('rounded border border-success')
+      }
+    }
+
+    window.addEventListener('hashchange', function () {
+      switchPage(window.location.hash)
+    })
+    switchPage(window.location.hash)
+
+    $('#createAccountForm').submit((event) => {
+      event.preventDefault() // Prevents the form submit reloading the page
+      createAccount()
+    })
+
+    function createAccount() {
+      const passphraseCheckbox = $('#customCheckReg').val()
+      const username = $('#username').val()
+
+      if (!passphraseCheckbox) {
+        alert('Make sure to save your secure passphrase')
+      } else if (username == '') {
+        alert('Username is empty')
+      } else if (typeof mnemonic == 'undefined' || mnemonic == '') {
+        alert('Please report this bug: unable to create account, seed is empty')
+      } else {
+        // disable button
+        let createAccountBtn = document.getElementById('createAccountBtn')
+        createAccountBtn.disabled = 'disabled'
+        createAccountBtn.className += ' disabled'
+        createAccountBtn.innerHTML = '<div class="float-left spinner"> </div>  Initializing profile...'
+
+        skyid.setMnemonic(mnemonic, function (success) {
+          if (success) {
+            console.log('nmset')
+            let profile = { 'username': username, 'aboutMe': '', 'location': '', 'avatar': generateRandomAvatarUrl() }
+            let jsonProfile = JSON.stringify(profile)
+            skyid.setFile('profile', jsonProfile, function (success) {
+              if (!success) {
+                alert('Error: unable to save profile.json')
+              }
+            });
+
+            readySeed = mnemonic;
+          } else {
+            alert('Please report this bug: setMnemonic failed')
+          }
+        })
+      }
+    }
+
+    $('#signInForm').submit((event) => {
+      event.preventDefault()
+      signIn()
+    })
+
+    function signIn() {
+      let mnemonic = $('#loginInput').val()
+      if ($('#rememberMe').is(':checked')) {
+        var rememberMe = true
+      } else {
+        var rememberMe = false
+      }
+
+      skyid.setMnemonic(mnemonic, function (success) {
+        console.log('success', success)
+
+        if (success) {
+          readySeed = mnemonic;
+        } else {
+          alert('Your passphrase is invalid')
+        }
+      }, rememberMe, true)
+    }
+
+
+
+
+    function removeClass(el, classNameToRemove) {
+      var elClass = ' ' + el.className + ' '
+      while (elClass.indexOf(' ' + classNameToRemove + ' ') !== -1) {
+        elClass = elClass.replace(' ' + classNameToRemove + ' ', '')
+      }
+      el.className = elClass
+    }
+
+    $('.toggle-password').click(function () {
+      $(this).toggleClass('fa-eye fa-eye-slash')
+      var input = $($(this).attr('toggle'))
+      if (input.attr('type') == 'password') {
+        input.attr('type', 'text')
+      } else {
+        input.attr('type', 'password')
+      }
+    })
+
+    function loadSpinner() {
+
+      var wrong_passphrase = window.alert;
+      var sign_in_btn = document.getElementById('sign_in_btn')
+      if ($('#loginInput').val() == "") {
+        sign_in_btn.innerHTML = 'Sign in'
+        return
+      }
+      sign_in_btn.innerHTML = '<div class="float-left spinner"></div> Sign in'
+      window.alert = function () {
+        sign_in_btn.innerHTML = 'Sign in'
+        wrong_passphrase.apply(window, arguments)
+      }
+    }
+  </script>
+
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Argon JS -->
+  <script src="assets/js/argon.js?v=1.2.0"></script>
+  <script src="assets/js/create-copy.js"></script>
+  <script src="assets/js/components/init/popover.min.js"></script>
+
+
+</body>
+
+</html>
