@@ -359,7 +359,8 @@
     }
 
     if (skyid.seed != '') {
-      window.location.href = 'dashboard.html'
+      // Seed found, just return it.
+      readySeed = skyid.seed;
     }
 
     var mnemonic = ''
@@ -438,14 +439,14 @@
         createAccountBtn.className += ' disabled'
         createAccountBtn.innerHTML = '<div class="float-left spinner"> </div>  Initializing profile...'
 
-        skyid.setMnemonic(mnemonic, function (success) {
+        skyid.setMnemonic(mnemonic, function (success, seed) {
           if (success) {
             console.log('nmset')
             let profile = { 'username': username, 'aboutMe': '', 'location': '', 'avatar': generateRandomAvatarUrl() }
             let jsonProfile = JSON.stringify(profile)
             skyid.setFile('profile', jsonProfile, function (success) {
               if (success) {
-                readySeed = mnemonic;
+                readySeed = seed;
               } else {
                 alert('Error: unable to save profile.json')
               }
@@ -470,11 +471,11 @@
         var rememberMe = false
       }
 
-      skyid.setMnemonic(mnemonic, function (success) {
+      skyid.setMnemonic(mnemonic, function (success, seed) {
         console.log('success', success)
 
         if (success) {
-          readySeed = mnemonic;
+          readySeed = seed;
         } else {
           alert('Your passphrase is invalid')
         }
