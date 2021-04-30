@@ -162,13 +162,6 @@
                   </div>
                 </div>
 
-
-                <div class="custom-control custom-control-alternative custom-checkbox mb-3">
-                  <input class="custom-control-input" id="rememberMe" type="checkbox">
-                  <label class="custom-control-label" for="rememberMe">
-                    <span class="text-light">Remember me</span>
-                  </label>
-                </div>
                 <div class="text-center">
                   <button id="sign_in_btn" type="submit" onclick="loadSpinner()"
                     class="btn btn-skygreenish btn-icon mt-4">Sign in</button>
@@ -465,11 +458,6 @@
 
     function signIn() {
       let mnemonic = $('#loginInput').val()
-      if ($('#rememberMe').is(':checked')) {
-        var rememberMe = true
-      } else {
-        var rememberMe = false
-      }
 
       skyid.setMnemonic(mnemonic, function (success, seed) {
         console.log('success', success)
@@ -479,7 +467,7 @@
         } else {
           alert('Your passphrase is invalid')
         }
-      }, rememberMe, true)
+      }, false, true)
     }
 
 
