@@ -345,13 +345,13 @@ export class SkyID {
 			skyid.getJSON('profile', function (response, revision) {
 				if (response == '') { // file not found
 					self.sessionDestroy()
-					callback(false)
+				    callback(false)
 				} else {
-					callback(true)
+				    callback(true, seed)
 				}
 			})
 		} else {
-			callback(this.setAccount({ "seed": seed }))
+		    callback(this.setAccount({ "seed": seed }), seed)
 		}
 	}
 
