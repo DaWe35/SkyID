@@ -12,7 +12,22 @@ Read security logs in [CHANGELOG.md](https://github.com/DaWe35/SkyID/blob/main/C
 
 ### Install
 
-``` html
+Just copy this code to your HTML:
+
+``` javascript
+<script>
+let hostArr = window.location.host.split('.hns.')
+let portalUrl = [hostArr.length-1]
+
+var script = document.createElement('script')
+script.onload = function () {
+    // Initialize here
+};
+script.src = something;
+
+document.head.appendChild(script); //or something of the likes
+</script>
+
 <script src="/hns/sky-id/skyid.js"></script>
 ```
 
@@ -223,7 +238,7 @@ You can just open the `/dist/index.html` in your browser.
 
 If you're using the `file://` protocol (or `idtest.local` as localhost domain), SkyID will recognise you're in development mode and siasky.net will be used as default Skynet portal.
 
-*Chrome won't savecookies with file:// protocol. YOu can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
+*Chrome won't savecookies with file:// protocol. You can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
 
 #### Testing with example dapp
 
