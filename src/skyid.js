@@ -22,8 +22,8 @@ export class SkyID {
 
 
 		if (isOptionTrue('devMode', this.opts)) {
-			console.log('devMode on, using https://skyportal.xyz')
-			this.skynetClient = new SkynetClient('https://skyportal.xyz', this.opts)
+			console.log('devMode on, using https://siasky.net')
+			this.skynetClient = new SkynetClient('https://siasky.net', this.opts)
 			let html = `<div id="deprecated_warn" style="position: fixed; top: 0; transform: translateX(-50%); left: 50%; background-color: #B71C1C; padding: 5px 20px; opacity: 0.5; z-index: 99999; color: white; font-size: 80%;">
 					<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('deprecated_warn').style.display = 'none'">x</span>
 					DevMode is on -
@@ -56,8 +56,8 @@ export class SkyID {
 			link.href = this.opts.customSkyidUrl + '/assets/css/loading.css'
 			console.log('CSS url set to', this.opts.customSkyidUrl)
 		} else if (isOptionTrue('devMode', this.opts)) {
-			link.href = 'https://sky-id.hns.skyportal.xyz/assets/css/loading.css'
-			console.log('CSS url set to sky-id.hns.skyportal.xyz')
+			link.href = 'https://sky-id.hns.siasky.net/assets/css/loading.css'
+			console.log('CSS url set to sky-id.hns.siasky.net')
 		} else {
 			link.href = '/hns/sky-id/assets/css/loading.css'
 			console.log('CSS url set to /hns/sky-id/')
@@ -89,9 +89,9 @@ export class SkyID {
 					400, 500
 				)
 			} else {
-				console.log('Connect url set to sky-id.hns.skyportal.xyz')
+				console.log('Connect url set to sky-id.hns.siasky.net')
 				window.windowObjectReference = popupCenter(
-					'https://sky-id.hns.skyportal.xyz/connect.html?appId=' + this.appId + devModeString,
+					'https://sky-id.hns.siasky.net/connect.html?appId=' + this.appId + devModeString,
 					'SkyID',
 					400, 500
 				)
@@ -311,7 +311,7 @@ export class SkyID {
 	
 	/*
 
-	Functions below are only for sky-id.hns.skyportal.xyz ;)
+	Functions below are only for sky-id.hns.siasky.net ;)
 	
 	*/
 

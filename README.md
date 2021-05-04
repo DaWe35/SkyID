@@ -221,7 +221,7 @@ You'll see 3 new .js file in the `dist` folder. If you want to edit javascript, 
 #### Open in browser
 You can just open the `/dist/index.html` in your browser.
 
-If you're using the `file://` protocol (or `idtest.local` as localhost domain), SkyID will recognise you're in development mode and skyportal.xyz will be used as default Skynet portal.
+If you're using the `file://` protocol (or `idtest.local` as localhost domain), SkyID will recognise you're in development mode and siasky.net will be used as default Skynet portal.
 
 *Chrome won't save cookies with file:// protocol. You can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
 
