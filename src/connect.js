@@ -38,7 +38,7 @@ window.SkyidConnect = class SkyidConnect {
 				<span style="float:right; padding-left: 10px; cursor: pointer;" onclick="document.getElementById('devmode_warn').style.display = 'none'">x</span>
 				<p><b>This app wants to save cookies to unsafe domain.</b></p>
 				<p>If you're not a developer, we recommend you to deny access to your data.</p>
-				<p><small>If you're a developer then it's fine, but note that cookie saving won't work on Chrome/Brave because if your dapp is opened directly with file:// protocol. To get it work, you can use any localhost domain or use Firefox.</small></p>
+				<p><small>If you're a developer then it's fine, but note that cookie saving won't work on Chrome/Brave because your dapp is opened directly with file:// protocol. To get it work, you can use any localhost domain or use Firefox.</small></p>
 			</div>`
 			var div = document.createElement("div")
 			div.innerHTML = html

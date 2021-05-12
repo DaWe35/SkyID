@@ -67,11 +67,11 @@ function skyidEventCallback(message) {
 			console.log('Login failed')
 			break;
 		case 'login_success':
-			console.log('Login succeed!')
+			console.log('Login succeeded!')
 			fetchNote()
 			break;
 		case 'destroy':
-			console.log('Logout succeed!')
+			console.log('Logout succeeded!')
 			break;
 		default:
 			console.log(message)
@@ -102,15 +102,15 @@ skyid.sessionDestroy()
 
 ### Display classes
 
-If you wnat, you can use special HTML classes, so you don't need to listen for SkyID callbacks.
+If you want, you can use special HTML classes, so you don't need to listen to SkyID callbacks.
 
 - `show-if-logged-in` - Set `display` to `''` if user logged in
 
-- `hide-if-logged-in` - Set `display` to `nonde` if user logged in
+- `hide-if-logged-in` - Set `display` to `none` if user logged in
 
 - `show-if-initialized` - Set `display` to `''` if SkyID initialized
 
-- `hide-if-initialized` - Set `display` to `nonde` if SkyID initialized
+- `hide-if-initialized` - Set `display` to `none` if SkyID initialized
 
 Example:
 
@@ -229,7 +229,7 @@ RFC: https://forum.sia.tech/t/discussion-about-sky-id/64
 ❤ Thank you! ❤
 
 #### Brainstorm participants & helpers:
-Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RLZL
+Taek, wkibbler, redsolver, Nemo, pjbrone, kreelud, Mortal-Killer, RBZL
 
 ## Development
 
@@ -251,7 +251,7 @@ You can just open the `/dist/index.html` in your browser.
 
 If you're using the `file://` protocol (or `idtest.local` as localhost domain), SkyID will recognise you're in development mode and siasky.net will be used as default Skynet portal.
 
-*Chrome won't savecookies with file:// protocol. You can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
+*Chrome won't save cookies with file:// protocol. You can use Firefox, use idtest.local as localhost domain, or upload the dist folder to Skynet.*
 
 #### Testing with example dapp
 
