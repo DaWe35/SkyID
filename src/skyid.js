@@ -59,8 +59,8 @@ export class SkyID {
 			link.href = 'https://sky-id.hns.siasky.net/assets/css/loading.css'
 			console.log('CSS url set to sky-id.hns.siasky.net')
 		} else {
-			link.href = '/hns/sky-id/assets/css/loading.css'
-			console.log('CSS url set to /hns/sky-id/')
+			link.href = 'https://sky-id.hns.siasky.net/assets/css/loading.css'
+			console.log('CSS url set to sky-id.hns.siasky.net')
 		}
 
 		head.appendChild(link)

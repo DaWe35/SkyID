@@ -12,13 +12,41 @@ Read security logs in [CHANGELOG.md](https://github.com/DaWe35/SkyID/blob/main/C
 
 ### Install
 
-``` html
-<script src="/hns/sky-id/skyid.js"></script>
-```
+Just copy this code to your HTML:
 
-### Initialize
 ``` javascript
-var skyid = new SkyID('App name')
+<script>
+// get portal url from response header
+fetch("", {method: 'HEAD'})
+.then( response => response.headers)
+.then( headers => {
+	let portal = headers.get('skynet-portal-api');
+	let devMode = false;
+	if (!portal){
+		// if no header, default to siasky.net
+		portal = "https://siasky.net"
+		devMode = true;
+	}
+
+	let portalNoProtocol = portal.replace(/^https?\:\/\//i, "");
+
+	// path for sky-id, easier than subdomain logic
+	let path = 'https://sky-id.hns.' + portalNoProtocol;
+
+	// create script tag
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = path+"/skyid.js";
+	script.onload = ()=>{initSkyID(path, devMode)}; //once loaded, call method to run code that relies on it
+	document.head.appendChild(script);
+
+});
+
+var initSkyID = function(path){
+	var skyid = new SkyID('App Name', null, {customSkyidUrl:path});
+}
+</script>
+
 ```
 
 ### Initialize with options and callback (optional)
