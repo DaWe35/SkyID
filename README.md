@@ -16,24 +16,37 @@ Just copy this code to your HTML:
 
 ``` javascript
 <script>
-let hostArr = window.location.host.split('.hns.')
-let portalUrl = [hostArr.length-1]
+// get portal url from response header
+fetch("", {method: 'HEAD'})
+.then( response => response.headers)
+.then( headers => {
+	let portal = headers.get('skynet-portal-api');
+	let devMode = false;
+	if (!portal){
+		// if no header, default to siasky.net
+		portal = "https://siasky.net"
+		devMode = true;
+	}
 
-var script = document.createElement('script')
-script.onload = function () {
-    // Initialize here
-};
-script.src = something;
+	let portalNoProtocol = portal.replace(/^https?\:\/\//i, "");
 
-document.head.appendChild(script); //or something of the likes
+	// path for sky-id, easier than subdomain logic
+	let path = 'https://sky-id.hns.' + portalNoProtocol;
+
+	// create script tag
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = path+"/skyid.js";
+	script.onload = ()=>{initSkyID(path, devMode)}; //once loaded, call method to run code that relies on it
+	document.head.appendChild(script);
+
+});
+
+var initSkyID = function(path){
+	var skyid = new SkyID('App Name', null, {customSkyidUrl:path});
+}
 </script>
 
-<script src="/hns/sky-id/skyid.js"></script>
-```
-
-### Initialize
-``` javascript
-var skyid = new SkyID('App name')
 ```
 
 ### Initialize with options and callback (optional)

@@ -56,11 +56,11 @@ export class SkyID {
 			link.href = this.opts.customSkyidUrl + '/assets/css/loading.css'
 			console.log('CSS url set to', this.opts.customSkyidUrl)
 		} else if (isOptionTrue('devMode', this.opts)) {
-			link.href = 'https://sky-id.hns.skyportal.xyz/assets/css/loading.css'
-			console.log('CSS url set to sky-id.hns.skyportal.xyz')
+			link.href = 'https://skyid.hns.siasky.net/assets/css/loading.css'
+			console.log('CSS url set to skyid.hns.siasky.net')
 		} else {
-			link.href = '/hns/sky-id/assets/css/loading.css'
-			console.log('CSS url set to /hns/sky-id/')
+			link.href = 'https://skyid.hns.siasky.net/assets/css/loading.css'
+			console.log('CSS url set to skyid.hns.siasky.net')
 		}
 
 		head.appendChild(link)
