@@ -2,10 +2,7 @@ import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, showOverlay, hideOverlay, toHexString, isOptionSet, isOptionTrue } from "./utils"
 import { encryptFile, decryptFile, fetchFile } from "./encrypt"
 import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRelativeFilePath, getRootDirectory } from "skynet-js"
-import { pki } from "node-forge"
 const sia = require('sia-js')
-global.Buffer = global.Buffer || require('buffer').Buffer
-
 
 export class SkyID {
 	constructor(appId, callback = null, opts = null) {
@@ -131,8 +128,12 @@ export class SkyID {
 		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
+			console.log('dataKey', dataKey)
+			console.log('publicKey', publicKey)
 			var { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
+			console.log('data', data)
 		} catch (error) {
+			console.log(error)
 			var data = ''
 			var revision = 0
 		}
@@ -172,11 +173,8 @@ export class SkyID {
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		if (revision === null) {
 			// fetch the current value to find out the revision.
-			const privateKeyBuffer = Buffer.from(privateKey, "hex")
-			let entry
-			const publicKey = pki.ed25519.publicKeyFromPrivateKey({ privateKey: privateKeyBuffer })
 			try {
-				entry = await this.skynetClient.registry.getEntry(toHexString(publicKey), dataKey)
+				let entry = await this.skynetClient.registry.getEntry(toHexString(publicKey), dataKey)
 				revision = entry.entry.revision + 1
 			} catch (err) {
 				console.log(err)

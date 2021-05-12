@@ -1,6 +1,7 @@
 import base32Encode from "base32-encode"
 import base64 from "base64-js"
 import Url from "url-parse"
+global.Buffer = global.Buffer || require('buffer').Buffer
 
 export function setCookie(values, rememberMe = false) {
 	if (typeof(Storage) == 'undefined') {

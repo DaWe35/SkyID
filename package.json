@@ -25,11 +25,14 @@
     "buffer": "^5.7.0",
     "post-me": "^0.4.5",
     "sia-js": "github:dawe35/sia-js",
-    "skynet-js": "^2.7.0",
-    "url-parse": "^1.4.7"
+    "skynet-js": "^3.0.2",
+    "url-parse": "^1.5.1"
   },
   "devDependencies": {
     "webpack": "^5.4.0",
-    "webpack-cli": "^4.1.0"
+    "webpack-cli": "^4.7.0"
+  },
+  "browser": {
+    "crypto": false
   }
 }
