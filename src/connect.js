@@ -85,14 +85,14 @@ window.SkyidConnect = class SkyidConnect {
 				alert('Error: unable to fetch dapp list')
 				console.log('Error: unable to fetch dapp list')
 			} else { // success
-				var profileObj = JSON.parse(response)
+				var profileObj = response
 				if (typeof profileObj.dapps == 'undefined') {
 					profileObj.dapps = {}
 				}
 				profileObj.dapps[appId] = appData
 
 				// set file
-				let jsonProfile = JSON.stringify(profileObj)
+				let jsonProfile = profileObj
 				self.skyid.setJSON('profile', jsonProfile, function (success) {
 					if (!success) {
 						alert('Error: unable to save profile.json')

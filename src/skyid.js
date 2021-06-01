@@ -1,7 +1,8 @@
 import { getCookie, setCookie, delCookie, redirectToSkappContainer, popupCenter,
 	toggleElementsDisplay, showOverlay, hideOverlay, toHexString, isOptionSet, isOptionTrue } from "./utils"
 import { encryptFile, decryptFile, fetchFile } from "./encrypt"
-import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRelativeFilePath, getRootDirectory } from "skynet-js"
+import { SkynetClient, genKeyPairFromSeed, deriveChildSeed, getRelativeFilePath, getRootDirectory, defaultPortalUrl } from "skynet-js"
+import { SlowBuffer } from "buffer";
 const sia = require('sia-js')
 
 export class SkyID {
@@ -31,7 +32,7 @@ export class SkyID {
 			document.body.appendChild(div.firstChild)
 		} else {
 			console.log('devMode off, using auto portal')
-			this.skynetClient = new SkynetClient('', this.opts)
+			this.skynetClient = new SkynetClient('https://siasky.net', this.opts)
 		}
 
 		window.addEventListener("message", (event) => {
@@ -128,17 +129,35 @@ export class SkyID {
 		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
-			console.log('dataKey', dataKey)
-			console.log('publicKey', publicKey)
 			var { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
-			console.log('data', data)
 		} catch (error) {
 			console.log(error)
-			var data = ''
-			var revision = 0
+			console.log('running fixDoubleEncodedJSON')
+			var { data, revision } = await this.fixDoubleEncodedJSON(dataKey)
 		}
 		hideOverlay(this.opts)
 		callback(data, revision)
+	}
+
+	async fixDoubleEncodedJSON(dataKey) {
+		showOverlay(this.opts)
+		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
+		try {
+			console.log('dataKey', dataKey)
+			console.log('publicKey', publicKey)
+			let entry = await this.skynetClient.registry.getEntry(publicKey, dataKey)
+			let fileContent = await this.skynetClient.getFileContent(entry.entry.data)
+			console.log('fileContent.data', fileContent.data)
+			let contentObj = JSON.parse(fileContent.data)
+			await this.skynetClient.db.setJSON(privateKey, dataKey, contentObj)
+			var { data, revision } = await this.skynetClient.db.getJSON(publicKey, dataKey)
+		} catch (error) {
+			console.log(error)
+			var data = null
+			var revision = null
+		}
+		hideOverlay(this.opts)
+		return { 'data': data, 'revision': revision }
 	}
 
 	async setJSON(dataKey, json, callback) {
@@ -156,7 +175,7 @@ export class SkyID {
 		callback(success)
 	}
 
-	async getRegistry(dataKey, callback) { // needs DaWe's fork of skynet-js-2.4.0
+	async getRegistry(dataKey, callback) {
 		showOverlay(this.opts)
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		try {
@@ -173,9 +192,11 @@ export class SkyID {
 		const { publicKey, privateKey } = genKeyPairFromSeed(this.seed)
 		if (revision === null) {
 			// fetch the current value to find out the revision.
+			
 			try {
-				let entry = await this.skynetClient.registry.getEntry(toHexString(publicKey), dataKey)
-				revision = entry.entry.revision + 1
+				let entry = await this.skynetClient.registry.getEntry(publicKey, dataKey)
+				console.log('entry', entry)
+				revision = entry.entry.revision + BigInt(1)
 			} catch (err) {
 				console.log(err)
 				revision = 0
@@ -188,6 +209,9 @@ export class SkyID {
 			data: skylink,
 			revision,
 		}
+
+		console.log('privateKey', privateKey)
+		console.log('newEntry', newEntry)
 
 		// update the registry
 		try {
@@ -272,6 +296,9 @@ export class SkyID {
 		})
 	}
 
+	defaultPortalUrl() {
+		return defaultPortalUrl()
+	}
 
 	signData(data, childSecKey) {
 		// NOT IMPLEMENTED YET
@@ -298,8 +325,8 @@ export class SkyID {
 		try {
 			var { data, revision } = await this.skynetClient.db.getJSON(this.userId, 'profile')
 		} catch (error) {
-			var data = ''
-			var revision = 0
+			var data = null
+			var revision = null
 		}
 		
 		if (callback != null) {
@@ -341,7 +368,7 @@ export class SkyID {
 		if (checkMnemonic && this.setAccount({ "seed": seed })) {
 			var self = this
 			skyid.getJSON('profile', function (response, revision) {
-				if (response == '') { // file not found
+				if (response == null) { // file not found
 					self.sessionDestroy()
 				    callback(false)
 				} else {

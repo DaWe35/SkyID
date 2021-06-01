@@ -302,7 +302,7 @@
 	<!-- Argon Scripts -->
 	<!-- Core -->
 
-	<script src="skyid.js"></script>
+	<script src="skyid.js?v=1"></script>
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 	<script>
 		if (window.location.hostname == 'idtest.local' || window.location.hostname == 'localhost' || window.location.protocol == 'file:') {
@@ -887,11 +887,11 @@
 			var table = document.getElementById('dappsTable')
 
 			// fetch file
-			skyid.getFile('profile', function (response, revision) {
-				if (response == '') { // file not found
+			skyid.getJSON('profile', function (response, revision) {
+				if (response == null) { // file not found
 					table.innerHTML = ''
 				} else { // success
-					var respObs = JSON.parse(response)
+					var respObs = response
 					var rows = ''
 					for (var key in respObs.dapps) {
 						// skip loop if the property is from prototype
@@ -952,11 +952,11 @@
 			var navProfilePictureImg = document.getElementById('navProfilePictureImg')
 
 			// fetch file
-			skyid.getFile('profile', function (response, revision) {
-				if (response == '') { // file not found
+			skyid.getJSON('profile', function (response, revision) {
+				if (response == null) { // file not found
 					alert('Profile not found, please check your connection and retry')
 				} else { // success
-					var respObs = JSON.parse(response)
+					var respObs = response
 					navProfileUsername.innerHTML = profileUsernameDiv.innerHTML = respObs.username
 					profileAboutMeDiv.innerHTML = respObs.aboutMe
 					profileLocationDiv.innerHTML = respObs.location || ''
@@ -980,7 +980,8 @@
 			if (skyid.opts != null && skyid.opts.devMode != null && skyid.opts.devMode == true) {
 				return 'https://siasky.net/' + skyfile + '/' + size
 			} else {
-				return '/' + skyfile + '/' + size
+				// return '/' + skyfile + '/' + size
+				return 'https://siasky.net/' + skyfile + '/' + size
 			}
 		}
 
@@ -1074,12 +1075,12 @@
 			$('#undo').hide()
 			$('#edit').show()
 
-			skyid.getFile('profile', function (response, revision) {
-				if (response == '') { // file not found
+			skyid.getJSON('profile', function (response, revision) {
+				if (response == null) { // file not found
 					alert('Error: unable to fetch your profile')
 					console.log('Error: unable to fetch your profile')
 				} else { // success
-					var profileObj = JSON.parse(response)
+					var profileObj = response
 					profileObj.username = username
 					profileObj.aboutMe = aboutMe
 					profileObj.location = location
