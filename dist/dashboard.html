@@ -1088,8 +1088,7 @@
 						profileObj.avatar = profilePicture
 					}
 					// set file
-					let jsonProfile = JSON.stringify(profileObj)
-					skyid.setFile('profile', jsonProfile, function (success) {
+					skyid.setJSON('profile', profileObj, function (success) {
 						if (!success) {
 							alert('Error: unable to save profile')
 
