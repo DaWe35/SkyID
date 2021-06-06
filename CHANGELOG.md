@@ -2,17 +2,20 @@
 
 ### 2021. 06.
 
-Skynet-js version updated and it requires to change the setJSON() and getJSON() functions. Before the change SkyID.setJSON expected a JSON string, but now it expects an object:
+Skynet-js version updated and it requires to change the setJSON() and getJSON() calls. Before the change `SkyID.setJSON()` expected a JSON string as argument, but now it expects an object:
 
 Old:
 
-``skyid.setJSON('filename', JSONstring, callback)``
+```˙
+let JSONstring = JSON.stringify(yourObject);
+skyid.setJSON('filename', JSONstring, callback)
+```
 
 New:
 
-`skyid.setJSON('filename', object, callback)`
+`skyid.setJSON('filename', yourObject, callback)`
 
-Same with skyid.getJSON: it will return an object instead of a JSON string.
+Same with `skyid.getJSON()`: it will return an object instead of a JSON string, so there is no need to `JSON.parse()` the response.
 
 ### 2020. 11. 18.
 
