@@ -13,7 +13,9 @@ skyid.setJSON('filename', JSONstring, callback)
 
 New:
 
-`skyid.setJSON('filename', yourObject, callback)`
+```
+skyid.setJSON('filename', yourObject, callback)
+```
 
 Same with `skyid.getJSON()`: it will return an object instead of a JSON string, so there is no need to `JSON.parse()` the response.
 
