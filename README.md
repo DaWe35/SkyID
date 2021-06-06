@@ -139,8 +139,7 @@ SkyID uses SkyDB under the hood to save, modify, and fetch files. The only diffe
 
 ``` javascript
 let yourObject = { key1: 'value1' }
-let jsonData = JSON.stringify(yourObject)
-skyid.setJSON('filename', jsonData, function(response) {
+skyid.setJSON('filename', yourObject, function(response) {
 	if (response != true) {
 		alert('Sorry, skyid.setFile failed :(')
 	}
@@ -155,8 +154,7 @@ skyid.getJSON('filename', function(response) {
 	if (response == false) {
 		alert('Sorry, skyid.getFile failed :(')
 	}
-	var responseObject = JSON.parse(response)
-	console.log(responseObject)
+	console.log(response)
 })
 ```
 
