@@ -196,10 +196,10 @@ export class SkyID {
 			try {
 				let entry = await this.skynetClient.registry.getEntry(publicKey, dataKey)
 				console.log('entry', entry)
-				revision = entry.entry.revision + BigInt(1)
+				revision = BigInt(entry.entry.revision) + BigInt(1)
 			} catch (err) {
 				console.log(err)
-				revision = 0
+				revision = BigInt(0)
 			}
 		}
 
